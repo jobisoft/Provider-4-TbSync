@@ -1,7 +1,7 @@
 # EWS-4-TbSync
-Example implementation of the TbSync interface for external provider extensions.
+Example implementation of the TbSync interface for external sync provider extensions.
 
-### Steps to hook into TbSync
+### Steps to hook an external sync provider into TbSync
 
 1. Provide hook information so it can be registered in TbSync.
 ```
