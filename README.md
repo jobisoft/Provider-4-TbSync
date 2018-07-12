@@ -1,6 +1,10 @@
 # EWS-4-TbSync
 Example implementation of the TbSync interface for an external sync provider extensions.
 
+### Testing the example implementation
+
+The [prototype of the EWS-4-TbSync extension](https://github.com/jobisoft/EWS-4-TbSync/releases) needs the latest [beta of TbSync](https://github.com/jobisoft/TbSync/releases).
+ 
 ### Steps to hook an external sync provider into TbSync
 
 1. Provide hook information so it can be registered in TbSync.
