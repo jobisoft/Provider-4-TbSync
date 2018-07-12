@@ -1,5 +1,5 @@
 # EWS-4-TbSync
-Example implementation of the TbSync interface for an external sync provider extensions.
+Example implementation of the TbSync interface for an external sync provider extension.
 
 ### Testing the example implementation
 
