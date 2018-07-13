@@ -18,6 +18,6 @@
 build:
 	# Sync all files except git technical files
 	# and screenshots
-	zip ../TbSync-beta.xpi -FS -R '*' \
-		-x 'screenshots' 'github/*' '.git/*' '.gitignore'
+	zip ../EWS-4-TbSync.xpi -FS -R '*' \
+		-x 'screenshots' '.git/*' '.gitignore'
 
