@@ -7,11 +7,11 @@
         <em:bootstrap>true</em:bootstrap>
         <em:unpack>false</em:unpack>
         <em:multiprocessCompatible>true</em:multiprocessCompatible>
-        <em:name>EWS for TbSync</em:name>
+        <em:name>Exchange WebServices (EWS) provider for TbSync</em:name>
         <em:version>0.1</em:version>
-        <em:description>EWS provider for TbSync (prototype)</em:description>
+        <em:description>Add sync support for EWS accounts to TbSync</em:description>
         <em:creator>John Bieling</em:creator>
-        <em:homepageURL>https://github.com/jobisoft/TbSyncEws</em:homepageURL>
+        <em:homepageURL>https://github.com/jobisoft/EWS-4-TbSync</em:homepageURL>
         <em:iconURL>chrome://ews4tbsync/skin/exchange-addrbook.png</em:iconURL>
 
         <em:targetApplication>
