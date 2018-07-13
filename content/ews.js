@@ -44,10 +44,10 @@ var ews = {
             "host" : "",
             "user" : "",
             "https" : "1",
-            "syncdefaultfolders" : "1", //also used to cache folders during removeAllFolders() during disable, so the same set of folders is synced after re-enable
             "autosync" : "0",
             "downloadonly" : "0",            
             //some example options
+            "syncdefaultfolders" : "1",
             "displayoverride" : "0",
             "seperator" : "44",            
             }; 
@@ -131,7 +131,7 @@ var ews = {
         //db.setAccountSetting(account, "policykey", 0);
         //db.setAccountSetting(account, "foldersynckey", "");
 
-        //remove all folders from DB and remove associated targets (cache folders, if syncdefaultfolders set) 
+        //remove all folders from DB and remove associated targets (caches all folder settings to be used on next re-enable) 
         tbSync.removeAllFolders(account);
     },
 

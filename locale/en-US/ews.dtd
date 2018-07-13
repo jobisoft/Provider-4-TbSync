@@ -20,7 +20,7 @@
 <!ENTITY pref.contactoptions "Contact options">
 <!ENTITY pref.downloadonly "Revert local changes (one-way sync)">
 <!ENTITY pref.generaloptions "General options">
-<!ENTITY pref.syncdefaultfolders "Synchronize default or formaly subscribed folders right after server connection has been established">
+<!ENTITY pref.syncdefaultfolders "Subscribe and sync all default folders after the initial connection has been established.">
 
 <!ENTITY pref.autotime "Sync interval (minutes)">
 <!ENTITY pref.never "A setting of 0 disables periodic sync. Push sync is no yet supported.">
