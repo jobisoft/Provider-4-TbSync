@@ -26,11 +26,14 @@ ews: {
 ### Images of the prototype hooked into TbSync
 
 External sync provider shows up in "Add account" menu:
+
 ![image](https://github.com/jobisoft/EWS-4-TbSync/raw/master/screenshots/add_account.png)
 
 Sync progress feedback:
+
 ![image](https://github.com/jobisoft/EWS-4-TbSync/raw/master/screenshots/sync_progress.png)
 
 Autocomplete integration:
+
 ![image](https://github.com/jobisoft/EWS-4-TbSync/raw/master/screenshots/autocomplete.png)
 
