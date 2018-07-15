@@ -25,7 +25,7 @@ ews.sync = {
         let types = ["addressbook","calendar","task"]; //i just picked these types, getThunderbirdFolderType must match these (needs to be replaced with true EWS folder types)
         let id = Date.now();
     
-        let newFolder = tbSync.eas.getNewFolderEntry(syncdata.account);
+        let newFolder = tbSync.ews.getNewFolderEntry(syncdata.account);
         newFolder.folderID = id.toString();
         newFolder.name = "EWS " + id;
         newFolder.type = types[type];
