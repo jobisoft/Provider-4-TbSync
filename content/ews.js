@@ -16,7 +16,7 @@ var ews = {
      */
     init: Task.async (function* (lightningIsAvail)  {
         //load overlays or do other init stuff, use lightningIsAvail to init stuff if lightning is installed
-        tbSync.window.alert("EWS Test (Lightning: " + lightningIsAvail + ")");	    
+        //tbSync.window.alert("EWS Test (Lightning: " + lightningIsAvail + ")");	    
     }),
 
 
