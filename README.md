@@ -19,8 +19,8 @@ ews: {
                                                                    a download page
 ```
 
-2. Implement the [sync interface](https://github.com/jobisoft/EWS-4-TbSync/blob/v0.1/content/ews.js#L6-L327)
-3. Implement the [user interface](https://github.com/jobisoft/EWS-4-TbSync/blob/v0.1/content/ews.js#L332-L525) (if the external provider wants to re-use the standard TbSync account settings UI)
+2. Implement the [sync interface](https://github.com/jobisoft/EWS-4-TbSync/blob/v0.2/content/ews.js#L6-L273)
+3. Implement the [user interface](https://github.com/jobisoft/EWS-4-TbSync/blob/v0.2/content/ews.js#L282-L471) (if the external provider wants to re-use the standard TbSync account settings UI)
 4. Add overlays to add custom UI elements to TB (TbSync has its own overlayManager, works with TB61+)
 
 ### Images of the prototype hooked into TbSync
