@@ -236,94 +236,40 @@ var ews = {
      * @param job           [in] identifier about what is to be done, the standard job is "sync", you are free to add
      *                           custom jobs like "deletefolder" via your own accountSettings.xul
      */
-    start: Task.async (function* (syncdata, job)  {                
+    start: Task.async (function* (syncdata, job)  {                        
         //Suggestion: Implement this as a loop to be able to do a resync if standard sync failed (if resyncing is part of the EWS sync method)
         //Also do the sync inside a try { .. } catch { ... } so you can throw a custom error at any given time in any called function
         //and evaluate the error msg *here* and decide what to do (sync next folder, abort, resync etc...)
         
         //This is more like a "glue" function, to attach this provider logic to TbSync. The actually EWS Sync methods
         //are defined in the ews.sync object (defined in sync.js)
-        
-        switch (job) {
-            case "sync":
-                //update folders avail on server and handle added, removed, renamed folders
-                yield ews.sync.updateFolders(syncdata);
+        try {
+            switch (job) {
+                case "sync":
+                    //update folders avail on server and handle added, removed, renamed folders
+                    yield ews.sync.folderList(syncdata);
 
-                //set all selected folders to "pending", so they are marked for syncing
-                tbSync.setSelectedFoldersToPending(syncdata.account);
+                    //set all selected folders to "pending", so they are marked for syncing
+                    tbSync.setSelectedFoldersToPending(syncdata.account);
 
-                //update folder list in GUI
-                Services.obs.notifyObservers(null, "tbsync.updateFolderList", syncdata.account);
+                    //update folder list in GUI
+                    Services.obs.notifyObservers(null, "tbsync.updateFolderList", syncdata.account);
 
-                //process all pending folders
-                do {
-                    //any pending folders left?
-                    let folders = tbSync.db.findFoldersWithSetting("status", "pending", syncdata.account);
-                    if (folders.length == 0) {
-                        //all folders of this account have been synced
-                        break;
-                    }
-                    //what folder are we syncing?
-                    syncdata.folderID = folders[0].folderID;
-                    syncdata.type = folders[0].type;
-                                            
-                    switch ( syncdata.type) {
-                        case "addressbook": 
-                            // check SyncTarget
-                            if (!tbSync.checkAddressbook(syncdata.account, syncdata.folderID)) {
-                                //could not create target
-                                tbSync.finishFolderSync(syncdata, "notargets");         
-                                continue; //with next folder
-                            }
-
-                            //get sync target of this addressbook
-                            syncdata.targetId = tbSync.db.getFolderSetting(syncdata.account, syncdata.folderID, "target");
-                            syncdata.addressbookObj = tbSync.getAddressBookObject(syncdata.targetId);
-
-                            //promisify addressbook, so it can be used together with yield (using same interface as promisified calender)
-                            syncdata.targetObj = tbSync.promisifyAddressbook(syncdata.addressbookObj);
-                            
-                            yield ews.sync.start(syncdata);
-                            break;
-
-                        case "calendar":
-                        case "task": 
-                            // skip if lightning is not installed
-                            if (tbSync.lightningIsAvailable() == false) {
-                                tbSync.finishFolderSync(syncdata, "nolightning");         
-                                continue;
-                            }
-                            
-                            // check SyncTarget
-                            if (!tbSync.checkCalender(syncdata.account, syncdata.folderID)) {
-                                //could not create target
-                                tbSync.finishFolderSync(syncdata, "notargets");         
-                                continue; //with next folder
-                            }
-
-                            syncdata.targetId = tbSync.db.getFolderSetting(syncdata.account, syncdata.folderID, "target");
-                            syncdata.calendarObj = cal.getCalendarManager().getCalendarById(syncdata.targetId);
-                            
-                            //promisify calender, so it can be used together with yield
-                            syncdata.targetObj = cal.async.promisifyCalendar(syncdata.calendarObj.wrappedJSObject);
-
-                            syncdata.calendarObj.startBatch();
-                            yield ews.sync.start(syncdata);
-                            syncdata.calendarObj.endBatch();
-                            break;
-                    }                        
-                } while (true);
-                
-                //Mandatory: set account state at end, either 
-                //- OK (green tick)
-                //- nolightning (blue info, which should be used, if everything is OK, just all calendar/task folders have been skipped, beause lighning is not installed)
-                //- any other error (red error)  
-                tbSync.finishAccountSync(syncdata, "OK"); //if any of the folders has an error, that error is mapped onto the account status              
-                break;
-                                
-            default:
-                tbSync.finishAccountSync(syncdata, "UnsupportedJob::"+job);               
-        }        
+                    //process all pending folders
+                    yield ews.sync.allPendingFolders(syncdata);
+                    break;
+                                    
+                default:
+                    throw ews.sync.failed("unknown::"+job);
+                    break;
+            }
+        } catch (e) {
+            if (e.type == "ews4tbsync") tbSync.finishAccountSync(syncdata, e.message);
+            else {
+                tbSync.finishAccountSync(syncdata, "Javascript Error");
+                Components.utils.reportError(e);
+            }
+        }            
     }),
     
 
