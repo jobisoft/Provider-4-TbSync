@@ -1,3 +1,4 @@
+@echo off
 REM  This file is part of EWS-4-TbSync.
 REM 
 REM  TbSync is free software: you can redistribute it and/or modify
