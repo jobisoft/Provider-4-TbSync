@@ -97,6 +97,13 @@ var ews = {
     },
 
 
+    /**
+     * Returns an array of folder settings, that should survive unsubscribe/subscribe and disable/re-enable (caching)
+     */
+    getPersistentFolderSettings: function () {
+        return ["name", "targetName", "targetColor", "selected"];
+    },
+
 
     /**
      * Return the thunderbird type (tb-contact, tb-event, tb-todo) for a given folder type of this provider. A provider could have multiple 
