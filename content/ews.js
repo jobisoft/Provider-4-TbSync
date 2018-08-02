@@ -50,7 +50,7 @@ var ews = {
     /**
      * Return object which contains all possible fields of a row in the accounts database with the default value if not yet stored in the database.
      */
-    getNewAccountEntry: function () {
+    getDefaultAccountEntries : function () {
         let row = {
             "account" : "",
             "accountname": "",
@@ -77,7 +77,7 @@ var ews = {
     /**
      * Return object which contains all possible fields of a row in the folder database with the default value if not yet stored in the database.
      */
-    getNewFolderEntry: function (account) {
+    getDefaultFolderEntries: function (account) {
         let folder = {
             "account" : account,
             "folderID" : "",
@@ -90,9 +90,9 @@ var ews = {
             "lastsynctime" : "",
             "status" : "",
             "parentID" : "",
-            "monitored" : "1", //log changes into changelog
+            "useChangeLog" : "1", //log changes into changelog
             "downloadonly" : tbSync.db.getAccountSetting(account, "downloadonly"), //each folder has its own settings, the main setting is just the default,
-            "cached" : "0"};
+            };
         return folder;
     },
 
@@ -101,7 +101,7 @@ var ews = {
      * Returns an array of folder settings, that should survive unsubscribe/subscribe and disable/re-enable (caching)
      */
     getPersistentFolderSettings: function () {
-        return ["name", "type", "targetName", "targetColor", "selected"];
+        return ["targetName", "targetColor", "selected"];
     },
 
 
@@ -132,13 +132,11 @@ var ews = {
      *
      * @param account       [in] account which is being enabled
      */
-    enableAccount: function (account) {
-        db.setAccountSetting(account, "status", "notsyncronized");
-        db.setAccountSetting(account, "lastsynctime", "0");
-
+    onEnableAccount: function (account) {
+        db.resetAccountSetting(account, "lastsynctime");
         // reset custom values
-        //db.setAccountSetting(account, "policykey", 0);
-        //db.setAccountSetting(account, "foldersynckey", "");
+        //db.resetAccountSetting(account, "policykey");
+        //db.resetAccountSetting(account, "foldersynckey");
     },
 
 
@@ -149,15 +147,10 @@ var ews = {
      *
      * @param account       [in] account which is being disabled
      */
-    disableAccount: function (account) {
-        db.setAccountSetting(account, "status", "disabled");
-
+    onDisableAccount: function (account) {
         // reset custom values
         //db.setAccountSetting(account, "policykey", 0);
         //db.setAccountSetting(account, "foldersynckey", "");
-
-        //remove all folders from DB and remove associated targets (caches all folder settings to be used on next re-enable) 
-        tbSync.removeAllFolders(account);
     },
 
 
@@ -179,16 +172,24 @@ var ews = {
 
 
     /**
+     * Is called everytime an new target is created, intended to set a clean sync status.
+     *
+     * @param account       [in] account the new target belongs to
+     * @param folderID       [in] folder the new target belongs to
+     */
+    onResetTarget: function (account, folderID) {
+    },
+
+
+
+    /**
      * Is called if TbSync needs to create a new lightning calendar associated with an account of this provider.
      *
      * @param newname       [in] name of the new calendar
      * @param account       [in] id of the account this calendar belongs to
      * @param folderID      [in] id of the folder this calendar belongs to (sync target)
-     * @param color         [in] color for this calendar, picked by TbSync - if the provider provides a
-     *                           color information himself, store it in the folder DB and access it here
-     *                           directly via account and folderID
      */
-    createCalendar: function(newname, account, folderID, color) {
+    createCalendar: function(newname, account, folderID) {
         //This example implementation is using the standard storage calendar, but you may use another one
         let calManager = cal.getCalendarManager();
         
@@ -197,7 +198,7 @@ var ews = {
         newCalendar.id = cal.getUUID();
         newCalendar.name = newname;
 
-        newCalendar.setProperty("color", color); //any chance to get the color from the provider? pass via folderSetting
+        newCalendar.setProperty("color", tbSync.db.getFolderSetting(account, folderID, "targetColor"));
         newCalendar.setProperty("relaxedMode", true); //sometimes we get "generation too old for modifyItem", this check can be disabled with relaxedMode
         newCalendar.setProperty("calendar-main-in-composite", true);
 
@@ -226,6 +227,8 @@ var ews = {
      * if something is typed into the search field of the Thunderbird address book.
      *
      * TbSync will execute this only for queries longer than 3 chars.
+     *
+     * DO NOT IMPLEMENT AT ALL, IF NOT SUPPORTED
      *
      * @param account       [in] id of the account which should be searched
      * @param currentQuery  [in] search query
@@ -274,8 +277,10 @@ var ews = {
                     //update folders avail on server and handle added, removed, renamed folders
                     yield ews.sync.folderList(syncdata);
 
-                    //set all selected folders to "pending", so they are marked for syncing
-                    tbSync.setSelectedFoldersToPending(syncdata.account);
+                    //set all selected folders to "pending", so they are marked for syncing 
+                    //this also removes all leftover cached folders and sets all other folders to a well defined cached = "0"
+                    //which will set this account as connected (if at least one folder with cached == "0" is present)
+                    tbSync.prepareFoldersForSync(syncdata.account);
 
                     //update folder list in GUI
                     Services.obs.notifyObservers(null, "tbsync.updateFolderList", syncdata.account);
@@ -310,9 +315,8 @@ var ews = {
          * Returns array of all possible account options (field names of a row in the accounts database).
          */
         getAccountStorageFields: function () {
-            return Object.keys(tbSync.ews.getNewAccountEntry()).sort();
+            return Object.keys(tbSync.ews.getDefaultAccountEntries()).sort();
         },
-
 
 
 
@@ -322,7 +326,6 @@ var ews = {
         getAlwaysUnlockedSettings: function () {
             return ["autosync"];
         },
-
 
 
 
@@ -347,7 +350,6 @@ var ews = {
 
 
 
-
         /**
          * Is called before the context menu of the folderlist is shown, allows to 
          * show/hide custom menu options based on selected folder
@@ -357,7 +359,6 @@ var ews = {
          */
         onFolderListContextMenuShowing: function (document, folder) {
         },
-
 
 
 
@@ -378,7 +379,6 @@ var ews = {
             }
             return folderData;
         },
-
 
 
 
@@ -405,7 +405,6 @@ var ews = {
             return rowData;
         },
     
-
 
 
         /**
@@ -450,7 +449,6 @@ var ews = {
 
 
 
-
         /**
          * Is called to update a row of the folderlist.
          *
@@ -470,7 +468,6 @@ var ews = {
             }
         },
         
-
 
 
         /**

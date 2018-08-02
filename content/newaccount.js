@@ -122,7 +122,7 @@ var tbSyncEwsNewAccount = {
     },
 
     addAccount (user, password, servertype, accountname, url = "") {
-        let newAccountEntry = tbSync.ews.getNewAccountEntry();
+        let newAccountEntry = tbSync.ews.getDefaultAccountEntries();
         newAccountEntry.accountname = accountname;
         newAccountEntry.user = user;
         newAccountEntry.servertype = servertype;

@@ -54,17 +54,18 @@ ews.sync = {
         yield tbSync.sleep(500);
 
         //EWS API SIMULATION: lets simulate that a new folder of random type has been found on the server and add it to our DB
-        let type = Math.floor(Math.random() * 2);
+        let type = Math.floor(Math.random() * 3);
+        if (type == 3) type = 2;
         let types = ["addressbook","calendar","task"]; //i just picked these types, getThunderbirdFolderType must match these (needs to be replaced with true EWS folder types)
         let id = Date.now();
     
-        let newFolder = tbSync.ews.getNewFolderEntry(syncdata.account);
+        let newFolder = {};
         newFolder.folderID = id.toString();
         newFolder.name = "EWS " + id;
         newFolder.type = types[type];
         newFolder.parentID = "0"; //root - tbsync flatens hierachy, using parentID to sort entries
         newFolder.selected = "1"; //only select address books, tasks and calendars!
-        tbSync.db.addFolder(newFolder);            
+        tbSync.db.addFolder(syncdata.account, newFolder);            
     }),
 
 
