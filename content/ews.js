@@ -172,6 +172,19 @@ var ews = {
 
 
     /**
+     * Is called if TbSync needs to create a new UID for an address book card
+     *
+     * @param aItem       [in] card that needs new ID
+     *
+     * returns the new id 
+     */
+    getNewCardID: function (aItem) {
+        return aItem.localId;
+    },
+
+
+
+    /**
      * Is called everytime an new target is created, intended to set a clean sync status.
      *
      * @param account       [in] account the new target belongs to
