@@ -178,7 +178,7 @@ var ews = {
      *
      * returns the new id 
      */
-    getNewCardID: function (aItem) {
+    getNewCardID: function (aItem, folder) {
         return aItem.localId;
     },
 
