@@ -23,7 +23,7 @@
 var ews = {
     bundle: Services.strings.createBundle("chrome://ews4tbsync/locale/ews.strings"),
     prefSettings: Services.prefs.getBranch("extensions.ews4tbsync."),
-
+    minTbSyncVersionRequired: "0.7.15",
 
 
     /**
@@ -92,6 +92,7 @@ var ews = {
             "parentID" : "",
             "useChangeLog" : "1", //log changes into changelog
             "downloadonly" : tbSync.db.getAccountSetting(account, "downloadonly"), //each folder has its own settings, the main setting is just the default,
+            "createdWithProviderVersion" : "0",
             };
         return folder;
     },
@@ -134,6 +135,7 @@ var ews = {
      */
     onEnableAccount: function (account) {
         db.resetAccountSetting(account, "lastsynctime");
+
         // reset custom values
         //db.resetAccountSetting(account, "policykey");
         //db.resetAccountSetting(account, "foldersynckey");
@@ -148,9 +150,18 @@ var ews = {
      * @param account       [in] account which is being disabled
      */
     onDisableAccount: function (account) {
-        // reset custom values
-        //db.setAccountSetting(account, "policykey", 0);
-        //db.setAccountSetting(account, "foldersynckey", "");
+    },
+
+
+
+    /**
+     * Is called everytime an new target is created, intended to set a clean sync status.
+     *
+     * @param account       [in] account the new target belongs to
+     * @param folderID       [in] folder the new target belongs to
+     */
+    onResetTarget: function (account, folderID) {
+        tbSync.db.setFolderSetting(account, folderID, "createdWithProviderVersion", tbSync.providerList.ews.version);
     },
 
 
@@ -180,17 +191,6 @@ var ews = {
      */
     getNewCardID: function (aItem, folder) {
         return aItem.localId;
-    },
-
-
-
-    /**
-     * Is called everytime an new target is created, intended to set a clean sync status.
-     *
-     * @param account       [in] account the new target belongs to
-     * @param folderID       [in] folder the new target belongs to
-     */
-    onResetTarget: function (account, folderID) {
     },
 
 
@@ -270,6 +270,24 @@ var ews = {
 
 
     /**
+     * Is called if a card is loaded in the edit dialog to show/hide elements 
+    *  besides those of class type "<provider>Container"
+     * 
+     * OPTIONAL, do not implement, if this provider is not manipulating 
+     * the edit/new dialog beyond toggeling the elements of 
+     * class  "<provider>Container"
+     *
+     * @param document       [in] document obj of edit/new dialog
+     * @param isOwnProvider  [in] true if the open card belongs to this provider
+     */
+    onAbCardLoad: function (document, isOwnProvider) {
+//        document.getElementById("WorkAddress2Container").hidden = isOwnProvider;
+//        document.getElementById("abHomeTab").children[1].hidden = isOwnProvider;
+    },
+
+
+
+    /**
      * Is called if TbSync needs to synchronize an account.
      *
      * @param syncdata      [in] object that contains the account and maybe the folder which needs to worked on
@@ -294,6 +312,11 @@ var ews = {
                     //this also removes all leftover cached folders and sets all other folders to a well defined cached = "0"
                     //which will set this account as connected (if at least one folder with cached == "0" is present)
                     tbSync.prepareFoldersForSync(syncdata.account);
+
+                    //check if any folder was found
+                    if (!tbSync.isConnected(syncdata.account)) {	
+                        throw dav.sync.failed("no-folders-found-on-server");
+                    }
 
                     //update folder list in GUI
                     Services.obs.notifyObservers(null, "tbsync.updateFolderList", syncdata.account);
