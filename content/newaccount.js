@@ -19,6 +19,8 @@
 
 Components.utils.import("resource://gre/modules/Task.jsm");
 Components.utils.import("chrome://tbsync/content/tbsync.jsm");
+Components.utils.import("chrome://ews4tbsync/content\exchangeapi/common/erAutoDiscover.js");
+Components.utils.import("chrome://ews4tbsync/content\exchangeapi/common/erAutoDiscoverySOAP.js");
 
 var tbSyncEwsNewAccount = {
 
