@@ -1,5 +1,5 @@
 # EWS-4-TbSync
-The Exchange WebServices provider for the Thunderbird synchronization AddOn TbSync. If this AddOn and TbSync are installed, TbSync is able to sync EWS accounts. This is work in progress and not yet functional.
+The Exchange WebServices provider for the Thunderbird synchronization AddOn TbSync. If this AddOn and TbSync are installed, TbSync will be able to sync EWS accounts. However: **This is work in progress and not yet functional. Do not expect this to be released anytime soon.**
 
 ### Images of the EWS provider hooked into TbSync
 
