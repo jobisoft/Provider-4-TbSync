@@ -226,7 +226,7 @@ var ews = {
             //there is no matching email identity - use current default value as best guess and remove association
             //use current best guess 
             newCalendar.setProperty("organizerCN", newCalendar.getProperty("fallbackOrganizerName"));
-            newCalendar.setProperty("organizerId", cal.prependMailTo(tbSync.db.getAccountSetting(account, "user")));
+            newCalendar.setProperty("organizerId", cal.email.prependMailTo(tbSync.db.getAccountSetting(account, "user")));
         }
 
         return newCalendar;
