@@ -23,7 +23,7 @@
 var ews = {
     bundle: Services.strings.createBundle("chrome://ews4tbsync/locale/ews.strings"),
     prefSettings: Services.prefs.getBranch("extensions.ews4tbsync."),
-    minTbSyncVersionRequired: "0.7.15",
+    minTbSyncVersionRequired: "0.7.16",
 
 
     /**
@@ -31,11 +31,24 @@ var ews = {
      *
      * @param lightningIsAvail       [in] indicate wheter lightning is installed/enabled
      */
-    init: Task.async (function* (lightningIsAvail)  {
+    load: Task.async (function* (lightningIsAvail) {
         //load overlays or do other init stuff, use lightningIsAvail to init stuff if lightning is installed
-        //tbSync.window.alert("EWS Test (Lightning: " + lightningIsAvail + ")");	    
+
+        if (lightningIsAvail) {
+        }
+        
     }),
 
+    /**
+     * Called during unload of external provider extension to unload provider.
+     *
+     * @param lightningIsAvail       [in] indicate wheter lightning is installed/enabled
+     */
+    unload: function (lightningIsAvail) {
+        if (lightningIsAvail) {
+        }        
+    },
+    
 
 
     /**
@@ -43,6 +56,15 @@ var ews = {
      */
     getProviderIcon: function () {
         return "chrome://ews4tbsync/skin/exchange-addrbook.png";
+    },
+
+
+
+    /**
+     * Returns the email address of the maintainer (used for bug reports).
+     */
+    getMaintainerEmail: function () {
+        return "john.bieling@gmx.de";
     },
 
 
