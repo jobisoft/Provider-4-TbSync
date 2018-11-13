@@ -70,6 +70,17 @@ var ews = {
 
 
     /**
+     * Returns a list of sponsors, they will be sorted by the index and shown at the community tab
+     */
+    getSponsors: function () {
+        return {
+            //"sort string" : {name: "Name", description: "sponsoring", icon: "", link: "" },
+        };
+    },
+
+
+
+    /**
      * Return object which contains all possible fields of a row in the accounts database with the default value if not yet stored in the database.
      */
     getDefaultAccountEntries : function () {
