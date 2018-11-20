@@ -13,7 +13,7 @@
     onclose="return tbSyncEwsNewAccount.onClose()"
     ondialogextra1="tbSyncEwsNewAccount.onAdd();">
 
-    <script type="application/javascript" src="chrome://ews4tbsync/content/newaccount.js"/>
+    <script type="application/javascript" src="chrome://ews4tbsync/content/createAccount.js"/>
 
     <vbox>
         <description style="width: 450px">&add.description;</description>
