@@ -37,12 +37,12 @@ function startup(data, reason) {
     
     //during APP_STARTUP, TbSync will find auto load all active providers, if this provider gets enabled later, load it dynamically 
     if (reason != APP_STARTUP) {
-        Services.obs.notifyObservers(null, "tbsync.addProvider", "ews");
+        Services.obs.notifyObservers(null, "tbsync.registerProvider", "ews");
     }
 }
 
 function shutdown(data, reason) {
     //unload this provider from TbSync
-    Services.obs.notifyObservers(null, "tbsync.removeProvider", "ews");
+    Services.obs.notifyObservers(null, "tbsync.unregisterProvider", "ews");
     Services.obs.notifyObservers(null, "chrome-flush-caches", null);
 }
