@@ -37,7 +37,7 @@ function startup(data, reason) {
     
     //during APP_STARTUP, TbSync will find auto load all active providers, if this provider gets enabled later, load it dynamically 
     if (reason != APP_STARTUP) {
-        Services.obs.notifyObservers(null, "tbsync.registerProvider", "ews");
+        Services.obs.notifyObservers(null, "tbsync.registerProvider", JSON.stringify({provider: "ews", js: "//ews4tbsync/content/ews.js"}));
     }
 }
 
