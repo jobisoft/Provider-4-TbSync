@@ -23,7 +23,6 @@
 var ews = {
     bundle: Services.strings.createBundle("chrome://ews4tbsync/locale/ews.strings"),
     prefSettings: Services.prefs.getBranch("extensions.ews4tbsync."),
-    minTbSyncVersionRequired: "0.7.16",
 
 
     /**
@@ -83,6 +82,15 @@ var ews = {
      */
     getEditAccountXulUrl: function () {
         return "//ews4tbsync/content/editAccount.xul";
+    },
+
+
+
+    /**
+     * Returns nice string for name of provider (is used in the add account menu).
+     */
+    getNiceProviderName: function () {
+        return "Exchange WebServices";
     },
 
 
@@ -212,7 +220,7 @@ var ews = {
      * @param folderID       [in] folder the new target belongs to
      */
     onResetTarget: function (account, folderID) {
-        tbSync.db.setFolderSetting(account, folderID, "createdWithProviderVersion", tbSync.providerList.ews.version);
+        tbSync.db.setFolderSetting(account, folderID, "createdWithProviderVersion", tbSync.providerList.ews.addon.version.toString());
     },
 
 
