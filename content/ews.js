@@ -220,7 +220,7 @@ var ews = {
      * @param folderID       [in] folder the new target belongs to
      */
     onResetTarget: function (account, folderID) {
-        tbSync.db.setFolderSetting(account, folderID, "createdWithProviderVersion", tbSync.providerList.ews.addon.version.toString());
+        tbSync.db.setFolderSetting(account, folderID, "createdWithProviderVersion", tbSync.loadedProviders.ews.version);
     },
 
 
