@@ -34,10 +34,10 @@ var ews = {
      *
      * @param lightningIsAvail       [in] indicate wheter lightning is installed/enabled
      */
-    unload: Task.async(function* (lightningIsAvail) {
+    unload: function (lightningIsAvail) {
         if (lightningIsAvail) {
         }        
-    }),
+    },
     
 
 
