@@ -40,3 +40,6 @@
 <!ENTITY servertype.auto "Automatic configuration via WebServices Autodiscover">
 <!ENTITY servertype.custom "Custom configuration">
 <!ENTITY servertype.unlock "Double click to unlock all predefined server settings.">
+
+<!ENTITY manager.tabs.settings "Server settings">
+<!ENTITY manager.tabs.resources "Available resources">
