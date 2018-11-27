@@ -95,9 +95,6 @@ ews.sync = {
                         syncdata.targetId = tbSync.db.getFolderSetting(syncdata.account, syncdata.folderID, "target");
                         syncdata.addressbookObj = tbSync.getAddressBookObject(syncdata.targetId);
 
-                        //promisify addressbook, so it can be used together with yield (using same interface as promisified calender)
-                        syncdata.targetObj = tbSync.promisifyAddressbook(syncdata.addressbookObj);
-                        
                         yield ews.sync.singleFolder(syncdata);
                         break;
 
@@ -116,9 +113,6 @@ ews.sync = {
 
                         syncdata.targetId = tbSync.db.getFolderSetting(syncdata.account, syncdata.folderID, "target");
                         syncdata.calendarObj = cal.getCalendarManager().getCalendarById(syncdata.targetId);
-                        
-                        //promisify calender, so it can be used together with yield
-                        syncdata.targetObj = cal.async.promisifyCalendar(syncdata.calendarObj.wrappedJSObject);
 
                         syncdata.calendarObj.startBatch();
                         yield ews.sync.singleFolder(syncdata);
@@ -142,11 +136,6 @@ ews.sync = {
 
     
     singleFolder: Task.async (function* (syncdata)  {
-        //The syncdata.targetObj has a comon interface, regardless if this is a contact or calendar sync, 
-        //so you could use the same main sync process for both to reduce redundancy.
-        //The actual type can be stored in syncdata.type, so you can call type-based functions to read 
-        //or to create new Thunderbird items (contacts or events)
-
         //Pretend to receive remote changes
         {
             tbSync.setSyncState("send.request.remotechanges", syncdata.account, syncdata.folderID);
