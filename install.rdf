@@ -10,6 +10,8 @@
         <em:name>Provider for Exchange WebServices</em:name>
         <em:version>0.6</em:version>
         <em:description>Add sync support for Exchange WebServices accounts to TbSync</em:description>
+        <em:translator>John Bieling (en-US)</em:translator>
+        <em:translator>Alexey Sinitsyn (ru)</em:translator>
         <em:creator>John Bieling</em:creator>
         <em:homepageURL>https://github.com/jobisoft/EWS-4-TbSync</em:homepageURL>
         <em:iconURL>chrome://ews4tbsync/skin/exchange-addrbook.png</em:iconURL>
@@ -23,5 +25,16 @@
           </Description>
         </em:targetApplication>
 
+         <em:localized>  <!-- Russian -->
+          <Description>
+            <em:locale>ru</em:locale>
+            <em:name>Провайдер CalDAV &amp; CardDAV</em:name>
+            <em:description>Добавляет в TbSync поддержку базирующегося на http/https протокола синхронизации для учетных записей CalDAV &amp; CardDAV (контакты, задачи и календари)</em:description>
+            <em:translator>John Bieling (en-US)</em:translator>
+            <em:translator>Alexey Sinitsyn (ru)</em:translator> 
+            <em:creator>John Bieling</em:creator>
+          </Description>
+         </em:localized>
+         
     </Description>
 </RDF>
