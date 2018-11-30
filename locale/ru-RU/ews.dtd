@@ -1,8 +1,8 @@
-<!ENTITY add.title "Adding an Exchange WebServices account to TbSync">
-<!ENTITY add.ok "Add account (EWS)">
-<!ENTITY add.name "Account name (EWS):">
-<!ENTITY add.user "User name (EWS):">
-<!ENTITY add.password "Password:">
+<!ENTITY add.title "Добавить Exchange WebServices аккаунт для TbSync">
+<!ENTITY add.ok "Добавить аккаунт (EWS)">
+<!ENTITY add.name "Имя аккаунта (EWS):">
+<!ENTITY add.user "Имя пользователя (EWS):">
+<!ENTITY add.password "Пароль:">
 <!ENTITY add.server "Server configuration:">
 <!ENTITY add.description "Please enter a name for the new TbSync account, the user name of the Exchange WebServices account you want to add (probably an email address) and select one of the available server configuration options. ">
 
@@ -18,7 +18,7 @@
 <!ENTITY pref.usehttps "Use secure connection (connect via https)">
 <!ENTITY pref.DeviceId "Device Id">
 <!ENTITY pref.contactoptions "Contact options">
-<!ENTITY pref.downloadonly "Revert local changes (one-way sync)">
+<!ENTITY pref.downloadonly "Отменить локальные изменения (односторонняя синхронизация)">
 <!ENTITY pref.generaloptions "General options">
 <!ENTITY pref.syncdefaultfolders "Subscribe and sync all default folders after the initial connection has been established.">
 
