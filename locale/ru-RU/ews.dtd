@@ -3,8 +3,8 @@
 <!ENTITY add.name "Имя аккаунта (EWS):">
 <!ENTITY add.user "Имя пользователя (EWS):">
 <!ENTITY add.password "Пароль:">
-<!ENTITY add.server "Server configuration:">
-<!ENTITY add.description "Please enter a name for the new TbSync account, the user name of the Exchange WebServices account you want to add (probably an email address) and select one of the available server configuration options. ">
+<!ENTITY add.server "Конфигурация сервера:">
+<!ENTITY add.description "Введите имя для нового аккаунта TbSync, имя пользователя аккаунта Exchange WebServices, который вы хотите добавить (возможно, адрес электронной почты), и выберите один из доступных параметров конфигурации сервера. ">
 
 <!ENTITY pref.EnableAccount "Enable account &amp; try to connect to server">
 <!ENTITY pref.SynchronizeAccount "Synchronize account">
