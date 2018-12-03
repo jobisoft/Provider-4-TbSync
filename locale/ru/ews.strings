@@ -6,7 +6,7 @@ autodiscover.Ok=Автообнаружение завершилось успеш
 autodiscover.NeedEmail=Автообнаружению нужен действительный адрес электронной почты в качестве имени пользователя.
 
 autodiscover.Failed=Автообнаружение для пользователя <##user##> не удалось.
-autodiscover.FailedUnknown=Either the provided credentials were wrong or your Exchange WebServices provider has a temporary issue, or does not support Autodiscover.
+autodiscover.FailedUnknown=Либо предоставленные учетные данные были неправильными, либо у вашего провайдера Exchange WebServices была временная проблема, или не поддерживается автообнаружение.
 autodiscover.FailedSecurity=Сообщается также о следующих ошибках сертификата, которые *может быть* указывают проблему с вашим провайдером Exchange WebServices:
 
 deletefolder.confirm=Вы действительно хотите ПЕРМАНЕНТНО ВЫЧИСТИТЬ папку "##replace.1##" из корзины?
