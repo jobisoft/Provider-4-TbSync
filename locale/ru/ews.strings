@@ -48,12 +48,12 @@ status.javascriptError=JavaScript дал ошибку! Проверьте жур
 status.security=Could not establish a secure connection. Are you using a self-signed or otherwise untrusted certificate without importing it into Thunderbird? (##replace.1##)||How-to-use-TbSync-with-self-signed-or-otherwise-untrusted-certificates%3F||[help]
 status.network=Could not connect to server (##replace.1##).
 
-status.syncing=Synchronizing
-status.connecting=Connecting to server
-status.skipped=Not yet supported, skipped
-status.aborted=Not synchronized
-status.pending=Waiting to be synchronized
-status.modified=Local modifications
+status.syncing=Синхронизация
+status.connecting=Подключение к серверу
+status.skipped=Пока не поддерживается, пропущено
+status.aborted=Не синхронизировано
+status.pending=Ожидание пока синхронизируется
+status.modified=Локальные изменения
 
 prompt.Unsubscribe=Are you sure you want to unsubscribe this item? All local modifications, which have not been synced yet, will be lost!
 prompt.UnlockSettings=Changing any of the predefined server settings could lead to synchronization errors. Are you sure you want to unlock all predefined server settings?
