@@ -58,10 +58,10 @@ status.modified=Локальные изменения
 prompt.Unsubscribe=Are you sure you want to unsubscribe this item? All local modifications, which have not been synced yet, will be lost!
 prompt.UnlockSettings=Changing any of the predefined server settings could lead to synchronization errors. Are you sure you want to unlock all predefined server settings?
 
-button.syncthis=Synchronize this account
-button.tryagain=Try again to connect to server
-button.enableAndConnect=Enable account & try to connect to server
-button.disableAndEdit=Disable account to edit settings
+button.syncthis=Синхронизировать этот аккаунт
+button.tryagain=Повторить попытку подключения к серверу
+button.enableAndConnect=Разрешить аккаунт & подключиться к серверу
+button.disableAndEdit=Запретить аккаунт для редактирования настроек
 
 config.auto=Exchange WebServices конфигурация сервера (Автообнаружение)
 config.custom=Exchange WebServices конфигурация сервера
