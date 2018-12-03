@@ -63,5 +63,5 @@ button.tryagain=Try again to connect to server
 button.enableAndConnect=Enable account & try to connect to server
 button.disableAndEdit=Disable account to edit settings
 
-config.auto=Exchange WebServices configuration (Autodiscover)
-config.custom=Exchange WebServices configuration
+config.auto=Exchange WebServices конфигурация сервера (Автообнаружение)
+config.custom=Exchange WebServices конфигурация сервера
