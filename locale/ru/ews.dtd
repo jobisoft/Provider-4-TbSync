@@ -6,16 +6,16 @@
 <!ENTITY add.server "Конфигурация сервера:">
 <!ENTITY add.description "Введите имя для нового аккаунта TbSync, имя пользователя аккаунта Exchange WebServices, который вы хотите добавить (возможно, адрес электронной почты), и выберите один из доступных параметров конфигурации сервера. ">
 
-<!ENTITY pref.EnableAccount "Enable account &amp; try to connect to server">
-<!ENTITY pref.SynchronizeAccount "Synchronize account">
+<!ENTITY pref.EnableAccount "Разрешить аккаунт &amp; попробовать подключиться к серверу">
+<!ENTITY pref.SynchronizeAccount "Синхронизировать аккаунт">
 <!ENTITY pref.autodetect "лучшее из доступных">
 
-<!ENTITY pref.AccountName "Account name">
-<!ENTITY pref.UserName "User name">
-<!ENTITY pref.UserNameDescription "User name is usually the email address of your account.">
-<!ENTITY pref.ServerName "Server address">
+<!ENTITY pref.AccountName "Имя аккаунта">
+<!ENTITY pref.UserName "Имя пользователя">
+<!ENTITY pref.UserNameDescription "Имя пользователя обычно является адресом электронной почты вашего аккаунта.">
+<!ENTITY pref.ServerName "Адрес сервера">
 <!ENTITY pref.ServerNameDescription "например: mail.yourserver.com">
-<!ENTITY pref.usehttps "Use secure connection (connect via https)">
+<!ENTITY pref.usehttps "Использовать безопасное соединение (соединение через https)">
 <!ENTITY pref.DeviceId "Идентификатор устройства">
 <!ENTITY pref.contactoptions "Contact options">
 <!ENTITY pref.downloadonly "Отменить локальные изменения (односторонняя синхронизация)">
