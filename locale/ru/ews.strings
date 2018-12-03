@@ -5,19 +5,19 @@ autodiscover.Querying=Поиск настроек ...
 autodiscover.Ok=Автообнаружение завершилось успешно, теперь вы можете проверить дополнительные настройки и установить соединение синхронизации.
 autodiscover.NeedEmail=Автообнаружению нужен действительный адрес электронной почты в качестве имени пользователя.
 
-autodiscover.Failed=Autodiscover for user <##user##> failed.
+autodiscover.Failed=Автообнаружение для пользователя <##user##> не удалось.
 autodiscover.FailedUnknown=Either the provided credentials were wrong or your Exchange WebServices provider has a temporary issue, or does not support Autodiscover.
 autodiscover.FailedSecurity=Also the following certificate errors have been reported, which *might* indicate a problem with your Exchange WebServices provider:
 
-deletefolder.confirm=Do you really want to PERMANENTLY PURGE folder "##replace.1##" from trash?
+deletefolder.confirm=Вы действительно хотите ПЕРМАНЕНТНО ВЫЧИСТИТЬ папку "##replace.1##" из корзины?
 
 subscribe.on=Подписаться "##replace.1##"
 subscribe.off=Отписаться "##replace.1##"
 
 syncstate.syncing=Инициализация синхронизации
-syncstate.preparing=Preparing next item for synchronization
-syncstate.done=Preparing next item for synchronization
-syncstate.accountdone=Готовый аккаунт
+syncstate.preparing=Подготовка следующего элемента для синхронизации
+syncstate.done=Подготовка следующего элемента для синхронизации
+syncstate.accountdone=Завершенный аккаунт
 
 syncstate.prepare.request.autodiscover=Requesting updated server settings
 syncstate.send.request.autodiscover=Waiting for updated server settings
