@@ -22,8 +22,8 @@
 <!ENTITY pref.generaloptions "General options">
 <!ENTITY pref.syncdefaultfolders "Subscribe and sync all default folders after the initial connection has been established.">
 
-<!ENTITY pref.autotime "Sync interval (minutes)">
-<!ENTITY pref.never "A setting of 0 disables periodic sync. Push sync is no yet supported.">
+<!ENTITY pref.autotime "Интервал синхронизации (минуты)">
+<!ENTITY pref.never "Установка 0 отключает периодическую синхронизацию. Push-синхронизация пока не поддерживается.">
 
 <!ENTITY pref.syncstate "Sync status">
 <!ENTITY pref.seperator.comma "Comma">
