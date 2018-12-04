@@ -392,58 +392,18 @@ var ews = {
 
 
     /**
-     * Implements the TbSync UI interface for external provider extensions, 
-     * only needed, if the standard TbSync UI logic is used (chrome://tbsync/content/manager/accountSettings.js).
+     * Functions used by the folderlist in the main account settings tab
      */
-    ui: {
+    folderList: {
 
-        /**
-         * Returns array of all possible account options (field names of a row in the accounts database).
-         */
-        getAccountStorageFields: function () {
-            return Object.keys(tbSync.ews.getDefaultAccountEntries()).sort();
-        },
-
-
-
-        /**
-         * Returns array of all options, that should not lock while being connected.
-         */
-        getAlwaysUnlockedSettings: function () {
-            return ["autosync"];
-        },
-
-
-
-        /**
-         * Returns object with fixed entries for rows in the accounts database. This is useable for two cases:
-         *   1. indicate which entries where retrieved by autodiscover, do not assign a value
-         *   2. other special server profiles (like "outlook") which the user can select during account creation with predefined values
-         * In either case, these entries are not editable in the UI by default,but the user has to unlock them.
-         *
-         * @param servertype       [in] return fixed set based on the given servertype
-         */
-        getFixedServerSettings: function(servertype) {
-            let settings = {};
-            switch (servertype) {
-                case "auto":
-                    settings["host"] = null;
-                    settings["https"] = null;
-                    break;
-            }
-            return settings;
-        },
-
-
-
-        /**
+         /**
          * Is called before the context menu of the folderlist is shown, allows to 
          * show/hide custom menu options based on selected folder
          *
          * @param document       [in] document object of the account settings window
          * @param folder         [in] folder databasse object of the selected folder
          */
-        onFolderListContextMenuShowing: function (document, folder) {
+        onContextMenuShowing: function (document, folder) {
         },
 
 
@@ -451,17 +411,17 @@ var ews = {
         /**
          * Returns an array of folderRowData objects, containing all information needed 
          * to fill the folderlist. The content of the folderRowData object is free to choose,
-         * it will be passed back to addRowToFolderList() and updateRowOfFolderList()
+         * it will be passed back to addRow() and updateRow()
          *
          * @param account        [in] account id for which the folder data should be returned
          */
-        getSortedFolderData: function (account) {
+        getSortedData: function (account) {
             let folderData = [];
             let folders = tbSync.db.getFolders(account);
             let folderIDs = Object.keys(folders);
 
             for (let i=0; i < folderIDs.length; i++) {
-                folderData.push(tbSync.ews.ui.getFolderRowData(folders[folderIDs[i]]));
+                folderData.push(tbSync.ews.folderList.getRowData(folders[folderIDs[i]]));
             }
             return folderData;
         },
@@ -471,16 +431,16 @@ var ews = {
         /**
          * Returns a folderRowData object, containing all information needed to fill one row
          * in the folderlist. The content of the folderRowData object is free to choose, it
-         * will be passed back to addRowToFolderList() and updateRowOfFolderList()
+         * will be passed back to addRow() and updateRow()
          *
          * Use tbSync.getSyncStatusMsg(folder, syncdata, provider) to get a nice looking 
          * status message, including sync progress (if folder is synced)
          *
          * @param folder         [in] folder databasse object of requested folder
-         * @param syncdata       [in] optional syncdata obj send by updateRowOfFolderList(),
+         * @param syncdata       [in] optional syncdata obj send by updateRow(),
          *                            needed to check if the folder is currently synced
          */        
-        getFolderRowData: function (folder, syncdata = null) {
+        getRowData: function (folder, syncdata = null) {
             let rowData = {};
             rowData.folderID = folder.folderID;
             rowData.selected = (folder.selected == "1");
@@ -500,14 +460,14 @@ var ews = {
          * @param newListItem    [in] the listitem of the row, where row items should be added to
          * @param rowData        [in] rowData object with all information needed to add the row
          */        
-        addRowToFolderList: function (document, newListItem, rowData) {
+        addRow: function (document, newListItem, rowData) {
             //add folder type/img
             let itemTypeCell = document.createElement("listcell");
             itemTypeCell.setAttribute("class", "img");
             itemTypeCell.setAttribute("width", "24");
             itemTypeCell.setAttribute("height", "24");
                 let itemType = document.createElement("image");
-                itemType.setAttribute("src", tbSync.ews.ui.getTypeImage(rowData.type));
+                itemType.setAttribute("src", tbSync.ews.folderList.getTypeImage(rowData.type));
                 itemType.setAttribute("style", "margin: 4px;");
             itemTypeCell.appendChild(itemType);
             newListItem.appendChild(itemTypeCell);
@@ -542,7 +502,7 @@ var ews = {
          * @param listItem       [in] the listitem of the row, which needs to be updated
          * @param rowData        [in] rowData object with all information needed to add the row
          */        
-        updateRowOfFolderList: function (document, listItem, rowData) {
+        updateRow: function (document, listItem, rowData) {
             tbSync.updateListItemCell(listItem.childNodes[1], ["label","tooltiptext"], rowData.name);
             tbSync.updateListItemCell(listItem.childNodes[2], ["label","tooltiptext"], rowData.status);
             if (rowData.selected) {
