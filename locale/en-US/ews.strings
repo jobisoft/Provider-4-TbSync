@@ -41,8 +41,8 @@ status.449=Server requests provisioning.
 status.500=Unknown Server Error (HTTP Error 500).
 status.503=Service unavailable.
 status.httperror=Communication error (HTTP status ##replace.1##).
-status.OK=Ok
-status.nolightning=Lightning Add-On not installed, calendars are not supported.
+status.OK=OK
+status.nolightning=Lightning add-on not installed, calendars are not supported.
 status.javascriptError=Javascript error! Check debug log for details.
 
 status.security=Could not establish a secure connection. Are you using a self-signed or otherwise untrusted certificate without importing it into Thunderbird? (##replace.1##)||How-to-use-TbSync-with-self-signed-or-otherwise-untrusted-certificates%3F||[help]
