@@ -42,9 +42,13 @@ var ews = {
 
 
     /**
-     * Returns location of 16x16 pixel provider icon.
+     * Returns location of a provider icon.
+     *
+     * @param size       [in] size of requested icon
+     * @param accountId  [in] optional ID of the account related to this request
+     *
      */
-    getProviderIcon: function () {
+    getProviderIcon: function (size, accountId = null) {
         return "chrome://ews4tbsync/skin/exchange-addrbook.png";
     },
 
@@ -63,16 +67,16 @@ var ews = {
      * Returns XUL URL of the new account dialog.
      */
     getCreateAccountXulUrl: function () {
-        return "//ews4tbsync/content/createAccount.xul";
+        return "chrome://ews4tbsync/content/createAccount.xul";
     },
 
 
 
     /**
-     * Returns XUL URL of the edit account dialog.
+     * Returns overlay XUL URL of the edit account dialog (chrome://tbsync/content/manager/editAccount.xul)
      */
-    getEditAccountXulUrl: function () {
-        return "//ews4tbsync/content/editAccount.xul";
+    getEditAccountOverlayUrl: function () {
+        return "chrome://ews4tbsync/content/editAccount.xul";
     },
 
 
@@ -404,6 +408,20 @@ var ews = {
          * @param folder         [in] folder databasse object of the selected folder
          */
         onContextMenuShowing: function (document, folder) {
+        },
+
+
+
+        /**
+         * Returns an array of attribute objects, which define the number of columns 
+         * and the look of the header
+         */
+        getHeader: function () {
+            return [
+                {style: "font-weight:bold;", label: "", width:"24"},
+                {style: "font-weight:bold;", label: tbSync.getLocalizedMessage("manager.resource"), width:"145"},
+                {style: "font-weight:bold;", label: tbSync.getLocalizedMessage("manager.status"), flex:"1"},
+            ]
         },
 
 
