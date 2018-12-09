@@ -82,6 +82,28 @@ var ews = {
 
 
     /**
+     * Is called after the settings overlay of this provider has been added to the main settings window
+     *
+     * @param window       [in] window object of the settings window
+     * @param accountID    [in] accountId of the selected account
+     */
+    onSettingsLoad: function (window, accountID) {
+    },
+
+
+
+    /**
+     * Is called each time after the settings window has been updated
+     *
+     * @param window       [in] window object of the settings window
+     * @param accountID    [in] accountId of the selected account
+     */
+    onSettingsUpdate: function (window, accountID) {
+    },
+
+
+
+    /**
      * Returns nice string for name of provider (is used in the add account menu).
      */
     getNiceProviderName: function () {
