@@ -87,7 +87,7 @@ var ews = {
      * @param window       [in] window object of the settings window
      * @param accountID    [in] accountId of the selected account
      */
-    onSettingsLoad: function (window, accountID) {
+    onSettingsGUILoad: function (window, accountID) {
     },
 
 
@@ -98,7 +98,7 @@ var ews = {
      * @param window       [in] window object of the settings window
      * @param accountID    [in] accountId of the selected account
      */
-    onSettingsUpdate: function (window, accountID) {
+    onSettingsGUIUpdate: function (window, accountID) {
     },
 
 
