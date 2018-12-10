@@ -126,7 +126,7 @@ var tbSyncEwsNewAccount = {
         }
 
         //also update password in PasswordManager
-        tbSync.setPassword (newAccountEntry, password);
+        tbSync.ews.setPassword (newAccountEntry, password);
 
         //create a new EWS account and pass its id to updateAccountsList, which will select it
         //the onSelect event of the List will load the selected account
