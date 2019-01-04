@@ -340,31 +340,37 @@ var ews = {
      * It is used for autocompletion while typing something into the address field of the message composer and for the address book search,
      * if something is typed into the search field of the Thunderbird address book.
      *
-     * TbSync will execute this only for queries longer than 3 chars.
-     *
      * DO NOT IMPLEMENT AT ALL, IF NOT SUPPORTED
+     *
+     * TbSync will execute this only for queries longer than 3 chars.
      *
      * @param account       [in] id of the account which should be searched
      * @param currentQuery  [in] search query
+     * @param caller  [in] "autocomplete" or "search"
      */
-    abServerSearch: Task.async (function* (account, currentQuery)  {
+    abServerSearch: Task.async (function* (account, currentQuery, caller)  {
         //generating example data
         let galdata = [];
-    
-                let resultset = {};
+        let resultset = {};
+
+        switch (caller) {
+            case "search":
                 resultset.properties = {};                    
                 //any property defined here will be added to the found contacts card 
                 resultset.properties["FirstName"] = "EWS First";
                 resultset.properties["LastName"] = "LAST";
                 resultset.properties["DisplayName"] = "FIRST LAST";
                 resultset.properties["PrimaryEmail"] = "user@inter.net"
-
+                break;
+           
+            case "autocomplete":
                 resultset.autocomplete = {};                    
                 resultset.autocomplete.value = "EWS First Last" + " <" + "user@inter.net" + ">";
                 resultset.autocomplete.account = account;
-                    
-                galdata.push(resultset);
-        
+                break;
+        }
+        galdata.push(resultset);
+    
         return galdata;
     }),
 
