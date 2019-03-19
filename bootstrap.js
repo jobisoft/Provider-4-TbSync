@@ -54,7 +54,7 @@ function shutdown(data, reason) {
 
     //unload this provider add-on and all its loaded providers from TbSync
     try {
-        tbSync.unloadProviderAddon(data.id);
+        tbSync.unloadProvider("ews");
     } catch (e) {}
     Services.obs.notifyObservers(null, "chrome-flush-caches", null);    
 }
