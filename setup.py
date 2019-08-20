@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# Tested with Pyhton 2.7
+
 print
 print "Please enter the following 8 information, so your provider add-on can be prepared."
 print 
@@ -47,12 +49,22 @@ else:
     "bootstrap.js"                    : ["ShortName", "NameSpace", "ChromeUrl"],
     "chrome.manifest"                 : ["ChromeUrl"],
     "manifest.json"                   : ["ID", "AddonAuthor", "AddonHomepage"],
-    "_locales\en-US\messages.json"    : ["AddonName", "AddonDescription"],
-    "_locales\en-US\provider.dtd"     : ["AddonName"],
-    "_locales\en-US\provider.strings" : ["MenuName"],
-    "content\includes\sync.js"        : ["ShortName"],
-    "content\provider.js"             : ["ShortName", "NameSpace", "ChromeUrl", "Email"]
+    "_locales/en-US/messages.json"    : ["AddonName", "AddonDescription"],
+    "_locales/en-US/provider.dtd"     : ["AddonName"],
+    "_locales/en-US/provider.strings" : ["MenuName"],
+    "content/includes/sync.js"        : ["ShortName"],
+    "content/provider.js"             : ["ShortName", "NameSpace", "ChromeUrl", "Email"]
   }
 
   for file in files.keys():
-    print file
+    # Read in the file
+    with open(file, "r") as f :
+       filedata = f.read()
+    # Replace everything
+    for repl in files[file]:
+      filedata = filedata.replace("__Provider" + repl + "__", values[repl])
+    # Write the file out again
+    with open(file, 'w') as f:
+      f.write(filedata)
+
+  print "Done."
