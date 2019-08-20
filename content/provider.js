@@ -12,9 +12,9 @@
 const __ProviderNameSpace__ = tbSync.providers.__ProviderNameSpace__;
 
 /**
- * Implementing the TbSync interfaces for external provider extensions.
+ * Base class for the TbSync provider interface.
  */
-var base = class {
+var Base = class {
     /**
      * Called during load of external provider extension to init provider.
      */
@@ -156,7 +156,7 @@ var base = class {
      */
     static getDefaultFolderEntries() {
         let folder = {
-            "type" : "addrbook",
+            "someSetting" : "none",
             };
         return folder;
     }
@@ -265,6 +265,7 @@ var base = class {
      * return StatusData
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
+        await __ProviderNameSpace__.sync.folderList(syncData);
         return new tbSync.StatusData();
     }
     
@@ -280,7 +281,7 @@ var base = class {
      * @param syncRunNr     [in] Indicates the n-th number the folder is being synced.
      *                           It starts with 1 and is limited by 
      *                           syncDescription.maxFolderReruns.
-     *
+     * <p>
      * !!! NEVER CALL THIS FUNCTION DIRECTLY BUT USE !!!
      *    tbSync.AccountData::sync() or
      *    tbSync.FolderData::sync()
@@ -288,6 +289,7 @@ var base = class {
      * return StatusData
      */
     static async syncFolder(syncData, syncJob, syncRunNr) {
+        await __ProviderNameSpace__.sync.folder(syncData);
         return new tbSync.StatusData();
     }
 }
@@ -295,167 +297,249 @@ var base = class {
 
 
 
-
-var standardTargets = {
-    // If this provider is using the standard "addressbook" targetType, it must
-    // implement the addressbook object.
-    addressbook : {
-
-        // define a card property, which should be used for the changelog
-        // basically your primary key for the abItem properties
-        // UID will be used, if nothing specified
-        primaryKeyField: "UID",
-        
-
-
-        generatePrimaryKey: function (folderData) {
-             return tbSync.generateUUID();
-        },
-        
+/**
+ * The addressbook class allows the provider to use the standard TbSync
+ * addressbook target, which provides a changelog and some observer
+ * notifications for directories, cards and lists.
+ */
+var addressbook = class {
+    /**
+     * Returns the card property, which should be used as primary key for the
+     * changelog. Fallback to UID, if nothing is returned.
+     */
+    static get primaryKeyField() {
+        return "UID";
+    }
+    
 
 
-        // enable or disable changelog
-        logUserChanges: true,
+    /**
+     * Returns a value to be stored in the primary key field, if a card or list
+     * does not yet have a valid primary key.
+     *
+     * @param {FolderData} folderData FolderData object of thedirectory, the
+     *                                list belongs to
+     */
+    static generatePrimaryKey(folderData) {
+        return tbSync.generateUUID();
+    }
+    
+
+
+    /**
+     * Returns if changes made to elements (by the user) should be added to the
+     * changelog.
+     */
+    static get logUserChanges() {
+        return true;
+    }
 
 
 
-        directoryObserver: function (aTopic, folderData) {
-            switch (aTopic) {
-                case "addrbook-removed":
-                case "addrbook-updated":
-                    //Services.console.logStringMessage("["+ aTopic + "] " + folderData.getFolderProperty("foldername"));
-                    break;
+    /**
+     * An observer for directory events.
+     *
+     * @param {string} aTopic         Name of the event, can be one of these: 
+     *                                "addrbook-removed",
+     *                                "addrbook-updated"
+     * @param {FolderData} folderData FolderData object of the directory,
+     *                                that triggered the event 
+     */
+    static directoryObserver(aTopic, folderData) {
+        switch (aTopic) {
+            case "addrbook-removed":
+            case "addrbook-updated":
+                //Services.console.logStringMessage("["+ aTopic + "] " + folderData.getFolderProperty("foldername"));
+                break;
+        }
+    }
+    
+
+
+    /**
+     * An observer for card events.
+     *
+     * @param {string} aTopic         Name of the event, can be one of these: 
+     *                                "addrbook-contact-updated",
+     *                                "addrbook-contact-removed",
+     *                                "addrbook-contact-created"
+     * @param {FolderData} folderData FolderData object of the directory,
+     *                                containing the card that triggered the
+     *                                event 
+     * @param {AbCardItem} abCardItem AbCardItem of the card that triggered
+     *                                the event 
+     */
+    static cardObserver(aTopic, folderData, abCardItem) {
+        switch (aTopic) {
+            case "addrbook-contact-updated":
+            case "addrbook-contact-removed":
+                //Services.console.logStringMessage("["+ aTopic + "] " + abCardItem.getProperty("DisplayName"));
+                break;
+
+            case "addrbook-contact-created":
+            {
+                //Services.console.logStringMessage("["+ aTopic + "] " + abCardItem.getProperty("DisplayName"));
+                break;
             }
-        },
-        
+        }
+    }
+    
 
 
-        cardObserver: function (aTopic, folderData, abCardItem) {
-            switch (aTopic) {
-                case "addrbook-contact-updated":
-                case "addrbook-contact-removed":
-                    //Services.console.logStringMessage("["+ aTopic + "] " + abCardItem.getProperty("DisplayName"));
-                    break;
-
-                case "addrbook-contact-created":
-                {
-                    //Services.console.logStringMessage("["+ aTopic + "] " + abCardItem.getProperty("DisplayName"));
-                    break;
-                }
-            }
-        },
-        
-
-
-        listObserver: function (aTopic, folderData, abListItem, abListMember) {
-            switch (aTopic) {
-                case "addrbook-list-member-added":
-                case "addrbook-list-member-removed":
-                    //Services.console.logStringMessage("["+ aTopic + "] MemberName: " + abListMember.getProperty("DisplayName"));
-                    break;
-                
-                case "addrbook-list-removed":
-                case "addrbook-list-updated":
-                    //Services.console.logStringMessage("["+ aTopic + "] ListName: " + abListItem.getProperty("ListName"));
-                    break;
-                
-                case "addrbook-list-created": 
-                    //Services.console.logStringMessage("["+ aTopic + "] ListName: " + abListItem.getProperty("ListName"));
-                    break;
-            }
-        },
-        
-
-
-        /**
-         * Is called by TargetData::getTarget() if a new addressbook needs to
-         * be created.
-         *
-         * @param newname       [in] name of the new address book
-         * @param folderData  [in] FolderData
-         *
-         * return the new directory
-         */
-        createAddressBook: function (newname, folderData) {
-            let dirPrefId = MailServices.ab.newAddressBook(newname, "", 2);
-            let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
-
-            if (directory && directory instanceof Components.interfaces.nsIAbDirectory && directory.dirPrefId == dirPrefId) {
-                directory.setStringValue("tbSyncIcon", "__ProviderNameSpace__");
-                
-                // Disable AutoComplete, so we can have full control over the auto completion of our own directories.
-                // Implemented in https://bugzilla.mozilla.org/show_bug.cgi?id=1546425
-                directory.setBoolValue("enable_autocomplete", false);
-                
-                return directory;
-            }
-            return null;
-        },    
-    },
-
-
-
-    // If this provider is using the standard "calendar" targetType, it must
-    // implement the calendar object.
-    calendar : {
-        
-        // The calendar target does not support a custom primaryKeyField, because
-        // the lightning implementation only allows to search for items via UID.
-        // Like the addressbook target, the calendar target item element has a
-        // primaryKey getter/setter which - however - only works on the UID.
-        
-        // enable or disable changelog
-        logUserChanges: false,
-
-
-
-        calendarObserver: function (aTopic, folderData, tbCalendar, aPropertyName, aPropertyValue, aOldPropertyValue) {
-            switch (aTopic) {
-                case "onCalendarPropertyChanged":
-                    //Services.console.logStringMessage("["+ aTopic + "] " + tbCalendar.calendar.name + " : " + aPropertyName);
-                    break;
-                
-                case "onCalendarDeleted":
-                case "onCalendarPropertyDeleted":
-                    //Services.console.logStringMessage("["+ aTopic + "] " +tbCalendar.calendar.name);
-                    break;
-            }
-        },
-
-
-
-        itemObserver: function (aTopic, folderData, tbItem, tbOldItem) {
-            switch (aTopic) {
-                case "onAddItem":
-                case "onModifyItem":
-                case "onDeleteItem":
-                    //Services.console.logStringMessage("["+ aTopic + "] " + tbItem.nativeItem.title);
-                    break;
-            }
-        },
-
-
-
-        /**
-         * Is called by TargetData::getTarget() if a new calendar needs to be
-         * created.
-         *
-         * @param newname       [in] name of the new calendar
-         * @param folderData  [in] folderData
-         *
-         * return the new calendar
-         */
-        createCalendar: function(newname, folderData) {
-            let calManager = tbSync.lightning.cal.getCalendarManager();
-
-            //Create the new standard calendar with a unique name
-            let newCalendar = calManager.createCalendar("storage", Services.io.newURI("moz-storage-calendar://"));
-            newCalendar.id = tbSync.lightning.cal.getUUID();
-            newCalendar.name = newname;
-            calManager.registerCalendar(newCalendar);
+    /**
+     * An observer for list events.
+     *
+     * @param {string} aTopic           Name of the event, can be one of these:
+     *                                  "addrbook-list-member-added",
+     *                                  "addrbook-list-member-removed",
+     *                                  "addrbook-list-removed",
+     *                                  "addrbook-list-updated",
+     *                                  "addrbook-list-created"
+     * @param {FolderData} folderData   FolderData object of the directory,
+     *                                  containing the list that triggered the
+     *                                  event 
+     * @param {AbListItem} abListItem   AbListItem of the list that triggered
+     *                                  the event 
+     * @param {AbCardItem} [abListMember] AbCardItem of the member of the list
+     *                                    that triggered the event 
+     */
+    static listObserver(aTopic, folderData, abListItem, abListMember) {
+        switch (aTopic) {
+            case "addrbook-list-member-added":
+            case "addrbook-list-member-removed":
+                //Services.console.logStringMessage("["+ aTopic + "] MemberName: " + abListMember.getProperty("DisplayName"));
+                break;
             
-            return newCalendar;
-        },
+            case "addrbook-list-removed":
+            case "addrbook-list-updated":
+                //Services.console.logStringMessage("["+ aTopic + "] ListName: " + abListItem.getProperty("ListName"));
+                break;
+            
+            case "addrbook-list-created": 
+                //Services.console.logStringMessage("["+ aTopic + "] ListName: " + abListItem.getProperty("ListName"));
+                break;
+        }
+    }
+    
+
+
+    /**
+     * Create a new address book.
+     *
+     * @param {string} newname         name of the new address book
+     * @param {FolderData} folderData  FolderData object belonging to the new
+     *                                 address book
+     * @returns {nsIAbDirectory}       the new address book
+     */
+    static createAddressBook(newname, folderData) {
+        let dirPrefId = MailServices.ab.newAddressBook(newname, "", 2);
+        let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
+
+        if (directory && directory instanceof Components.interfaces.nsIAbDirectory && directory.dirPrefId == dirPrefId) {
+            directory.setStringValue("tbSyncIcon", "__ProviderNameSpace__");
+            
+            // Disable AutoComplete, so we can have full control over the auto completion of our own directories.
+            // Implemented in https://bugzilla.mozilla.org/show_bug.cgi?id=1546425
+            directory.setBoolValue("enable_autocomplete", false);
+            
+            return directory;
+        }
+        return null;
+    }
+}
+
+
+
+/**
+ * The calendar class allows the provider to use the standard TbSync
+ * calendar target, which provides a changelog and some observer
+ * notifications for calendars and events.
+ */
+var calendar = class {        
+    // The calendar target does not support a custom primaryKeyField, because
+    // the lightning implementation only allows to search for items via UID.
+    // Like the addressbook target, the calendar target item element has a
+    // primaryKey getter/setter which - however - only works on the UID.
+    
+    /**
+     * Returns if changes made to elements (by the user) should be added to the
+     * changelog.
+     */
+    static get logUserChanges() {
+        return false;
+    }
+
+
+
+    /**
+     * An observer for calendar events.
+     *
+     * @param {string} aTopic         Name of the event, can be one of these: 
+     *                                "onCalendarPropertyChanged",
+     *                                "onCalendarPropertyDeleted",
+     *                                "onCalendarDeleted"
+     * @param {FolderData} folderData FolderData object of the calendar,
+     *                                that triggered the event 
+     */
+    static calendarObserver(aTopic, folderData, tbCalendar, aPropertyName, aPropertyValue, aOldPropertyValue) {
+        switch (aTopic) {
+            case "onCalendarPropertyChanged":
+                //Services.console.logStringMessage("["+ aTopic + "] " + tbCalendar.calendar.name + " : " + aPropertyName);
+                break;
+            
+            case "onCalendarDeleted":
+            case "onCalendarPropertyDeleted":
+                //Services.console.logStringMessage("["+ aTopic + "] " +tbCalendar.calendar.name);
+                break;
+        }
+    }
+
+
+
+    /**
+     * An observer for item events.
+     *
+     * @param {string} aTopic         Name of the event, can be one of these: 
+     *                                "onAddItem",
+     *                                "onModifyItem"
+     *                                "onDeleteItem"
+     * @param {FolderData} folderData FolderData object of the calendar,
+     *                                that triggered the event 
+     * @param {TbItem} tbItem         TbItem of the item that triggered
+     *                                the event 
+     * @param {TbItem} [tbOldItem]    TbItem of the item before the change was
+     *                                made
+     */
+    static itemObserver(aTopic, folderData, tbItem, tbOldItem) {
+        switch (aTopic) {
+            case "onAddItem":
+            case "onModifyItem":
+            case "onDeleteItem":
+                //Services.console.logStringMessage("["+ aTopic + "] " + tbItem.nativeItem.title);
+                break;
+        }
+    }
+
+
+
+    /**
+     * Create a new calendar.
+     *
+     * @param {string} newname         name of the new calendar
+     * @param {FolderData} folderData  FolderData object belonging to the new
+     *                                 calendar
+     * @returns {calICalendar}         the new calendar
+     */
+    static createCalendar(newname, folderData) {
+        let calManager = tbSync.lightning.cal.getCalendarManager();
+
+        //Create the new standard calendar with a unique name
+        let newCalendar = calManager.createCalendar("storage", Services.io.newURI("moz-storage-calendar://"));
+        newCalendar.id = tbSync.lightning.cal.getUUID();
+        newCalendar.name = newname;
+        calManager.registerCalendar(newCalendar);
+        
+        return newCalendar;
     }
 }
 
@@ -463,26 +547,30 @@ var standardTargets = {
 
 
 
+
 /**
- * Implementation of the standardFolderList object.
- *
- * The DOM of the folderlist can be accessed by
- * 
+ * The StandardFolderList class allows the provider to use the standard folder
+ * list, which requires to implement only a small subset of the entire
+ * FolderList class.
+ * <p>
+ * Check out {@link http://bl.ocks.org/mbostock/4341574| this example} 
+ * <p>
  *    let list = document.getElementById("tbsync.accountsettings.folderlist");
- * 
+ * <p>
  * and the folderData of each entry is attached to each row:
- * 
+ * <p>
  *    let folderData = folderList.selectedItem.folderData;
- *
  */
-var standardFolderList = class {
+var StandardFolderList = class {
     /**
-     * Is called before the context menu of the folderlist is shown, allows to
-     * show/hide custom menu options based on selected folder. During an active
-     * sync, folderData will be null and the folder list will be disabled.
+     * Gets called before the context menu of the folderlist is shown, allows
+     * to show/hide custom menu options based on selected folder. During an
+     * active sync, folderData will be null and the folder list will be
+     * disabled.
      *
-     * @param window        [in] window object of the account settings window
-     * @param folderData    [in] FolderData of the selected folder
+     * @param {nsIDOMWindow} window      window object of the account
+     *                                   settings window
+     * @param {FolderData} folderData    FolderData of the selected folder
      */
     static onContextMenuShowing(window, folderData) {
     }
@@ -490,14 +578,15 @@ var standardFolderList = class {
 
 
     /**
-     * Return the icon used in the folderlist to represent the different folder
-     * types.
+     * Gets the icon for a folder to be shown in the folderlist.
      *
-     * @param folderData         [in] FolderData of the selected folder
+     * @param {FolderData} folderData    FolderData of the folder for which the
+     *                                   icon is requested
+     * @returns {string} Chrome URL of icon
      */
     static getTypeImage(folderData) {
-        switch (folderData.getFolderProperty("type")) {
-            case "addrbook":
+        switch (folderData.getFolderProperty("targetType")) {
+            case "addressbook":
                 return "chrome://tbsync/skin/contacts16.png";
             case "calendar":
                 return "chrome://tbsync/skin/calendar16.png";
@@ -507,9 +596,12 @@ var standardFolderList = class {
 
 
     /**
-     * Return the name of the folder shown in the folderlist.
+     * Gets the display name for a folder to be shown in the folderlist.
      *
-     * @param folderData         [in] FolderData of the selected folder
+     * @param {FolderData} folderData    FolderData of the folder for which the
+     *                                   display name is requested
+     *                                   
+     * @returns {string} Display name of the folder   
      */ 
     static getFolderDisplayName(folderData) {
         return folderData.getFolderProperty("foldername");
@@ -518,13 +610,15 @@ var standardFolderList = class {
 
 
     /**
-     * Return the attributes for the ACL RO (readonly) menu element per folder.
-    * (label, disabled, hidden, style, ...)
+     * Gets the attributes for the ACL RO (readonly) menu element for a folder
+     * to be shown in the folderlist (label, disabled, hidden, style, ...)
      *
-     * @param folderData         [in] FolderData of the selected folder
-     *
-     * Return a list of attributes and their values. If both (RO+RW) do
-     * not return any attributes, the ACL menu is not displayed at all.
+     * @param {FolderData} folderData    FolderData of the folder for which the
+     *                                   attributes for the ACL RO XUL element
+     *                                   are requested
+     * @returns {object} A list of attributes and their values for the ACL RO
+     *                   XUL element . If both (RO+RW) do not return any
+     *                   attributes, the ACL menu is not displayed at all.
      */ 
     static getAttributesRoAcl(folderData) {
         return null;
@@ -538,13 +632,15 @@ var standardFolderList = class {
 
 
     /**
-     * Return the attributes for the ACL RW (readwrite) menu element per folder.
-    * (label, disabled, hidden, style, ...)
+     * Gets the attributes for the ACL RW (read/write) menu element for a folder
+     * to be shown in the folderlist (label, disabled, hidden, style, ...)
      *
-     * @param folderData         [in] FolderData of the selected folder
-     *
-     * Return a list of attributes and their values. If both (RO+RW) do
-     * not return any attributes, the ACL menu is not displayed at all.
+     * @param {FolderData} folderData    FolderData of the folder for which the
+     *                                   attributes for the ACL RW XUL element
+     *                                   are requested
+     * @returns {object} A list of attributes and their values for the ACL RW
+     *                   XUL element . If both (RO+RW) do not return any
+     *                   attributes, the ACL menu is not displayed at all.
      */ 
     static getAttributesRwAcl(folderData) {
         return null;
