@@ -302,7 +302,7 @@ var Base = class {
  * addressbook target, which provides a changelog and some observer
  * notifications for directories, cards and lists.
  */
-var addressbook = class {
+var StandardAddressbookTarget = class {
     /**
      * Returns the card property, which should be used as primary key for the
      * changelog. Fallback to UID, if nothing is returned.
@@ -455,7 +455,7 @@ var addressbook = class {
  * calendar target, which provides a changelog and some observer
  * notifications for calendars and events.
  */
-var calendar = class {        
+var StandardCalendarTarget = class {        
     // The calendar target does not support a custom primaryKeyField, because
     // the lightning implementation only allows to search for items via UID.
     // Like the addressbook target, the calendar target item element has a
