@@ -57,7 +57,6 @@ var tbSyncNewAccount = {
         if (url) {
             //if no protocoll is given, prepend "https://"
             if (url.substring(0,4) != "http" || url.indexOf("://") == -1) url = "https://" + url.split("://").join("/");
-            newAccountEntry.host = eas.network.stripAutodiscoverUrl(url);
             newAccountEntry.https = (url.substring(0,5) == "https");
         }
 
