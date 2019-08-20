@@ -11,7 +11,7 @@ order = [
   "Email",
   "AddonName",
   "AddonDescription",
-  "AddonHompepage",
+  "AddonHomepage",
   "NameSpace",
   "ID",
   "MenuName"
@@ -21,7 +21,7 @@ values["AddonAuthor"]      = raw_input("1. Your name: ")
 values["Email"]            = raw_input("2. Your email address: ")
 values["AddonName"]        = raw_input("3. The name of your add-on as shown in the Thunderbird add-on manager (en-US): ")
 values["AddonDescription"] = raw_input("4. The description of your add-on as shown in the Thunderbird add-on manager (en-US): ")
-values["AddonHompepage"]   = raw_input("5. The project homepage: ")
+values["AddonHomepage"]   = raw_input("5. The project homepage: ")
 values["NameSpace"]        = raw_input("6. A short identifier for your add-on, like 'dav', 'google', which will be used as its name space inside TbSync: ")
 values["ChromeUrl"]        = values["NameSpace"] + "4tbsync"
 values["ShortName"]        = values["NameSpace"].upper() + "-4-TbSync"
