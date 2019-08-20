@@ -43,17 +43,19 @@ else:
   print
 
   files = {
-    "CONTRIBUTORS.md"                   : ["AddonAuthor"],
-    "bootstrap.js"                      : ["ShortName", "NameSpace", "ChromeUrl"],
-    "chrome.manifest"                   : ["ChromeUrl"],
-    "manifest.json"                     : ["ID", "AddonAuthor"],
-    "_locales/en-US/messages.json"      : ["AddonName", "AddonDescription"],
-    "_locales/en-US/provider.dtd"       : ["MenuName"],
-    "_locales/en-US/provider.strings"   : ["MenuName"],
-    "content/includes/sync.js"          : ["ShortName"],
-    "content/provider.js"               : ["ShortName", "NameSpace", "ChromeUrl", "Email"],
-    "content/manager/createAccount.js"  : ["ShortName", "NameSpace"],
-    "content/manager/createAccount.xul" : ["ChromeUrl"]
+    "CONTRIBUTORS.md"                        : ["AddonAuthor"],
+    "bootstrap.js"                           : ["ShortName", "NameSpace", "ChromeUrl"],
+    "chrome.manifest"                        : ["ChromeUrl"],
+    "manifest.json"                          : ["ID", "AddonAuthor"],
+    "_locales/en-US/messages.json"           : ["AddonName", "AddonDescription"],
+    "_locales/en-US/provider.dtd"            : ["MenuName"],
+    "_locales/en-US/provider.strings"        : ["MenuName"],
+    "content/includes/sync.js"               : ["ShortName"],
+    "content/provider.js"                    : ["ShortName", "NameSpace", "ChromeUrl", "Email"],
+    "content/manager/createAccount.js"       : ["ShortName", "NameSpace"],
+    "content/manager/createAccount.xul"      : ["ChromeUrl"],
+    "content/manager/editAccountOverlay.js"  : ["ShortName", "NameSpace"],
+    "content/manager/editAccountOverlay.xul" : ["ChromeUrl"]
   }
 
   for file in files.keys():
