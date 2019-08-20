@@ -51,8 +51,8 @@ else:
     "_locales/en-US/provider.dtd"       : ["AddonName"],
     "_locales/en-US/provider.strings"   : ["MenuName"],
     "content/includes/sync.js"          : ["ShortName"],
-    "content/provider.js"               : ["ShortName", "NameSpace", "ChromeUrl", "Email"]
-    "content/manager/createAccount.js"  : ["ShortName", "NameSpace"]
+    "content/provider.js"               : ["ShortName", "NameSpace", "ChromeUrl", "Email"],
+    "content/manager/createAccount.js"  : ["ShortName", "NameSpace"],
     "content/manager/createAccount.xul" : ["ChromeUrl"]
   }
 
