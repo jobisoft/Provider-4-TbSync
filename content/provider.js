@@ -339,10 +339,7 @@ var standardTargets = {
 
                 case "addrbook-contact-created":
                 {
-                    //Services.console.logStringMessage("["+ aTopic + "] Created new X-DAV-UID for Card <"+ abCardItem.getProperty("DisplayName")+">");
-                    abCardItem.setProperty("X-DAV-UID", tbSync.generateUUID());
-                    // the card is tagged with "_by_user" so it will not be changed to "_by_server" by the following modify
-                    abCardItem.abDirectory.modifyItem(abCardItem);
+                    //Services.console.logStringMessage("["+ aTopic + "] " + abCardItem.getProperty("DisplayName"));
                     break;
                 }
             }
@@ -363,7 +360,7 @@ var standardTargets = {
                     break;
                 
                 case "addrbook-list-created": 
-                    //Services.console.logStringMessage("["+ aTopic + "] Created new X-DAV-UID for List <"+abListItem.getProperty("ListName")+">");
+                    //Services.console.logStringMessage("["+ aTopic + "] ListName: " + abListItem.getProperty("ListName"));
                     break;
             }
         },
@@ -554,4 +551,4 @@ var standardFolderList = class {
     }
 }
 
-Services.scriptloader.loadSubScript("chrome://dav4tbsync/content/includes/sync.js", this, "UTF-8");
+Services.scriptloader.loadSubScript("chrome://__ProviderChromeUrl__/content/includes/sync.js", this, "UTF-8");
