@@ -1,6 +1,8 @@
 TbSync Provider Documentation
 =================================
 
+THIS IS NOT DONE YET. 
+
 This document tries to cover all aspects of how to create a provider add-on for TbSync to extends its sync capabilities. All TbSync providers are currently designed as *bootrapped extensions*, for which support is probably going to be dropped from Thunderbird at some time. We are working on migrate them into future proof *WebExtensions*.
 
 Getting Started
