@@ -1,3 +1,7 @@
 <!ENTITY add.title "Adding a __ProviderMenuName__ account to TbSync">
+
+<!ENTITY manager.tabs.accountsettings "Account settings">
+<!ENTITY manager.tabs.syncsettings "Options">
+
 <!ENTITY pref.someOtherOption "Some other option">
 <!ENTITY pref.someOtherOptionDescription "Description for some other option">
