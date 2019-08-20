@@ -3,5 +3,14 @@
 <!ENTITY manager.tabs.accountsettings "Account settings">
 <!ENTITY manager.tabs.syncsettings "Options">
 
+<!ENTITY pref.AccountName "Account name">
+<!ENTITY pref.UserName "User name">
+<!ENTITY pref.ServerName "Host">
+<!ENTITY pref.usehttps "Use secure connection (connect via https)">
+
+<!ENTITY pref.generaloptions "General options">
+<!ENTITY pref.contactoptions "Contact options">
+<!ENTITY pref.calendaroptions "Calendar options">
+
 <!ENTITY pref.someOtherOption "Some other option">
 <!ENTITY pref.someOtherOptionDescription "Description for some other option">

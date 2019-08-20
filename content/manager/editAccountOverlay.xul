@@ -4,7 +4,7 @@
   <!ENTITY % tbsyncDTD SYSTEM "chrome://tbsync/locale/tbSync.dtd">
   %tbsyncDTD;
   <!ENTITY % providerDTD SYSTEM "chrome://__ProviderChromeUrl__/locale/provider.dtd">
-  %provideDTD;
+  %providerDTD;
 ]>
 <overlay 
     id="tbSyncAccountConfig" 
@@ -43,7 +43,7 @@
                             <vbox pack="center">
                                 <label class="lockIfConnected" style="text-align:left" control="tbsync.accountsettings.pref.host" value="&pref.ServerName;" />
                             </vbox>
-                            <textbox class="lockIfConnected"  tooltiptext="&pref.ServerNameDescription;" id="tbsync.accountsettings.pref.host" />
+                            <textbox class="lockIfConnected" id="tbsync.accountsettings.pref.host" />
                         </row>
                         <row>
                             <hbox/>
