@@ -141,6 +141,7 @@ var base = class {
             "username" : "",
             "host" : "",
             "https" : true,
+            "someOtherOption" : false,
             }; 
         return row;
     }

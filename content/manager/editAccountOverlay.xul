@@ -3,14 +3,14 @@
 <!DOCTYPE window [
   <!ENTITY % tbsyncDTD SYSTEM "chrome://tbsync/locale/tbSync.dtd">
   %tbsyncDTD;
-  <!ENTITY % davDTD SYSTEM "chrome://dav4tbsync/locale/dav.dtd">
-  %davDTD;
+  <!ENTITY % providerDTD SYSTEM "chrome://__ProviderChromeUrl__/locale/provider.dtd">
+  %provideDTD;
 ]>
 <overlay 
     id="tbSyncAccountConfig" 
     xmlns:html="http://www.w3.org/1999/xhtml">
 
-    <script type="application/javascript" src="chrome://dav4tbsync/content/manager/editAccountOverlay.js"/>
+    <script type="application/javascript" src="chrome://__ProviderChromeUrl__/content/manager/editAccountOverlay.js"/>
 
     <tab id="manager.tabs.accountsettings" label="&manager.tabs.accountsettings;" appendto="manager.tabs" />
     <tab id="manager.tabs.syncsettings" label="&manager.tabs.syncsettings;" appendto="manager.tabs" />
@@ -36,24 +36,18 @@
                             <vbox pack="center">
                                 <label class="lockIfConnected" style="text-align:left" control="tbsync.accountsettings.pref.user" value="&pref.UserName;" />
                             </vbox>
-                            <textbox class="lockIfConnected" id="tbsync.accountsettings.pref.user" />
+                            <textbox class="lockIfConnected" id="tbsync.accountsettings.pref.username" />
                         </row>
                         
                         <row>
                             <vbox pack="center">
-                                <label class="lockIfConnected lockIfServiceProvider" style="text-align:left" control="tbsync.accountsettings.pref.calDavHost" value="&pref.CalDavServer;" />
+                                <label class="lockIfConnected" style="text-align:left" control="tbsync.accountsettings.pref.host" value="&pref.ServerName;" />
                             </vbox>
-                            <textbox class="lockIfConnected lockIfServiceProvider" id="tbsync.accountsettings.pref.calDavHost"  onblur="tbSyncEditAccountOverlay.stripHost(document, 'calDavHost');"/>
-                        </row>
-                        <row>
-                            <vbox pack="center">
-                                <label class="lockIfConnected lockIfServiceProvider" style="text-align:left" control="tbsync.accountsettings.pref.cardDavHost" value="&pref.CardDavServer;" />
-                            </vbox>
-                            <textbox class="lockIfConnected lockIfServiceProvider" id="tbsync.accountsettings.pref.cardDavHost" onblur="tbSyncEditAccountOverlay.stripHost(document, 'cardDavHost');" />
+                            <textbox class="lockIfConnected"  tooltiptext="&pref.ServerNameDescription;" id="tbsync.accountsettings.pref.host" />
                         </row>
                         <row>
                             <hbox/>
-                            <checkbox class="lockIfConnected" style="margin-bottom:1ex" id="tbsync.accountsettings.pref.https" label="&pref.usehttps;"  />
+                            <checkbox class="lockIfConnected" style="margin-bottom:1ex" id="tbsync.accountsettings.pref.https" label="&pref.usehttps;" />
                         </row>
 
                    </rows>
@@ -76,15 +70,11 @@
 
                 <label style="margin-left:0; margin-bottom: 1ex;" class="header lockIfConnected" value="&pref.contactoptions;"/>
                 <vbox>                            
-                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.syncGroups" label="&pref.syncGroups;" />
-                    <description style="margin-left:2em" class="lockIfConnected">&pref.syncGroupsDescription;</description>
-                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.useCardBook" hidden="true" label="&pref.useCardBook;" />
+                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.syncGroups" label="&pref.someOtherOption;" />
+                    <description style="margin-left:2em" class="lockIfConnected">&pref.someOtherOptionDescription;</description>
                 </vbox>
 
                 <label style="margin-left:0; margin-bottom: 1ex; margin-top: 3ex" class="header lockIfConnected" value="&pref.calendaroptions;"/>
-                <vbox>                            
-                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.useCalendarCache" label="&pref.useCalendarCache;" />
-                </vbox>
 
                 <vbox flex="1" />
                 <vbox class="showIfConnected">
