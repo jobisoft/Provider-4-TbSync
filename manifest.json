@@ -10,7 +10,6 @@
   "name": "__MSG_extensionName__",
   "version": "1.0",
   "author": "__ProviderAddonAuthor__",
-  "homepage_url": "__ProviderAddonHomepage__",
   "default_locale": "en-US",
   "description": "__MSG_extensionDescription__",
   "icons": {
