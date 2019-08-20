@@ -43,15 +43,17 @@ else:
   print
 
   files = {
-    "CONTRIBUTORS.md"                 : ["AddonAuthor"],
-    "bootstrap.js"                    : ["ShortName", "NameSpace", "ChromeUrl"],
-    "chrome.manifest"                 : ["ChromeUrl"],
-    "manifest.json"                   : ["ID", "AddonAuthor"],
-    "_locales/en-US/messages.json"    : ["AddonName", "AddonDescription"],
-    "_locales/en-US/provider.dtd"     : ["AddonName"],
-    "_locales/en-US/provider.strings" : ["MenuName"],
-    "content/includes/sync.js"        : ["ShortName"],
-    "content/provider.js"             : ["ShortName", "NameSpace", "ChromeUrl", "Email"]
+    "CONTRIBUTORS.md"                   : ["AddonAuthor"],
+    "bootstrap.js"                      : ["ShortName", "NameSpace", "ChromeUrl"],
+    "chrome.manifest"                   : ["ChromeUrl"],
+    "manifest.json"                     : ["ID", "AddonAuthor"],
+    "_locales/en-US/messages.json"      : ["AddonName", "AddonDescription"],
+    "_locales/en-US/provider.dtd"       : ["AddonName"],
+    "_locales/en-US/provider.strings"   : ["MenuName"],
+    "content/includes/sync.js"          : ["ShortName"],
+    "content/provider.js"               : ["ShortName", "NameSpace", "ChromeUrl", "Email"]
+    "content/manager/createAccount.js"  : ["ShortName", "NameSpace"]
+    "content/manager/createAccount.xul" : ["ChromeUrl"]
   }
 
   for file in files.keys():
