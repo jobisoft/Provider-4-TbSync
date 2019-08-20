@@ -1,5 +1,5 @@
 ## Creator
-* __ProviderAuthor__
+* __ProviderAddonAuthor__
 
 ## Contributors
 * ...

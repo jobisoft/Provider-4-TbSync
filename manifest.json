@@ -9,8 +9,8 @@
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
   "version": "1.0",
-  "author": "__ProviderAuthor__",
-  "homepage_url": "__ProviderHomepageUrl__",
+  "author": "__ProviderAddonAuthor__",
+  "homepage_url": "__ProviderAddonHomepage__",
   "default_locale": "en-US",
   "description": "__MSG_extensionDescription__",
   "icons": {
