@@ -48,7 +48,7 @@ else:
     "chrome.manifest"                   : ["ChromeUrl"],
     "manifest.json"                     : ["ID", "AddonAuthor"],
     "_locales/en-US/messages.json"      : ["AddonName", "AddonDescription"],
-    "_locales/en-US/provider.dtd"       : ["AddonName"],
+    "_locales/en-US/provider.dtd"       : ["MenuName"],
     "_locales/en-US/provider.strings"   : ["MenuName"],
     "content/includes/sync.js"          : ["ShortName"],
     "content/provider.js"               : ["ShortName", "NameSpace", "ChromeUrl", "Email"],
