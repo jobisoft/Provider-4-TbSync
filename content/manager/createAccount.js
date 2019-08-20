@@ -53,6 +53,7 @@ var tbSyncNewAccount = {
     addAccount (username, password, accountname, url) {
         let newAccountEntry = this.providerData.getDefaultAccountEntries();
         newAccountEntry.username = username;
+        newAccountEntry.host = url;
 
         if (url) {
             //if no protocoll is given, prepend "https://"

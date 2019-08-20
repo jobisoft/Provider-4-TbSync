@@ -17,7 +17,7 @@
 
     <tabpanel id="manager.tabpanels.accountsettings" appendto="manager.tabpanels" flex="1" orient="vertical"><!-- ACCOUNT SETTINGS -->
            <vbox flex="1">
-                <label class="header lockIfConnected" style="margin-left:0; margin-bottom:1ex;" value="" id="tbsync.accountsettings.label.config" />                
+                <label class="header lockIfConnected" style="margin-left:0; margin-bottom:1ex;" value="Server settings" />                
                 <grid flex="1">
                    <columns>
                         <column flex="0" style="margin-right:1ex;" />
@@ -70,7 +70,7 @@
 
                 <label style="margin-left:0; margin-bottom: 1ex;" class="header lockIfConnected" value="&pref.contactoptions;"/>
                 <vbox>                            
-                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.syncGroups" label="&pref.someOtherOption;" />
+                    <checkbox class="lockIfConnected" id="tbsync.accountsettings.pref.someOtherOption" label="&pref.someOtherOption;" />
                     <description style="margin-left:2em" class="lockIfConnected">&pref.someOtherOptionDescription;</description>
                 </vbox>
 
