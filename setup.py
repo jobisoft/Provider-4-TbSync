@@ -70,5 +70,5 @@ else:
     with open(file, 'w') as f:
       f.write(filedata)
 
-  shutil.rmtree('/folder_name', ignore_errors=True)
+  shutil.rmtree('docs', ignore_errors=True)
   print "Done."

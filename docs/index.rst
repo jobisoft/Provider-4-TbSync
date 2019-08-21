@@ -2,7 +2,7 @@
 TbSync Provider Documentation
 *****************************
 
-.. include:: intro.rst
+.. include:: introduction.rst
 
 .. toctree::
    :hidden:
