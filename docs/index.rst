@@ -2,14 +2,14 @@
 TbSync Provider Documentation
 *****************************
 
-.. include:: introduction.rst
-
 .. toctree::
    :hidden:
    :caption: TbSync Provider Documentation
-   :maxdepth: 4
+   :maxdepth: 2
 
    Introduction <introduction>
    getting_started
    base
    folderlist
+
+.. include:: introduction.rst
