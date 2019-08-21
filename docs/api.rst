@@ -10,7 +10,7 @@ The file ``provider.js`` is the central starting point to implement the TbSync P
 :doc:`Folder List Class <folderlist>`
   A central part of the TbSync manager UI is the folder list, which displays available resources discovered by your provider and their synchronization status. It even allows interaction via additional buttons or context menus. You may implement the ``FolderList`` class, which allows to fully control how your list items should look like, or the ``StandardFolderList`` class, which is a lot simpler but does not give you full control over the layout.
 
-Target Classes
+:doc:`Target Classes <targets>`
   TbSync is target driven and does not restrict you, where you want to sync into.
  
 .. toctree::
