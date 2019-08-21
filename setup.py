@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # Tested with Pyhton 2.7
+import shutil
 
 print
 print "Please enter the following 7 information, so your provider add-on can be prepared."
@@ -69,4 +70,5 @@ else:
     with open(file, 'w') as f:
       f.write(filedata)
 
+  shutil.rmtree('/folder_name', ignore_errors=True)
   print "Done."
