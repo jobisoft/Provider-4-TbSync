@@ -1,3 +1,5 @@
+.. rubric:: title
+
 Introduction
 ============
 
@@ -19,3 +21,32 @@ TbSync itself is just the manager UI and does not provide any sync capabilities 
 
 * `CalDAV & CardDAV <https://addons.thunderbird.net/addon/dav-4-tbsync>`_
 * `Exchange ActiveSync (EAS) <https://addons.thunderbird.net/addon/eas-4-tbsync>`_
+
+
+.. note::
+
+   This function is not suitable for sending spam e-mails.
+   
+.. versionadded:: 2.5
+   The *spam* parameter.
+
+.. versionchanged:: version
+   sdasd
+   
+.. warning::
+
+   This function is not suitable for sending spam e-mails.
+
+.. deprecated:: 3.1
+   Use :func:`spam` instead.
+
+.. warning::
+   This function is not suitable for sending spam e-mails.
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+
+   getting_started
+   api
