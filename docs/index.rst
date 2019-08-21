@@ -11,7 +11,7 @@ TbSync Provider Documentation
 
    Introduction <introduction>
    getting_started
-
+   base
 
 
 .. js:autoclass:: StandardFolderList
