@@ -37,7 +37,7 @@ html_theme_options = {
     #'vcs_pageview_mode': '',
     #'style_nav_header_background': 'white',
     # Toc options
-    'collapse_navigation': True,
+    'collapse_navigation': False,
     'sticky_navigation': True,
     'navigation_depth': 4,
     'includehidden': True,
@@ -157,7 +157,7 @@ context = {
     'using_theme': (html_theme == "default"),
     'new_theme': (html_theme == "sphinx_rtd_theme"),
     'source_suffix': SUFFIX,
-    'ad_free': False,
+    'ad_free': True,
     'user_analytics_code': '',
     'global_analytics_code': 'UA-17997319-1',
     'commit': '5f5ab153',
