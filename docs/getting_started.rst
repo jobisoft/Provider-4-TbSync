@@ -18,7 +18,7 @@ After you have all the files on disc, run
 
   ./setup.py
 
-which will ask you a couple of questions to setup the provider add-on for you. To install your own provider add-on into Thunderbird 68, just zip the project folder and install the file using the gear menu in the Thunderbird add-on manager:
+which will ask you a couple of questions to setup the provider add-on for you. After that is done, you can install your own provider add-on in Thunderbird 68. Just zip the project folder and install the file using the gear menu in the Thunderbird add-on manager:
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/install-from-file.PNG
 
