@@ -28,7 +28,7 @@ TbSync itself is just the manager UI and does not provide any sync capabilities 
 Getting Started
 ~~~~~~~~~~~~~~~
 
-Generating a basic TbSync provider add-on
+Generating a Basic TbSync Provider Add-on
 -----------------------------------------
 
 Head over to
@@ -49,17 +49,17 @@ which will ask you a couple of questions to setup the provider add-on for you. T
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/install-from-file.PNG
 
-To see your own provider add-on in action, you need to install the latest version of TbSync from the so called beta-release-channel for Thunderbird 68.
+To see your own provider add-on in action, you need to install the latest version of TbSync from the so called *beta release channel* for Thunderbird 68.
 
 ::
 
   https://github.com/jobisoft/TbSync/wiki/Get-the-latest-TbSync-version#beta-release-channel
  
-Please make sure, that you uninstall any other TbSync provider add-on or switch to their version from the beta-release-channel as well. Your own provider should then show up in the add-account-menu of TbSync:
+Please make sure, that you uninstall any other TbSync provider add-on or switch to their version from the *beta release channel* as well. Your own provider should then show up in the "Add new account" menu of TbSync:
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/custom_provider.PNG
 
-Once your TbSync provider add-on is stable and released to `addons.thunderbird.net <https://addons.thunderbird.net>`_, it can be added to the add-account menu of TbSync, so all TbSync users will learn about it and get directed to its add-on page. For example this is what users sees, when they try to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
+Once your TbSync provider add-on is stable and released to `addons.thunderbird.net <https://addons.thunderbird.net>`_, it can be added as a standard entry to the "Add new account" menu of TbSync, so all TbSync users will learn about it and get directed to its add-on page. For example this is what users see, when they try to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/missing_provider.PNG
 
@@ -67,7 +67,7 @@ Once your TbSync provider add-on is stable and released to `addons.thunderbird.n
 
 
 
-Understanding the directory structure of a TbSync provider add-on
+Understanding the Directory Structure of a TbSync Provider Add-on
 -----------------------------------------------------------------
 
 The generated provider add-on has the following structure:
