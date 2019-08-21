@@ -6,19 +6,19 @@ THIS IS NOT DONE YET.
 Introduction
 ~~~~~~~~~~~~
 
-This document tries to cover all aspects of how to create a provider add-on for TbSync to extends its sync capabilities. All TbSync provider add-ons are currently designed as *bootrapped extensions*, for which support is probably going to be dropped from Thunderbird at some time. We are working on migrating the TbSync API into a WebExtension API, so - hopefully - all provider add-ons can be converted into *MailExtensions* without much effort.
+This document tries to cover all aspects of how to create a provider add-on for TbSync to extends its sync capabilities. All TbSync provider add-ons are currently designed as *bootrapped extensions*, for which support is probably going to be dropped from Thunderbird at some time. We are working on migrating the TbSync API into a WebExtension API, so - hopefully - all provider add-ons can be converted into `MailExtensions <https://developer.thunderbird.net/add-ons/about-add-ons#mailextensions>`_ without much effort.
 
 What is TbSync ?
 ----------------
 
-TbSync is a central user interface to manage cloud accounts and to synchronize their contact, task and calendar information with Thunderbird. Its main objective is to simplify the setup process for such accounts and to improve the user experience by creating a common place to manage such accounts.
+TbSync is a central user interface to manage cloud accounts and to synchronize their contact, task and calendar information with Thunderbird. Its main objective is to simplify the setup process for such accounts and to improve the user experience by creating a common place to manage them.
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/TbSync_005.png
 
 Further details can be found in the `wiki <https://github.com/jobisoft/TbSync/wiki>`_ of the TbSync project.
 
 What is a TbSync Provider Add-on ?
----------------------------
+----------------------------------
 
 TbSync itself is just the manager UI and does not provide any sync capabilities on its own. But it provides an API for other add-ons to hook into TbSync. Such add-ons, which use this API and add sync capabilities are called TbSync provider add-ons. The following provider add-ons are currently available:
 
@@ -37,7 +37,7 @@ Head over to
 
   https://github.com/jobisoft/Provider-4-TbSync
  
-and clone the provider add-on template repository. If you have a GitHub account yourself, there is a nice feature to `add a copy of the provider add-on template to your own account <https://github.com/jobisoft/Provider-4-TbSync/generate>`_.
+and clone the provider add-on template repository. If you have a GitHub account yourself, you can simply `add a copy of the provider add-on template to your own account <https://github.com/jobisoft/Provider-4-TbSync/generate>`_.
 
 After you have all the files on disc, run
 
@@ -59,7 +59,7 @@ Please make sure, that you uninstall any other TbSync provider add-on or switch 
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/custom_provider.PNG
 
-Once your TbSync provider add-on is stable and released to `addons.thunderbird.net`_, it can be added to the add-account-menu of TbSync, so users of TbSync will learn about it and get directed to its add-on page. For example this is what the user sees, when he tries to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
+Once your TbSync provider add-on is stable and released to `addons.thunderbird.net <https://addons.thunderbird.net>`_, it can be added to the add-account menu of TbSync, so all TbSync users will learn about it and get directed to its add-on page. For example this is what users sees, when they try to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/missing_provider.PNG
 
