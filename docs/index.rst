@@ -19,11 +19,3 @@ TbSync itself is just the manager UI and does not provide any sync capabilities 
 
 * `CalDAV & CardDAV <https://addons.thunderbird.net/addon/dav-4-tbsync>`_
 * `Exchange ActiveSync (EAS) <https://addons.thunderbird.net/addon/eas-4-tbsync>`_
-
-.. toctree::
-   :hidden:
-   :maxdepth: 2
-
-   index
-   getting_started
-   api
