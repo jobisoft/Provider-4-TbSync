@@ -59,7 +59,7 @@ Please make sure, that you uninstall any other TbSync provider add-on or switch 
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/custom_provider.PNG
 
-Once your TbSync provider add-on is stable and released to `addons.thunderbird.net <https://addons.thunderbird.net>`_, it can be added as a standard entry to the "Add new account" menu of TbSync, so all TbSync users will learn about it and get directed to its add-on page. For example this is what users see, when they try to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
+Once your TbSync provider add-on is stable and released to `addons.thunderbird.net <https://addons.thunderbird.net>`_, it can be added as a standard entry to the "Add new account" menu of TbSync, so all TbSync users will learn about it and get directed to its add-on page. For example this is what users see, when they try to create an *ActiveSync* account, but the provider add-on for *ActiveSync* is not yet installed:
 
 .. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/missing_provider.PNG
 
@@ -67,40 +67,45 @@ Once your TbSync provider add-on is stable and released to `addons.thunderbird.n
 
 
 
-Understanding the Directory Structure of a TbSync Provider Add-on
------------------------------------------------------------------
+Directory Structure of a TbSync Provider Add-on
+-----------------------------------------------
 
-The generated provider add-on has the following structure:
+These are the important files and folders of the generated provider add-on:
 
 ::
 
     Project
-    ├── LICENSE         
-    ├── manifest.json
-    ├── chrome.manifest
     ├── bootstrap.js
-    ├── skin         
-    │   ├── logo16.png
-    │   └── logo32.png
-    │   └── logo48.png
+    ├── chrome.manifest
+    ├── manifest.json
     ├── _locales         
     │   └── en-US
     │       ├── provider.strings
     │       ├── provider.dtd
     │       └── messages.json
-    └── content
-        ├── provider.js       
-        ├── includes
-        │   └── sync.js   
-        └── manager
-            ├── provider.strings
-            ├── provider.dtd
-            └── messages.json
+    ├── content
+    │   ├── provider.js       
+    │   ├── includes
+    │   │   └── sync.js   
+    │   └── manager
+    │       ├── createAccount.js
+    │       ├── createAccount.xul
+    │       ├── editAccountOverlay.js
+    │       └── editAccountOverlay.xul
+    └── skin         
+        ├── logo16.png
+        └── logo32.png
+        └── logo48.png
 
-This documentation will refer to this structure and will explain the different files and folders as needed.
 
 ``bootstrap.js``
-  This file is registering your provider with TbSync and the generated file should work out of the box. You should not touch it, if you   do not know exactly what you are doing.
+  This file is registering your provider with TbSync. The generated file should work out of the box.
+
+``manifest.json``
+  The main configuration file for your add-ons. Further details about this file can be found in the `MDN documentation <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json>`_. The generated file should work out of the box.
+
+``chrome.manifest``
+  An additional configuration file for your add-on. You probably only have to change it, when adding further translations (locales).
 
 ``provider.js``
   After your provider has been registered, TbSync will read this file, where the provider interface has to be implemented.
