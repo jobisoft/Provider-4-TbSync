@@ -100,7 +100,7 @@ content
   Folder containing your add-ons source files.
    
   provider.js
-    File containing your implementation of the ``Base`` class and a few other classes, depending on what your add-on is supposed to do. See :doc:`base` for more details.
+    File containing your implementation of the ``Base`` class and a few other classes, depending on what your add-on is supposed to do. See :doc:`api` for more details.
    
   manager
     Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (announced via `Base.getCreateAccountWindowUrl <base.html#Base.getCreateAccountWindowUrl>`_) and the XUL file containing your tabs for the *Edit account dialog* (announced via `Base.getEditAccountOverlayUrl <base.html#Base.getEditAccountOverlayUrl>`_).
