@@ -1,9 +1,10 @@
+.. include:: intro.rst
 
 .. toctree::
    :caption: TbSync Provider Documentation
    :maxdepth: 4
 
-   Introduction <intro>
+   index
    getting_started
 
 .. js:autoclass:: Base
