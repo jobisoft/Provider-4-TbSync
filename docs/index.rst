@@ -108,9 +108,6 @@ manifest.json
 chrome.manifest
   An additional configuration file for your add-on. You probably only have to change it, when adding further translations (locales).
 
-provider.js
-  After your provider has been registered, TbSync will read this file, where the provider interface has to be implemented.
-
 _locales
   Folder containing files to translate your add-on into different languages. Add a subfolder for each language and register them in ``chrome.manifest``. The name of the folder must not be changed.
 
