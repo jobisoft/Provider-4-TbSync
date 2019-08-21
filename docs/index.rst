@@ -9,7 +9,6 @@ TbSync Provider Documentation
 
    Introduction <introduction>
    getting_started
-   base
-   folderlist
+   api
 
 .. include:: introduction.rst
