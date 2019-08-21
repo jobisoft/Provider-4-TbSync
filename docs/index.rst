@@ -11,5 +11,5 @@ TbSync Provider Documentation
 
    Introduction <introduction>
    getting_started
-     base
-     folderlist
+   base
+   folderlist
