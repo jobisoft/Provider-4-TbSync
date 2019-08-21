@@ -78,38 +78,62 @@ These are the important files and folders of the generated provider add-on:
     ├── bootstrap.js
     ├── chrome.manifest
     ├── manifest.json
-    ├── _locales         
+    ├── _locales
     │   └── en-US
-    │       ├── provider.strings
+    │       ├── messages.json
     │       ├── provider.dtd
-    │       └── messages.json
-    ├── content
-    │   ├── provider.js       
-    │   ├── includes
-    │   │   └── sync.js   
-    │   └── manager
-    │       ├── createAccount.js
-    │       ├── createAccount.xul
-    │       ├── editAccountOverlay.js
-    │       └── editAccountOverlay.xul
-    └── skin         
-        ├── logo16.png
-        └── logo32.png
-        └── logo48.png
+    │       └── provider.strings
+    ├── skin
+    │   ├── logo16.png
+    │   └── logo32.png
+    │   └── logo48.png
+    └── content
+        ├── provider.js
+        ├── includes
+        │   └── sync.js
+        └── manager
+            ├── createAccount.js
+            ├── createAccount.xul
+            ├── editAccountOverlay.js
+            └── editAccountOverlay.xul
 
+The author suggests to not rename files or folders, to not break the add-on. The following list provides an overview:
 
-``bootstrap.js``
+bootstrap.js
   This file is registering your provider with TbSync. The generated file should work out of the box.
 
-``manifest.json``
+manifest.json
   The main configuration file for your add-ons. Further details about this file can be found in the `MDN documentation <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json>`_. The generated file should work out of the box.
 
-``chrome.manifest``
+chrome.manifest
   An additional configuration file for your add-on. You probably only have to change it, when adding further translations (locales).
 
-``provider.js``
+provider.js
   After your provider has been registered, TbSync will read this file, where the provider interface has to be implemented.
 
+_locales
+  Folder containing files to translate your add-on into different languages. Add a subfolder for each language and register them in ``chrome.manifest``. The name of the folder must not be changed.
+
+  en-US/messages.json
+    Localization for entries in ``manifest.json``. Check the `MDN documentation <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization#Internationalizing_manifest.json>`_ for more details. The name of the file must not be changed.
+
+  en-US/provider.strings
+    Localization for your add-on, which can be accessed from JavaScript. The name of the file may be anything you like, but it must be announced via `Base.getStringBundleUrl() <https://tbsync.readthedocs.io/en/latest/#Base.getStringBundleUrl>`_ as TbSync needs to access some of your localized strings. In paticular error messages and synchronization states your add-on is using. TODO:LINK
+
+  en-US/provider.dtd
+    Deprecated localization for XUL files of your add-on. Try to avoid its usage and instead set the localized labels of XUL/HTML elements via JavaScript. The generated provider add-on is using this in ``createAccount.xul`` and ``editAccountOverlay.xul``.
+  
+skin
+  Folder containing all your additional resources like images and CSS files. It exists for historical reasons and the author is used to that approach. The generated provider also stores its logo files there. If you change their names, please also update your `manifest.json <https://github.com/jobisoft/Provider-4-TbSync/blob/ebfeec7b714baf956703511e30656208c8375526/manifest.json#L16>`_ and `Base.getProviderIcon() <https://tbsync.readthedocs.io/en/latest/#Base.getProviderIcon>`_. 
+
+content
+  Folder containing your add-ons source files.
+   
+  provider.js
+    File containing your implementation of the ``Base`` class and a few other classes, depending on what your add-on is supposed to do. See the `corresponding section <https://todo>`_ for more details.
+   
+  manager
+    Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (announced via `Base.getCreateAccountWindowUrl <https://tbsync.readthedocs.io/en/latest/#Base.getCreateAccountWindowUrl>`_) and the XUL file containing your tabs for the *Edit account dialog* (announced via `Base.getEditAccountOverlayUrl <https://tbsync.readthedocs.io/en/latest/#Base.getEditAccountOverlayUrl>`_).
 
 
 .. js:autoclass:: Base
