@@ -13,7 +13,7 @@ What is TbSync ?
 
 TbSync is a central user interface to manage cloud accounts and to synchronize their contact, task and calendar information with Thunderbird. Its main objective is to simplify the setup process for such accounts and to improve the user experience by creating a common place to manage such accounts.
 
-.. image:: https://github.com/jobisoft/TbSync/blob/master/screenshots/TbSync_005.png
+.. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/TbSync_005.png
 
 Further details can be found in the `wiki <https://github.com/jobisoft/TbSync/wiki>`_ of the TbSync project.
 
@@ -57,7 +57,14 @@ To see your own provider add-on in action, you need to install the latest versio
  
 Please make sure, that you uninstall any other TbSync provider add-on or switch to their version from the beta-release-channel as well. Your own provider should then show up in the add-account-menu of TbSync:
 
-.. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/TbSync_001.png
+.. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/custom_provider.PNG
+
+Once your TbSync provider add-on is stable and released to `addons.thunderbird.net`_, it can be added to the add-account-menu of TbSync, so users of TbSync will learn about it and get directed to its add-on page. For example this is what the user sees, when he tries to create an *ActiveSync* account, but the provider for ActiveSync is not yet installed:
+
+.. image:: https://raw.githubusercontent.com/jobisoft/TbSync/master/screenshots/missing_provider.PNG
+
+
+
 
 
 Understanding the directory structure of a TbSync provider add-on
