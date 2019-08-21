@@ -17,3 +17,5 @@
 
 .. warning::
    This function is not suitable for sending spam e-mails.
+
+https://www.sphinx-doc.org/en/1.8/usage/restructuredtext/directives.html

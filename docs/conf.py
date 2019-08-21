@@ -157,7 +157,7 @@ context = {
     'using_theme': (html_theme == "default"),
     'new_theme': (html_theme == "sphinx_rtd_theme"),
     'source_suffix': SUFFIX,
-    'ad_free': True,
+    'ad_free': False,
     'user_analytics_code': '',
     'global_analytics_code': 'UA-17997319-1',
     'commit': '5f5ab153',
