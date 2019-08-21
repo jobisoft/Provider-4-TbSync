@@ -15,7 +15,7 @@ source_parsers = {
             '.md': CommonMarkParser,
         }
 master_doc = 'index'
-project = u'TbSync'
+project = u'TbSync Provider Dokumentation'
 copyright = str(datetime.now().year)
 version = 'latest'
 release = 'latest'
@@ -25,7 +25,7 @@ htmlhelp_basename = 'tbsync'
 html_theme = 'sphinx_rtd_theme'
 file_insertion_enabled = False
 latex_documents = [
-  ('index', 'tbsync.tex', u'TbSync Documentation',
+  ('index', 'tbsync.tex', u'TbSync Provider Documentation',
    u'', 'manual'),
 ]
 
