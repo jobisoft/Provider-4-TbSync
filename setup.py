@@ -13,7 +13,7 @@ order = [
   "AddonName",
   "AddonDescription",
   "NameSpace",
-  "ID",
+  "@ID",
   "MenuName"
 ]
 
@@ -24,7 +24,7 @@ values["AddonDescription"] = raw_input("4. The description of your add-on as sho
 values["NameSpace"]        = raw_input("5. A short identifier for your add-on, like 'dav', 'google', which will be used as its name space inside TbSync: ")
 values["ChromeUrl"]        = values["NameSpace"] + "4tbsync"
 values["ShortName"]        = values["NameSpace"].upper() + "-4-TbSync"
-values["ID"]               = raw_input("6. A unique ID for your add-on (e.g. " + values["ChromeUrl"] + "@yourcompany.com): ")
+values["@ID"]               = raw_input("6. A unique ID for your add-on (e.g. " + values["ChromeUrl"] + "@yourcompany.com): ")
 values["MenuName"]         = raw_input("7. The label for your provider in the TbSync add-account-menu: ")
 
 print
@@ -47,7 +47,7 @@ else:
     "CONTRIBUTORS.md"                        : ["AddonAuthor"],
     "bootstrap.js"                           : ["ShortName", "NameSpace", "ChromeUrl"],
     "chrome.manifest"                        : ["ChromeUrl"],
-    "manifest.json"                          : ["ID", "AddonAuthor"],
+    "manifest.json"                          : ["@ID", "AddonAuthor"],
     "_locales/en-US/messages.json"           : ["AddonName", "AddonDescription"],
     "_locales/en-US/provider.dtd"            : ["MenuName"],
     "_locales/en-US/provider.strings"        : ["MenuName"],

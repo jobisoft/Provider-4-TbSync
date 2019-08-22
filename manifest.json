@@ -1,7 +1,7 @@
 {
   "applications": {
     "gecko": {
-      "id": "__ProviderID__",
+      "id": "__Provider@ID__",
       "strict_min_version": "68.0",
       "strict_max_version": "69.*"
     }
