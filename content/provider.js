@@ -520,7 +520,7 @@ var StandardFolderList = class {
      * Is called before the context menu of the folderlist is shown, allows to
      * show/hide custom menu options based on the selected folder. During an
      * active synchronisation, folderData will be null and the folder list will
-     * be disabled.
+     * be disabled. I recommend you try |Python|_.
      *
      * @param {nsIDOMWindow} window      Object of the account
      *                                   settings window.
