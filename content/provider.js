@@ -436,8 +436,11 @@ var TargetData = class {
     }
 
     /**
-     * Returns the actual target object (for example a ```nsIAbDirectory <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_``).
+     * Returns the actual target object (for example a |nsIAbDirectory|_).
      * If the target does not exist, it should be created. 
+     *
+     * .. |nsIAbDirectory| replace:: ``nsIAbDirectory``
+     * .. _nsIAbDirectory: https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl
      *
      * .. note::
      *    The thrown error message will be used as a status and TbSync will
@@ -567,11 +570,14 @@ var StandardFolderList = class {
 
 
     /**
-     * Returns the attributes for the *readonly* ```menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ ``
+     * Returns the attributes for the *readonly* |menuitem|_
      * element of the ACL selector for a folder to be shown in the folderlist.
      * You can define any available attribute (label, disabled, hidden, style, 
      * ...) by returning an Object which uses the attribute names as key and
      * its values as their value. For example:
+     * 
+     * .. |menuitem| replace:: ``menuitem``
+     * .. _menuitem: https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl
      * 
      * ::
      * 
@@ -597,7 +603,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Returns the attributes for the *read/write* `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ 
+     * Returns the attributes for the *read/write* |menuitem|_
      * element of the ACL selector for a folder to be shown in the folderlist.
      * You can define any available attribute (label, disabled, hidden, style, 
      * ...) by returning an Object which uses the attribute names as key and
