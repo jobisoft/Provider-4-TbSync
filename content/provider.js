@@ -58,7 +58,7 @@ var Base = class {
      * If it is not matching the version identifier of the TbSync add-on the
      * user has currently installed, this provider add-on is not loaded.
      *
-     * @returns {string} A API version identifier.
+     * @returns {string} An API version identifier.
      *
      */
     static getApiVersion() { return "Beta 2.0"; }
@@ -153,7 +153,7 @@ var Base = class {
 
 
     /**
-     * Returns uri to overlay for the edit account dialog
+     * Returns uri to the overlay for the edit account dialog
      * (chrome://tbsync/content/manager/editAccount.xul)
      *
      * The overlay must (!) implement:
@@ -174,14 +174,16 @@ var Base = class {
 
 
     /**
-     * Return object which contains all possible fields of a row in the
-     * accounts database with the default value if not yet stored in the 
+     * Returns object which contains all possible account properties of
+     * accounts of this provider, with its default value if not yet stored in the 
      * database.
      * 
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     * .. code-block:: javascript
+     * .. highlight:: javascript
+     *
+     * ::
      *    return {
      *      "username" : "",
      *      "host" : "",
@@ -207,8 +209,9 @@ var Base = class {
 
 
     /**
-     * Return object which contains all possible fields of a row in the folder 
-     * database with the default value if not yet stored in the database.
+     * Returns object which contains all possible folder properties of
+     * fodlers of this provider, with its default value if not yet stored in the 
+     * database.
      * 
      * The returned object uses the properties names as key and its default
      * values as their value:
@@ -315,10 +318,10 @@ var Base = class {
 
 
     /**
-     * Return the connection timeout for an active server request, so TbSync
+     * Returns the connection timeout for an active server request, so TbSync
      * can append a countdown to the connection timeout, while waiting for an
-     * answer from the server. Only syncstates which start with "send." will
-     * trigger this (see SyncData.setSyncState).
+     * answer from the server. Only syncstates which start with ``send.`` will
+     * trigger this (see ``SyncData.setSyncState``).
      *
      * @param {AccountData}  accountData  AccountData for the account for which the 
      *                                    timeout is being requested
@@ -433,10 +436,10 @@ var TargetData = class {
      *
      * .. note::
      *    The thrown Error.message will be used as a status by TbSync and it
-     *    will use "status.<Error.message>" from your string bundle (see 
+     *    will use ``status.<Error.message>`` from your string bundle (see 
      *    ``Base.getStringBundleUrl``) for the actual error/status message,
      *        
-     * @returns {object} Whatever you want to use as target object for
+     * @returns {Object} Whatever you want to use as target object for
      *                   this TargetData.
      *                   
      * @throws {Error} Reason, why the target could not be created.

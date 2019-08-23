@@ -23,3 +23,4 @@ This document tries to cover all aspects of how to create a provider add-on for 
    introduction
    getting_started
    api
+   classes
