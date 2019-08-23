@@ -576,9 +576,6 @@ var StandardFolderList = class {
      * ...) by returning an Object which uses the attribute names as key and
      * its values as their value. For example:
      * 
-     * .. |menuitem| replace:: ``menuitem``
-     * .. _menuitem: https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl
-     * 
      * ::
      * 
      *    return {
