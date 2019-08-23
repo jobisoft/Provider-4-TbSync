@@ -1,4 +1,5 @@
 TbSync Targets
 --------------
 
-Todo
+.. js:autoclass:: TargetData
+   :members:

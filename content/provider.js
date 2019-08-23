@@ -41,9 +41,10 @@ var Base = class {
 
 
     /**
-     * Returns name of this provider for the add account menu.
+     * Returns name of this provider for the *Add account* menu of tbe TbSync
+     * account manager.
      *
-     * @returns {string} name
+     * @returns {string} A name.
      *
      */
     static getProviderName() {
@@ -57,7 +58,7 @@ var Base = class {
      * If it is not matching the version identifier of the TbSync add-on the
      * user has currently installed, this provider add-on is not loaded.
      *
-     * @returns {string} version identifier
+     * @returns {string} A API version identifier.
      *
      */
     static getApiVersion() { return "Beta 2.0"; }
@@ -67,9 +68,9 @@ var Base = class {
     /**
      * Returns location of a provider icon.
      *
-     * @param {integer}  size  size of requested icon
+     * @param {integer}  size  Size of the requested icon.
      * @param {[AccountData]}  accountData  AccountData of the account, which
-     *                                      is requesting the icon
+     *                                      is requesting the icon.
      *
      */
     static getProviderIcon(size, accountData = null) {
@@ -88,15 +89,14 @@ var Base = class {
     /**
      * Returns a list of sponsors, they will be sorted by the index
      *
-     * <pre>
-     *  return {
+     * .. code-block:: javascript
+     *    return {
      *      "sortIndex" : {name       : "Name", 
      *                     description: "Something", 
      *                     icon: chrome://path/or/empty,
      *                     link: "url://or/empty"
      *                    },
-     *  };
-     * </pre>
+     *    }
      *
      * This probably has to be dropped when TbSync gets integrated into
      * Thunderbird.
@@ -113,7 +113,7 @@ var Base = class {
     /**
      * Returns the email address of the maintainer (used for bug reports).
      *
-     * @returns {string} email address
+     * @returns {string} An email address.
      *
      */
     static getMaintainerEmail() {
@@ -124,7 +124,9 @@ var Base = class {
 
     /**
      * Returns the URL of the string bundle file of this provider, it can be
-     * accessed by tbSync.getString(<key>, <ProviderNameSpace>)
+     * accessed by 
+     *
+     *   ``tbSync.getString``
      *
      * @returns {string} chrome uri to string bundle file
      *
@@ -151,7 +153,7 @@ var Base = class {
 
 
     /**
-     * Returns overlay XUL URL of the edit account dialog
+     * Returns uri to overlay for the edit account dialog
      * (chrome://tbsync/content/manager/editAccount.xul)
      *
      * The overlay must (!) implement:
@@ -162,7 +164,7 @@ var Base = class {
      * in the manager and gets passed the AccountData of the corresponding
      * account.
      *
-     * @returns {string} chrome uri to overlay file for edit account dialog
+     * @returns {string} chrome uri to overlay for edit account dialog
      *
      */
     static getEditAccountOverlayUrl() {
@@ -179,14 +181,13 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     * <pre>
-     *   return {
-     *     "username" : "",
-     *     "host" : "",
-     *     "https" : true,
+     * .. code-block:: javascript
+     *    return {
+     *      "username" : "",
+     *      "host" : "",
+     *      "https" : true,
      *      "someOtherOption" : false,    
-     *   }
-     * </pre>
+     *    }
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -212,11 +213,10 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     * <pre>
-     *   return {
+     * .. code-block:: javascript
+     *    return {
      *      "someSetting" : "none",    
-     *   }
-     * </pre>
+     *    }
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -259,8 +259,7 @@ var Base = class {
 
 
     /**
-     * Is called everytime an new target is created, intended to set a clean
-     * sync status.
+     * Is called everytime a new target is created.
      *
      * @param {FolderData} folderData  FolderData of the folder being
      *                                 resetted
@@ -299,10 +298,9 @@ var Base = class {
 
     /**
      * Returns all folders of the account, sorted in the desired order.
-     * The most simple implementation is to return accountData.getAllFolders();
      *
      * The order will be used in the folder list and also as the order to sync
-     * the resources of the account.
+     * the resources of the account identified by the passed AccountData.
      *
      * @param {AccountData}  accountData  AccountData for the account for which the 
      *                                    sorted folder should be returned
@@ -337,17 +335,17 @@ var Base = class {
     /**
      * Is called to synchronize the folder list.
      *
-     * NEVER CALL THIS FUNCTION DIRECTLY BUT USE
+     * Never call this method directly, but use:
      *
      *    ``AccountData.sync()``
      *
      * @param {SyncData} syncData   SyncData object
-     * @param {string}   syncJob    a specific sync job. Defaults to "sync",
-     *                              but can be set via the syncDescription
+     * @param {string}   syncJob    A specific sync job, defaults to "sync",
+     *                              but can be set via the syncDescription.
      *                              (see AccountData.sync or FolderData.sync)
      * @param {integer}  syncRunNr  Indicates the n-th number the account is
-     *                              being due to enforced retries. It starts
-     *                              with 1 and is limited by 
+     *                              being (re-)synced due to enforced retries.
+     *                              It starts with 1 and is limited by 
      *                              syncDescription.maxAccountReruns.
      *
      * @return {StatusData} Status information of sync (failed/success)
@@ -363,18 +361,18 @@ var Base = class {
     /**
      * Is called to synchronize a folder.
      *
-     * NEVER CALL THIS FUNCTION DIRECTLY BUT USE
+     * Never call this method directly, but use:
      *
      *    ``AccountData.sync()`` or
      *    ``FolderData::sync()``
      *
      * @param {SyncData} syncData   SyncData object
-     * @param {string}   syncJob    a specific sync job. Defaults to "sync",
-     *                              but can be set via the syncDescription
+     * @param {string}   syncJob    A specific sync job, defaults to "sync",
+     *                              but can be set via the syncDescription.
      *                              (see AccountData.sync or FolderData.sync)
      * @param {integer}  syncRunNr  Indicates the n-th number the account is
-     *                              being due to enforced retries. It starts
-     *                              with 1 and is limited by 
+     *                              being (re-)synced due to enforced retries.
+     *                              It starts with 1 and is limited by 
      *                              syncDescription.maxAccountReruns.
      *
      * @return {StatusData} Status information of sync (failed/success)
@@ -480,7 +478,7 @@ var TargetData = class {
      * @param {string}  suffix  Suffix, which should be appended to the name
      *                          of the target.
      * @param {Array.ChangelogData}  pendingChanges  Array of ChangelogData of
-     *                                               unsynced local changes
+     *                                               unsynced local changes.
      *
      */
     appendStaleSuffix(suffix, pendingChanges) {
@@ -522,9 +520,9 @@ var StandardFolderList = class {
      * active sync, folderData will be null and the folder list will be
      * disabled.
      *
-     * @param {nsIDOMWindow} window      window object of the account
-     *                                   settings window
-     * @param {FolderData} folderData    FolderData of the selected folder
+     * @param {nsIDOMWindow} window      Object of the account
+     *                                   settings window.
+     * @param {FolderData} folderData    FolderData of the selected folder.
      *
      */
     static onContextMenuShowing(window, folderData) {
@@ -536,7 +534,7 @@ var StandardFolderList = class {
      * Gets the icon for a folder to be shown in the folderlist.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   icon is requested
+     *                                   icon is requested.
      * @returns {string} Chrome URL of icon
      *
      */
@@ -555,7 +553,7 @@ var StandardFolderList = class {
      * Gets the display name for a folder to be shown in the folderlist.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   display name is requested
+     *                                   display name is requested.
      *                                   
      * @returns {string} Display name of the folder   
      *
@@ -573,19 +571,18 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     * <pre>
-     *   return {
-     *     label: "Readonly",
-     *     disabled: false
-     *   }
-     * </pre>
+     * .. code-block:: javascript
+     *    return {
+     *      label: "Readonly",
+     *      disabled: false
+     *    }
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   attributes for the ACL RO XUL element
-     *                                   are requested
+     *                                   are requested.
      * @returns {object} A list of attributes and their values for the ACL RO
      *                   XUL element.
      *
@@ -603,19 +600,18 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     * <pre>
-     *   return {
-     *     label: "Readonly",
-     *     disabled: false
-     *   }
-     * </pre>
+     * .. code-block:: javascript
+     *    return {
+     *      label: "Readonly",
+     *      disabled: false
+     *    }
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   attributes for the ACL RW XUL element
-     *                                   are requested
+     *                                   are requested.
      * @returns {object} A list of attributes and their values for the ACL RW
      *                   XUL element.
      *
