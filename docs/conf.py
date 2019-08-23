@@ -6,7 +6,7 @@ from datetime import datetime
 
 from recommonmark.parser import CommonMarkParser
 
-extensions = ['sphinx_js']
+extensions = ['sphinx_js', 'sphinx.ext.intersphinx']
 root_for_relative_js_paths = '../content'
 js_source_path = ['../content', '../content/core/modules']
 primary_domain = 'js'
@@ -29,6 +29,8 @@ latex_documents = [
   ('index', 'tbsync.tex', u'TbSync Provider Documentation',
    u'', 'manual'),
 ]
+
+intersphinx_mapping = {'tbsync': ('https://tbsync.readthedocs.io/projects/api/en/latest/', None)}
 
 html_theme_options = {
     #'logo_only': False,

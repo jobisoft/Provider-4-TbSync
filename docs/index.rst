@@ -15,6 +15,8 @@ This document tries to cover all aspects of how to create a provider add-on for 
 :doc:`implementing/api`
   Learn how to interact with TbSync and how to add sync capabilities to your provider add-on.
 
+:tbsync:doc:`index`
+   Test
 
 .. toctree::
    :hidden:
