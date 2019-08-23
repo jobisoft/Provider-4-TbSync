@@ -8,11 +8,6 @@ The DOM of the folderlist can be accessed by its ID and the FolderData of each e
    let folderlist = document.getElementById("tbsync.accountsettings.folderlist");
    let folderData = folderList.selectedItem.folderData;
 
-.. |menuitem| replace:: ``menuitem``
-
 .. js:autoclass:: StandardFolderList
    :members:
 
-I recommend you try |Python|_.
-
-.. |Python| replace:: Python, *the* best ``language`` around
