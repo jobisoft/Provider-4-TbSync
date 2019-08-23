@@ -69,8 +69,8 @@ var Base = class {
      * Returns location of a provider icon.
      *
      * @param {integer}  size  Size of the requested icon.
-     * @param {[AccountData]}  accountData  AccountData of the account, which
-     *                                      is requesting the icon.
+     * @param {AccountData}  accountData  AccountData of the account, which
+     *                                      is requesting the icon. Optional.
      *
      */
     static getProviderIcon(size, accountData = null) {
@@ -93,13 +93,15 @@ var Base = class {
      *
      * Test
      *
-     *    return {
-     *      "sortIndex" : {name       : "Name", 
-     *                     description: "Something", 
-     *                     icon: chrome://path/or/empty,
-     *                     link: "url://or/empty"
-     *                    },
-     *    }
+     *   ```
+     *   | return {
+     *   |   "sortIndex" : {name       : "Name", 
+     *   |                  description: "Something", 
+     *   |                  icon: chrome://path/or/empty,
+     *   |                  link: "url://or/empty"
+     *   |                 },
+     *   | }
+     *   ```
      *
      * This probably has to be dropped when TbSync gets integrated into
      * Thunderbird.
@@ -184,12 +186,14 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      *
+     *   ```
      *   | return {
      *   |  "username" : "",
      *   |  "host" : "",
      *   |  "https" : true,
      *   |  "someOtherOption" : false,    
      *   | }
+     *   ```
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -216,10 +220,11 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     * .. code-block:: javascript
+     *   ```
      *    return {
      *      "someSetting" : "none",    
      *    }
+     *   ```
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -576,12 +581,12 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     * """
-     *    return {
+     *   ```
+     *   return {
      *      label: "Readonly",
      *      disabled: false
-     *    }
-     * """
+     *   }
+     *   ```
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
@@ -606,11 +611,12 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     * .. code-block:: javascript
-     *    return {
+     *   ```
+     *   return {
      *      label: "Readonly",
      *      disabled: false
-     *    }
+     *   }
+     *   ```
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
