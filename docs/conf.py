@@ -7,6 +7,8 @@ from datetime import datetime
 from recommonmark.parser import CommonMarkParser
 
 extensions = ['sphinx_js']
+root_for_relative_js_paths = '../content'
+js_source_path = ['../content', 'core/content/passwordPrompt','core/content/modules']
 js_source_path = '../content'
 primary_domain = 'js'
 templates_path = ['templates', '_templates', '.templates']
