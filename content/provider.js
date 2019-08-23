@@ -435,10 +435,10 @@ var TargetData = class {
      * If the target does not exist, it should be created. 
      *
      * .. note::
-     *    The thrown error message will be used as a status by TbSync and it
-     *    will use ``status.<Error.message>`` from your string bundle (see
+     *    The thrown error message will be used as a status and TbSync will
+     *    use ``status.<Error.message>`` from your string bundle (see
      *    :class:`Base.getStringBundleUrl`) for the actual error/status 
-     *    message,
+     *    message.
      *        
      * @returns {Object} Whatever you want to use as target object for
      *                   this TargetData.
