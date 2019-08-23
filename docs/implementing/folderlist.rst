@@ -16,4 +16,3 @@ The DOM of the folderlist can be accessed by its ID and the FolderData of each e
 I recommend you try |Python|_.
 
 .. |Python| replace:: Python, *the* best ``language`` around
-.. _Python: http://www.python.org/
