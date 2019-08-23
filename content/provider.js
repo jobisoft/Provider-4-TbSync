@@ -436,7 +436,7 @@ var TargetData = class {
     }
 
     /**
-     * Returns the actual target object (for example a `|nsIAbDirectory| <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_).
+     * Returns the actual target object (for example a `nsIAbDirectory <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_).
      * If the target does not exist, it should be created. 
      *
      * .. note::
@@ -567,7 +567,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Returns the attributes for the *readonly* `|menuitem| <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_
+     * Returns the attributes for the *readonly* `menuitem <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_
      * element of the ACL selector for a folder to be shown in the folderlist.
      * You can define any available attribute (label, disabled, hidden, style, 
      * ...) by returning an Object which uses the attribute names as key and
@@ -597,7 +597,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Returns the attributes for the *read/write* `|menuitem| <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_
+     * Returns the attributes for the *read/write* `menuitem <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_
      * element of the ACL selector for a folder to be shown in the folderlist.
      * You can define any available attribute (label, disabled, hidden, style, 
      * ...) by returning an Object which uses the attribute names as key and

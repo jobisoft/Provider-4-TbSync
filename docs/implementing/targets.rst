@@ -1,4 +1,4 @@
-TbSync Targets
+Implementing sync targets
 --------------
 
 .. js:autoclass:: TargetData
