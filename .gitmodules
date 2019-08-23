@@ -1,0 +1,3 @@
+[submodule "docs/core"]
+	path = docs/core
+	url = https://github.com/jobisoft/TbSync.git
