@@ -89,7 +89,10 @@ var Base = class {
     /**
      * Returns a list of sponsors, they will be sorted by the index
      *
-     * .. code-block:: javascript
+     * .. literalinclude:: ../content/includes/addressbook.js
+     *
+     * Test
+     *
      *    return {
      *      "sortIndex" : {name       : "Name", 
      *                     description: "Something", 
@@ -180,16 +183,13 @@ var Base = class {
      * 
      * The returned object uses the properties names as key and its default
      * values as their value:
-     * 
-     * .. highlight:: javascript
      *
-     * ::
-     *    return {
-     *      "username" : "",
-     *      "host" : "",
-     *      "https" : true,
-     *      "someOtherOption" : false,    
-     *    }
+     *   | return {
+     *   |  "username" : "",
+     *   |  "host" : "",
+     *   |  "https" : true,
+     *   |  "someOtherOption" : false,    
+     *   | }
      *
      * Please also check the standard properties added by TbSync.
      *
