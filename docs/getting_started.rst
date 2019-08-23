@@ -62,8 +62,6 @@ These are the important files and folders of the generated provider add-on:
     │   └── logo48.png
     └── content
         ├── provider.js
-        ├── includes
-        │   └── sync.js
         └── manager
             ├── createAccount.js
             ├── createAccount.xul

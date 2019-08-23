@@ -1,5 +1,5 @@
-Implementing the TbSync API
-===========================
+Implementing the TbSync Provider API
+====================================
 
 The file ``provider.js`` is the central starting point to implement the TbSync Provider API. The following classes must be implemented:
 
