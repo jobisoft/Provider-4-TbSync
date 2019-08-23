@@ -21,4 +21,5 @@ The file ``provider.js`` is the central starting point to implement the TbSync P
 
    base
    folderlist
+   targets
 

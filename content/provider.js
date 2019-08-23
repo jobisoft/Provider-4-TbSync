@@ -428,12 +428,13 @@ var TargetData = class {
     }
 
     /**
-     * Returns the actual target object (for example a nsIAbDirectory).
+     * Returns the actual target object (for example a ``nsIAbDirectory``).
      * If the target does not exist, it should be created. 
      *
-     * Note: The thrown Error.message will be used as a status by TbSync and it
-     *       will use "status.<Error.message>" from your string bundle (see 
-     *       Base.getStringBundleUrl) for the actual error/status message,
+     * .. note::
+     *    The thrown Error.message will be used as a status by TbSync and it
+     *    will use "status.<Error.message>" from your string bundle (see 
+     *    ``Base.getStringBundleUrl``) for the actual error/status message,
      *        
      * @returns {object} Whatever you want to use as target object for
      *                   this TargetData.
@@ -472,8 +473,8 @@ var TargetData = class {
     }
     
     /**
-     * Sets a target as stale. TbSync will disconnect the target from this
-     * TargetData after this call has been executed.
+     * Sets a target as stale. TbSync will disconnect the target from the
+     * account belonging to this TargetData after this call has been executed.
      *
      * @param {string}  suffix  Suffix, which should be appended to the name
      *                          of the target.
