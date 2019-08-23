@@ -521,6 +521,7 @@ var StandardFolderList = class {
      * show/hide custom menu options based on the selected folder. During an
      * active synchronisation, folderData will be null and the folder list will
      * be disabled. I recommend you try |Python|_.
+     * 
      * .. _Python: http://www.python.org/
      *
      * @param {nsIDOMWindow} window      Object of the account
