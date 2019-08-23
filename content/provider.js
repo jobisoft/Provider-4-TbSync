@@ -92,14 +92,16 @@ var Base = class {
      * .. literalinclude:: ../content/includes/addressbook.js
      *
      * Test
-     *
-     *   | return {
-     *   |   "sortIndex" : {name       : "Name", 
-     *   |                  description: "Something", 
-     *   |                  icon: chrome://path/or/empty,
-     *   |                  link: "url://or/empty"
-     *   |                 },
-     *   | }
+     * 
+     * ::
+     * 
+     *    return {
+     *      "sortIndex" : {name       : "Name", 
+     *                     description: "Something", 
+     *                     icon: chrome://path/or/empty,
+     *                     link: "url://or/empty"
+     *                    },
+     *    }
      *
      * This probably has to be dropped when TbSync gets integrated into
      * Thunderbird.
@@ -184,12 +186,14 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      *
-     *   | return {
-     *   |  "username" : "",
-     *   |  "host" : "",
-     *   |  "https" : true,
-     *   |  "someOtherOption" : false,    
-     *   | }
+     * ::
+     * 
+     *    return {
+     *     "username" : "",
+     *     "host" : "",
+     *     "https" : true,
+     *     "someOtherOption" : false,    
+     *    }
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -216,9 +220,11 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     *   | return {
-     *   |   "someSetting" : "none",    
-     *   | }
+     * ::
+     * 
+     *    return {
+     *      "someSetting" : "none",    
+     *    }
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -569,7 +575,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the attributes for the ACL RO (readonly) menu element for a folder
+     * Gets the attributes for the ACL RO (readonly) `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ element for a folder
      * to be shown in the folderlist (label, disabled, hidden, style, ...)
      *
      * The returned object uses the attribute names as key and its values as
@@ -577,10 +583,10 @@ var StandardFolderList = class {
      * 
      * ::
      * 
-     *    | return {
-     *    |   label: "Readonly access",
-     *    |   disabled: false
-     *    | }
+     *    return {
+     *      label: "Readonly access",
+     *      disabled: false
+     *    }
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
@@ -599,7 +605,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the attributes for the ACL RW (read/write) menu element for a folder
+     * Gets the attributes for the ACL RW (read/write) `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ element for a folder
      * to be shown in the folderlist (label, disabled, hidden, style, ...)
      *
      * The returned object uses the attribute names as key and its values as
