@@ -86,20 +86,20 @@ _locales
     Localization for entries in ``manifest.json``. Check the `MDN documentation <https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Internationalization#Internationalizing_manifest.json>`_ for more details. The name of the file must not be changed.
 
   en-US/provider.strings
-    Localization for your add-on, which can be accessed from JavaScript. The name of the file may be anything you like, but it must be announced via `Base.getStringBundleUrl() <base.html#Base.getStringBundleUrl>`_ as TbSync needs to access some of your localized strings. In paticular error messages and synchronization states your add-on is using. TODO:LINK
+    Localization for your add-on, which can be accessed from JavaScript. The name of the file may be anything you like, but it must be announced via :class:`Base.getStringBundleUrl` as TbSync needs to access some of your localized strings. In paticular error messages and synchronization states your add-on is using. TODO:LINK
 
   en-US/provider.dtd
     Deprecated localization for XUL files of your add-on. Try to avoid its usage and instead set the localized labels of XUL/HTML elements via JavaScript. The generated provider add-on is using this in ``createAccount.xul`` and ``editAccountOverlay.xul``.
   
 skin
-  Folder containing all your additional resources like images and CSS files. It exists for historical reasons and the author is used to that approach. The generated provider add-on also stores its logo files there. If you change their names, please also update your `manifest.json <https://github.com/jobisoft/Provider-4-TbSync/blob/ebfeec7b714baf956703511e30656208c8375526/manifest.json#L16>`_ and `Base.getProviderIcon() <base.html#Base.getProviderIcon>`_. 
+  Folder containing all your additional resources like images and CSS files. It exists for historical reasons and the author is used to that approach. The generated provider add-on also stores its logo files there. If you change their names, please also update your `manifest.json <https://github.com/jobisoft/Provider-4-TbSync/blob/ebfeec7b714baf956703511e30656208c8375526/manifest.json#L16>`_ and :class:`Base.getProviderIcon`. 
 
 content
   Folder containing your add-ons source files.
    
   provider.js
-    File containing your implementation of the ``Base`` class and a few other classes, depending on what your add-on is supposed to do. See :doc:`api` for more details.
+    File containing your implementation of the :class:`Base` class and a few other classes, depending on what your add-on is supposed to do. See :doc:`api` for more details.
    
   manager
-    Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (announced via `Base.getCreateAccountWindowUrl <base.html#Base.getCreateAccountWindowUrl>`_) and the XUL file containing your tabs for the *Edit account dialog* (announced via `Base.getEditAccountOverlayUrl <base.html#Base.getEditAccountOverlayUrl>`_).
+    Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (announced via :class:`Base.getCreateAccountWindowUrl`) and the XUL file containing your tabs for the *Edit account dialog* (announced via :class:`Base.getEditAccountOverlayUrl`).
     

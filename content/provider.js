@@ -436,14 +436,9 @@ var TargetData = class {
      *
      * .. note::
      *    The thrown error message will be used as a status by TbSync and it
-     *    will use ``status.<Error.message>`` from your string bundle (see 
-     *    :class:`.Base` 
-     *    :class:`Base`  
-     *    :class:`Base#getStringBundleUrl` 
-     *    :class:`Base.getStringBundleUrl` 
-     *    :class:`.Base#getStringBundleUrl`
-     *    :class:`.Base.getStringBundleUrl`
-     *    ) for the actual error/status message,
+     *    will use ``status.<Error.message>`` from your string bundle (see
+     *    :class:`Base.getStringBundleUrl`) for the actual error/status 
+     *    message,
      *        
      * @returns {Object} Whatever you want to use as target object for
      *                   this TargetData.
@@ -581,11 +576,12 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     * .. code-block:: javascript
+     * """
      *    return {
      *      label: "Readonly",
      *      disabled: false
      *    }
+     * """
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
