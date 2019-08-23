@@ -10,7 +10,7 @@
 
 var { MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm");
 
-// Every object in here will be loaded into the following namespace: tbSync.providers.__ProviderNameSpace__. 
+// Every Object in here will be loaded into the following namespace: tbSync.providers.__ProviderNameSpace__. 
 const __ProviderNameSpace__ = tbSync.providers.__ProviderNameSpace__;
 
 /**
@@ -179,11 +179,11 @@ var Base = class {
 
 
     /**
-     * Returns object which contains all possible account properties of
+     * Returns an Object which contains all possible account properties of
      * accounts of this provider, with its default value if not yet stored in the 
      * database.
      * 
-     * The returned object uses the properties names as key and its default
+     * The returned Object uses the properties names as key and its default
      * values as their value:
      *
      * ::
@@ -197,7 +197,7 @@ var Base = class {
      *
      * Please also check the standard properties added by TbSync.
      *
-     * @returns {object} list of properties with default values
+     * @returns {Object} list of properties with default values
      *
      */
     static getDefaultAccountEntries() {
@@ -213,11 +213,11 @@ var Base = class {
 
 
     /**
-     * Returns object which contains all possible folder properties of
-     * fodlers of this provider, with its default value if not yet stored in the 
+     * Returns an Object which contains all possible folder properties of
+     * folders of this provider, with its default value if not yet stored in the 
      * database.
      * 
-     * The returned object uses the properties names as key and its default
+     * The returned Object uses the properties names as key and its default
      * values as their value:
      * 
      * ::
@@ -228,7 +228,7 @@ var Base = class {
      *
      * Please also check the standard properties added by TbSync.
      *
-     * @returns {object} list of properties with default values
+     * @returns {Object} list of properties with default values
      *
      */
     static getDefaultFolderEntries() {
@@ -245,7 +245,7 @@ var Base = class {
      * manager UI.
      *
      * @param {AccountData} accountData  AccountData of the account being
-     *                                   enabled
+     *                                   enabled.
      *
      */
     static onEnableAccount(accountData) {
@@ -258,7 +258,7 @@ var Base = class {
      * manager UI.
      *
      * @param {AccountData} accountData  AccountData of the account being
-     *                                   disabled
+     *                                   disabled.
      *
      */
     static onDisableAccount(accountData) {
@@ -270,7 +270,7 @@ var Base = class {
      * Is called everytime a new target is created.
      *
      * @param {FolderData} folderData  FolderData of the folder being
-     *                                 resetted
+     *                                 resetted.
      *
      */
     static onResetTarget(folderData) {
@@ -291,11 +291,11 @@ var Base = class {
      * control over the autocomplete.
      *
      * @param {AccountData}  accountData  AccountData of the account being
-     *                                    queried
+     *                                    queried.
      *
      * @param {string}  query  search query
      *
-     * @returns {Array.AutoCompleteData} Array of AutoCompleteData entries
+     * @returns {Array.AutoCompleteData} Array of AutoCompleteData entries.
      *
      */
     static async abAutoComplete(accountData, query)  {
@@ -311,9 +311,9 @@ var Base = class {
      * the resources of the account identified by the passed AccountData.
      *
      * @param {AccountData}  accountData  AccountData for the account for which the 
-     *                                    sorted folder should be returned
+     *                                    sorted folder should be returned.
      *
-     * @returns {Array.FolderData} Array of FolderData in the desired order
+     * @returns {Array.FolderData} Array of FolderData in the desired order.
      *
      */
     static getSortedFolders(accountData) {
@@ -329,7 +329,7 @@ var Base = class {
      * trigger this (see ``SyncData.setSyncState``).
      *
      * @param {AccountData}  accountData  AccountData for the account for which the 
-     *                                    timeout is being requested
+     *                                    timeout is being requested.
      *
      * @returns {integer} timeout in milliseconds
      *
@@ -347,16 +347,16 @@ var Base = class {
      *
      *    ``AccountData.sync()``
      *
-     * @param {SyncData} syncData   SyncData object
+     * @param {SyncData} syncData   SyncData instance
      * @param {string}   syncJob    A specific sync job, defaults to "sync",
      *                              but can be set via the syncDescription.
-     *                              (see AccountData.sync or FolderData.sync)
+     *                              (see AccountData.sync or FolderData.sync).
      * @param {integer}  syncRunNr  Indicates the n-th number the account is
      *                              being (re-)synced due to enforced retries.
      *                              It starts with 1 and is limited by 
      *                              syncDescription.maxAccountReruns.
      *
-     * @return {StatusData} Status information of sync (failed/success)
+     * @return {StatusData} Status information of the sync (failed/success).
      *
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
@@ -374,16 +374,16 @@ var Base = class {
      *    ``AccountData.sync()`` or
      *    ``FolderData::sync()``
      *
-     * @param {SyncData} syncData   SyncData object
+     * @param {SyncData} syncData   SyncData instance
      * @param {string}   syncJob    A specific sync job, defaults to "sync",
      *                              but can be set via the syncDescription.
-     *                              (see AccountData.sync or FolderData.sync)
+     *                              (see AccountData.sync or FolderData.sync).
      * @param {integer}  syncRunNr  Indicates the n-th number the account is
      *                              being (re-)synced due to enforced retries.
      *                              It starts with 1 and is limited by 
      *                              syncDescription.maxAccountReruns.
      *
-     * @return {StatusData} Status information of sync (failed/success)
+     * @return {StatusData} Status information of the sync (failed/success).
      *
      */
     static async syncFolder(syncData, syncJob, syncRunNr) {
@@ -436,7 +436,7 @@ var TargetData = class {
     }
 
     /**
-     * Returns the actual target object (for example a ``nsIAbDirectory``).
+     * Returns the actual target object (for example a ```nsIAbDirectory`` <https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl>`_).
      * If the target does not exist, it should be created. 
      *
      * .. note::
@@ -517,10 +517,10 @@ var TargetData = class {
  */
 var StandardFolderList = class {
     /**
-     * Gets called before the context menu of the folderlist is shown, allows
-     * to show/hide custom menu options based on selected folder. During an
-     * active sync, folderData will be null and the folder list will be
-     * disabled.
+     * Is called before the context menu of the folderlist is shown, allows to
+     * show/hide custom menu options based on the selected folder. During an
+     * active synchronisation, folderData will be null and the folder list will
+     * be disabled.
      *
      * @param {nsIDOMWindow} window      Object of the account
      *                                   settings window.
@@ -533,7 +533,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the icon for a folder to be shown in the folderlist.
+     * Returns the icon for a folder to be shown in the folderlist.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   icon is requested.
@@ -552,7 +552,7 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the display name for a folder to be shown in the folderlist.
+     * Returns the display name for a folder to be shown in the folderlist.
      *
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   display name is requested.
@@ -567,11 +567,11 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the attributes for the ACL RO (readonly) `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ element for a folder
-     * to be shown in the folderlist (label, disabled, hidden, style, ...)
-     *
-     * The returned object uses the attribute names as key and its values as
-     * their value:
+     * Returns the attributes for the *readonly* ```menuitem`` <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ 
+     * element of the ACL selector for a folder to be shown in the folderlist.
+     * You can define any available attribute (label, disabled, hidden, style, 
+     * ...) by returning an Object which uses the attribute names as key and
+     * its values as their value. For example:
      * 
      * ::
      * 
@@ -586,7 +586,7 @@ var StandardFolderList = class {
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   attributes for the ACL RO XUL element
      *                                   are requested.
-     * @returns {object} A list of attributes and their values for the ACL RO
+     * @returns {Object} A list of attributes and their values for the ACL RO
      *                   XUL element.
      *
      */
@@ -597,11 +597,11 @@ var StandardFolderList = class {
 
 
     /**
-     * Gets the attributes for the ACL RW (read/write) `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ element for a folder
-     * to be shown in the folderlist (label, disabled, hidden, style, ...)
-     *
-     * The returned object uses the attribute names as key and its values as
-     * their value:
+     * Returns the attributes for the *read/write* `menuitem <https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/menuitem>`_ 
+     * element of the ACL selector for a folder to be shown in the folderlist.
+     * You can define any available attribute (label, disabled, hidden, style, 
+     * ...) by returning an Object which uses the attribute names as key and
+     * its values as their value. For example:
      * 
      * ::
      * 
@@ -616,7 +616,7 @@ var StandardFolderList = class {
      * @param {FolderData} folderData    FolderData of the folder for which the
      *                                   attributes for the ACL RW XUL element
      *                                   are requested.
-     * @returns {object} A list of attributes and their values for the ACL RW
+     * @returns {Object} A list of attributes and their values for the ACL RW
      *                   XUL element.
      *
      */
