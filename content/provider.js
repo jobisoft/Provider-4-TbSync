@@ -437,7 +437,7 @@ var TargetData = class {
      * .. note::
      *    The thrown error message will be used as a status by TbSync and it
      *    will use ``status.<Error.message>`` from your string bundle (see 
-     *    ``:func:Base.getStringBundleUrl``) for the actual error/status message,
+     *    :class:`.Base` :class:`Base`  :func:`Base#getStringBundleUrl` ``:func:Base.getStringBundleUrl``) for the actual error/status message,
      *        
      * @returns {Object} Whatever you want to use as target object for
      *                   this TargetData.
