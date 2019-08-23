@@ -9,7 +9,6 @@ The DOM of the folderlist can be accessed by its ID and the FolderData of each e
    let folderData = folderList.selectedItem.folderData;
 
 .. |menuitem| replace:: ``menuitem``
-.. _|menuitem|: https://dxr.mozilla.org/comm-central/source/comm/mailnews/addrbook/public/nsIAbDirectory.idl
 
 .. js:autoclass:: StandardFolderList
    :members:
