@@ -450,7 +450,7 @@ var TargetData = class {
         if (!directory) {
             let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("targetName"), "", 2);
             let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
-            if (!directory)
+            if (!directory) {
                 throw new Error("TargetError");
             }
         }
@@ -495,7 +495,7 @@ var TargetData = class {
             // the main string bundle from TbSync is used.
             directory.dirName = tbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
         }
-    }     
+    }
 }
 
 
