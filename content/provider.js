@@ -93,7 +93,6 @@ var Base = class {
      *
      * Test
      *
-     *   ```
      *   | return {
      *   |   "sortIndex" : {name       : "Name", 
      *   |                  description: "Something", 
@@ -101,7 +100,6 @@ var Base = class {
      *   |                  link: "url://or/empty"
      *   |                 },
      *   | }
-     *   ```
      *
      * This probably has to be dropped when TbSync gets integrated into
      * Thunderbird.
@@ -186,14 +184,12 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      *
-     *   ```
      *   | return {
      *   |  "username" : "",
      *   |  "host" : "",
      *   |  "https" : true,
      *   |  "someOtherOption" : false,    
      *   | }
-     *   ```
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -220,11 +216,9 @@ var Base = class {
      * The returned object uses the properties names as key and its default
      * values as their value:
      * 
-     *   ```
-     *    return {
-     *      "someSetting" : "none",    
-     *    }
-     *   ```
+     *   | return {
+     *   |   "someSetting" : "none",    
+     *   | }
      *
      * Please also check the standard properties added by TbSync.
      *
@@ -581,12 +575,12 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     *   ```
-     *   return {
-     *      label: "Readonly",
-     *      disabled: false
-     *   }
-     *   ```
+     * ::
+     * 
+     *    | return {
+     *    |   label: "Readonly access",
+     *    |   disabled: false
+     *    | }
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
@@ -611,12 +605,12 @@ var StandardFolderList = class {
      * The returned object uses the attribute names as key and its values as
      * their value:
      * 
-     *   ```
-     *   return {
-     *      label: "Readonly",
-     *      disabled: false
-     *   }
-     *   ```
+     * ::
+     * 
+     *    return {
+     *       label: "Read/Write access",
+     *       disabled: true
+     *    }
      *
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
