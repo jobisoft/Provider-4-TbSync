@@ -16,7 +16,7 @@ This document tries to cover all aspects of how to create a provider add-on for 
   Learn how to interact with TbSync and how to add sync capabilities to your provider add-on.
 
 :doc:`tbsync:index`
-   Test
+   Test link :class:`tbsync:EventLogInfo`
 
 .. toctree::
    :hidden:
