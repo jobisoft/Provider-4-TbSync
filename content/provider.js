@@ -513,14 +513,6 @@ var TargetData = class {
 
 /**
  * StandardFolderList class.
- * 
- * The DOM of the folderlist can be accessed by
- * 
- *    ``let list = document.getElementById("tbsync.accountsettings.folderlist");``
- * 
- * and the folderData of each entry is attached to each row:
- * 
- *    ``let folderData = folderList.selectedItem.folderData;``
  *
  */
 var StandardFolderList = class {
