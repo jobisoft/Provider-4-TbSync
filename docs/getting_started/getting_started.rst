@@ -1,3 +1,6 @@
+Getting Started
+===============
+
 Generating a Basic TbSync Provider Add-on
 -----------------------------------------
 
