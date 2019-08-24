@@ -23,7 +23,7 @@ This document tries to cover all aspects of how to create a provider add-on for 
    
    Introduction <introduction/introduction>
    Getting Started <getting_started/getting_started>
-   Implementing the Provider Classes <implementing>
+   Implementing the Provider Classes <implementing/implementing>
 
 .. toctree::
    :caption: References
