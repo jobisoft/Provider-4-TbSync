@@ -19,11 +19,18 @@ This document tries to cover all aspects of how to create a provider add-on for 
    Test link :class:`tbsync:EventLogInfo`
 
 .. toctree::
+   :caption: Building a TbSync Provider Add-on
+   :hidden:
+   :maxdepth: 3
+   
+   Introduction <introduction/introduction>
+   Getting Started <getting_started/getting_started>
+   Implementing the TbSync Provider API <implementing/api>
+   TbSync Class Reference <classes/classes>
+
+.. toctree::
+   :caption: TbSync Reference
    :hidden:
    :maxdepth: 3
 
-   introduction/introduction
-   getting_started/getting_started
-   implementing/api
-   classes/classes
    TbSync API Reference <https://tbsync.readthedocs.io/projects/api/en/latest/api.html>
