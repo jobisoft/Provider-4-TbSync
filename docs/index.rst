@@ -26,3 +26,4 @@ This document tries to cover all aspects of how to create a provider add-on for 
    getting_started/getting_started
    implementing/api
    classes/classes
+   TbSync API Reference <https://tbsync.readthedocs.io/projects/api/en/latest/api.html>
