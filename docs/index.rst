@@ -30,5 +30,5 @@ This document tries to cover all aspects of how to create a provider add-on for 
    :hidden:
    :maxdepth: 3
 
-   Class Definitions <classes>
    API Reference <https://tbsync.readthedocs.io/projects/api/en/latest/api.html>
+    
