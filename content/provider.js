@@ -68,10 +68,8 @@ var Base = class {
     /**
      * Returns location of a provider icon.
      *
-     * :class:`TbSync:AccountData`
-     *
      * @param {integer}  size  Size of the requested icon.
-     * @param {AccountData}  accountData  AccountData of the account, which
+     * @param {:class:`TbSync:AccountData`}  accountData  AccountData of the account, which
      *                                      is requesting the icon. Optional.
      *
      */

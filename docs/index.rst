@@ -15,7 +15,6 @@ This document tries to cover all aspects of how to create a provider add-on for 
 :doc:`Provider:implementing/implementing`
   Learn how to interact with TbSync.
 
-:class:`TbSync:AccountData`
 
 .. toctree::
    :caption: Building a Provider Add-on
