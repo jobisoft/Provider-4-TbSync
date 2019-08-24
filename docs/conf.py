@@ -7,6 +7,11 @@ from datetime import datetime
 from recommonmark.parser import CommonMarkParser
 
 extensions = ['sphinx_js', 'sphinx.ext.intersphinx']
+intersphinx_mapping = {
+    'provider': ('https://tbsync.readthedocs.io/en/latest/', None),
+    'tbsync': ('https://tbsync.readthedocs.io/projects/api/en/latest/', None)
+}
+intersphinx_cache_limit = 0
 js_source_path = '../content'
 primary_domain = 'js'
 templates_path = ['templates', '_templates', '.templates']
@@ -15,7 +20,7 @@ source_parsers = {
             '.md': CommonMarkParser,
         }
 master_doc = 'index'
-project = u'TbSync Provider Documentation'
+project = u'TbSync Documentation'
 copyright = str(datetime.now().year)
 version = 'latest'
 release = 'latest'
@@ -24,12 +29,8 @@ pygments_style = 'sphinx'
 htmlhelp_basename = 'tbsync'
 html_theme = 'sphinx_rtd_theme'
 file_insertion_enabled = False
-latex_documents = [
-  ('index', 'tbsync.tex', u'TbSync Provider Documentation',
-   u'', 'manual'),
-]
 
-intersphinx_mapping = {'tbsync': ('https://tbsync.readthedocs.io/projects/api/en/latest/', None)}
+
 
 html_theme_options = {
     #'logo_only': False,
@@ -126,11 +127,6 @@ context = {
     'PRODUCTION_DOMAIN': "readthedocs.org",
     'versions': [
     ("latest", "/en/latest/"),
-    ],
-    'downloads': [ 
-    ("pdf", "//readthedocs.org/projects/tbsync/downloads/pdf/latest/"),
-    ("html", "//readthedocs.org/projects/tbsync/downloads/htmlzip/latest/"),
-    ("epub", "//readthedocs.org/projects/tbsync/downloads/epub/latest/"),
     ],
     'subprojects': [ 
     ],
