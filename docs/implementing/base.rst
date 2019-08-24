@@ -1,5 +1,5 @@
-Implementing the ``Base`` Class
---------------------------------------
+Base Class
+----------
 
 .. js:autoclass:: Base
    :members:

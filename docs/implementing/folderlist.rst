@@ -1,5 +1,5 @@
-Implementing the folder list of the manager UI
-----------------------------------------------
+Folder List Classes
+-------------------
 
 The DOM of the folderlist can be accessed by its ID and the FolderData of each entry is attached to its row. To get the FolderData of the selected row can be accessed like so:
 

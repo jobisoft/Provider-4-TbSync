@@ -1,4 +1,4 @@
-Implementing sync targets
+Target Classes
 --------------
 
 .. js:autoclass:: TargetData
