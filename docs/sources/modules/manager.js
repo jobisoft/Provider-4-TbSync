@@ -117,12 +117,9 @@ var manager = {
 
 
 
-/**
- * Functions used by the folderlist in the main account settings tab
- */
 manager.FolderList = class {
   /**
-   * Constructor
+   * Functions used by the folderlist in the main account settings tab
    */
   constructor(provider) {
     this.provider = provider
