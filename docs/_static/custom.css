@@ -11,4 +11,6 @@ a.reference em {
 	font-weight: bold !important;
 	font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace !important;
 	font-style: normal !important;
+	box-sizing: border-box;
+	font-size: 75% !important;
 }
