@@ -384,3 +384,17 @@ var manager = {
     }
   }    
 }
+
+/**
+ * FolderList2 dfsdf sdfsdf sdfsd f
+ *
+ */
+manager.FolderList2 = class {
+    /**
+     * FolderList2 constructor
+     *
+     */
+    constructor(provider) {
+      this.provider = provider
+    }
+}
