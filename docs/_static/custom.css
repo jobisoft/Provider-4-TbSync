@@ -4,7 +4,6 @@ code.literal {
 
 a.reference code.literal {
 	color: red !important;
-	font-style: italic;
 }
 	
 a.reference em {
