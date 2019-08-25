@@ -334,7 +334,7 @@ var Base = class {
      * @param accountData  An :class:`TbSync:AccountData` instance for the
      *                     account for which the timeout is being requested.
      *
-     * @returns {integer} The timeout in milliseconds.
+     * @returns {integer}  The timeout in milliseconds.
      *
      */
     static getConnectionTimeout(accountData) {
@@ -451,11 +451,11 @@ var TargetData = class {
      *    use ``status.<Error.message>`` from your string bundle (see
      *    :class:`Base.getStringBundleUrl`) for the actual error/status 
      *    message.
-     *        
+     *
      * @returns {Object}  Whatever you want to use as target object for
      *                    this TargetData.
-     *                   
-     * @throws {Error}  Reason, why the target could not be created.
+     *
+     * @throws {Error}    Reason, why the target could not be created.
      *
      */
     getTarget() { 
@@ -494,8 +494,6 @@ var TargetData = class {
      *
      * @param {string}  suffix  Suffix, which should be appended to the name
      *                          of the target.
-     * @param {Array.ChangelogData}  pendingChanges  Array of ChangelogData of
-     *                                               unsynced local changes.
      *
      */
     appendStaleSuffix(suffix, pendingChanges) {
@@ -544,6 +542,7 @@ var StandardFolderList = class {
      *
      * @param folderData  A :class:`TbSync:FolderData` instance of the folder
      *                    for which the icon is requested.
+     *                                   
      * @returns {string}  Chrome URL of icon
      *
      */
@@ -593,6 +592,7 @@ var StandardFolderList = class {
      * @param folderData  A :class:`TbSync:FolderData` instance of the folder
      *                    for which the attributes for the ACL RO XUL element 
      *                    are requested.
+     *                                   
      * @returns {Object}  A list of attributes and their values for the ACL RO
      *                    XUL element.
      *
@@ -623,6 +623,7 @@ var StandardFolderList = class {
      * @param folderData  A :class:`TbSync:FolderData` instance of the folder 
      *                    for which the attributes for the ACL RW XUL element 
      *                    are requested.
+     *                                   
      * @returns {Object}  A list of attributes and their values for the ACL RW
      *                    XUL element.
      *
