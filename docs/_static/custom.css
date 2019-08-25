@@ -3,13 +3,10 @@ code.literal {
 }
 
 a.reference code.literal {
-	color: black !important;
+	color: #9B59B6; !important;
 }
 	
 a.reference em {
-	color: black !important;
+	color: #9B59B6; !important;
 	font-weight: bold !important;
-	font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace !important;
-	font-style: normal !important;
-	font-size: 90% !important;
 }
