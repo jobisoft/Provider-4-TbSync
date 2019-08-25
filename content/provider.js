@@ -244,7 +244,7 @@ var Base = class {
      * Is called everytime an account of this provider is enabled in the
      * manager UI.
      *
-     * @param {AccountData} accountData  AccountData of the account being
+     * @param accountData  :class:`TbSync:AccountData` of the account being
      *                                   enabled.
      *
      */
@@ -257,7 +257,7 @@ var Base = class {
      * Is called everytime an account of this provider is disabled in the
      * manager UI.
      *
-     * @param {AccountData} accountData  AccountData of the account being
+     * @param accountData  :class:`TbSync:AccountData` of the account being
      *                                   disabled.
      *
      */
@@ -269,8 +269,8 @@ var Base = class {
     /**
      * Is called everytime a new target is created.
      *
-     * @param {FolderData} folderData  FolderData of the folder being
-     *                                 resetted.
+     * @param folderData :class:`TbSync:FolderData` instance of the folder 
+     *                   being resetted.
      *
      */
     static onResetTarget(folderData) {
@@ -290,7 +290,7 @@ var Base = class {
      * to disable the default autocomplete for this directory and have full
      * control over the autocomplete.
      *
-     * @param {AccountData}  accountData  AccountData of the account being
+     * @param accountData  :class:`TbSync:AccountData` of the account being
      *                                    queried.
      *
      * @param {string}  query  search query
@@ -310,10 +310,10 @@ var Base = class {
      * The order will be used in the folder list and also as the order to sync
      * the resources of the account identified by the passed AccountData.
      *
-     * @param {AccountData}  accountData  AccountData for the account for which the 
+     * @param accountData  :class:`TbSync:AccountData` for the account for which the 
      *                                    sorted folder should be returned.
      *
-     * @returns {Array.FolderData} Array of FolderData in the desired order.
+     * @returns Array of :class:`TbSync:FolderData` instances in the desired order.
      *
      */
     static getSortedFolders(accountData) {
@@ -328,7 +328,7 @@ var Base = class {
      * answer from the server. Only syncstates which start with ``send.`` will
      * trigger this (see ``SyncData.setSyncState``).
      *
-     * @param {AccountData}  accountData  AccountData for the account for which the 
+     * @param accountData  :class:`TbSync:AccountData` for the account for which the 
      *                                    timeout is being requested.
      *
      * @returns {integer} timeout in milliseconds
@@ -356,7 +356,7 @@ var Base = class {
      *                              It starts with 1 and is limited by 
      *                              syncDescription.maxAccountReruns.
      *
-     * @return {StatusData} Status information of the sync (failed/success).
+     * @return :class:`TbSync:StatusData` with information of the sync (failed/success).
      *
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
@@ -374,7 +374,8 @@ var Base = class {
      *    ``AccountData.sync()`` or
      *    ``FolderData::sync()``
      *
-     * @param {SyncData} syncData   SyncData instance
+     * @param  syncData  :class:`TbSync:SyncData` instance with information 
+     *                   regarding the requested sync
      * @param {string}   syncJob    A specific sync job, defaults to "sync",
      *                              but can be set via the syncDescription.
      *                              (see AccountData.sync or FolderData.sync).
@@ -399,8 +400,8 @@ var TargetData = class {
     /**
      * TargetData constrcutor.
      *
-     * @param {FolderData}  folderData  FolderData of the folder for which the
-     *                                  TargetData is being created.
+     * @param folderData  :class:`TbSync:FolderData` instance of the folder for
+     *                    which this TargetData instance is being created.
      *
      */
     constructor(folderData) {            
@@ -522,9 +523,8 @@ var StandardFolderList = class {
      * active synchronisation, folderData will be null and the folder list will
      * be disabled.
      *
-     * @param {nsIDOMWindow} window      Object of the account
-     *                                   settings window.
-     * @param {FolderData} folderData    FolderData of the selected folder.
+     * @param {nsIDOMWindow} window  Object of the account settings window.
+     * @param folderData :class:`TbSync:FolderData` instance of the selected folder.
      *
      */
     static onContextMenuShowing(window, folderData) {
@@ -535,8 +535,8 @@ var StandardFolderList = class {
     /**
      * Returns the icon for a folder to be shown in the folderlist.
      *
-     * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   icon is requested.
+     * @param folderData :class:`TbSync:FolderData` instance of the folder for
+     *                   which the icon is requested.
      * @returns {string} Chrome URL of icon
      *
      */
@@ -554,8 +554,8 @@ var StandardFolderList = class {
     /**
      * Returns the display name for a folder to be shown in the folderlist.
      *
-     * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   display name is requested.
+     * @param folderData :class:`TbSync:FolderData` instance of the folder for
+     *                   which the display name is requested.
      *                                   
      * @returns {string} Display name of the folder   
      *
@@ -583,9 +583,9 @@ var StandardFolderList = class {
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
-     * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   attributes for the ACL RO XUL element
-     *                                   are requested.
+     * @param folderData :class:`TbSync:FolderData` instance of the folder for
+     *                   which the attributes for the ACL RO XUL element are
+     *                   requested.
      * @returns {Object} A list of attributes and their values for the ACL RO
      *                   XUL element.
      *
@@ -613,9 +613,9 @@ var StandardFolderList = class {
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
-     * @param {FolderData} folderData    FolderData of the folder for which the
-     *                                   attributes for the ACL RW XUL element
-     *                                   are requested.
+     * @param folderData :class:`TbSync:FolderData` instance of the folder for
+     *                   which the attributes for the ACL RW XUL element are
+     *                   requested.
      * @returns {Object} A list of attributes and their values for the ACL RW
      *                   XUL element.
      *
