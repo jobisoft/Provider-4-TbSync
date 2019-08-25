@@ -4,12 +4,12 @@ code.literal {
 
 a.reference code.literal {
 	color: red !important;
-	font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace;
-	font-style: none;
-	font-size: 75%;
 }
 	
 a.reference em {
 	color: red !important;
-	font-weight: bold;
+	font-weight: bold !important;
+	font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace !important;
+	font-style: none !important;
+	font-size: 75% !important;
 }
