@@ -115,6 +115,11 @@ if globals().get('websupport2_base_url', False):
     websupport2_base_url = 'https://readthedocs.org/websupport'
     websupport2_static_url = 'https://assets.readthedocs.org/static/'
 
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'custom.css',
+]
 
 #Add project information to the template context.
 context = {
