@@ -1,13 +1,13 @@
 code.literal {
-	color: green !important;
+	color: grey !important;
 }
 
 a.reference code.literal {
-	color: red !important;
+	color: black !important;
 }
 	
 a.reference em {
-	color: red !important;
+	color: black !important;
 	font-weight: bold !important;
 	font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",Courier,monospace !important;
 	font-style: normal !important;
