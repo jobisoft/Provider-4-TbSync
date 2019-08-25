@@ -117,6 +117,9 @@ var manager = {
    * Functions used by the folderlist in the main account settings tab
    */
   FolderList : class {
+    /**
+     * FolderList constructor
+     */
     constructor(provider) {
       this.provider = provider
     }
@@ -250,6 +253,9 @@ var manager = {
     }
 
 
+    /**
+     * ToggleFolder event
+     */
     toggleFolder(event) {
       let element = event.target;
       let folderList = element.ownerDocument.getElementById("tbsync.accountsettings.folderlist");
@@ -286,6 +292,9 @@ var manager = {
       }
     }
     
+    /**
+     * updateReadOnly event
+     */
     updateReadOnly(event) {
       let element = event.target;
       let folderList = element.ownerDocument.getElementById("tbsync.accountsettings.folderlist");
