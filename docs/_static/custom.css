@@ -1,3 +1,8 @@
-.literal {
+code.literal {
 	color: green !important;
 }
+
+a.reference code.literal {
+	color: red !important;
+}
+	
