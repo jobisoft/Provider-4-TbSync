@@ -3,7 +3,7 @@ code.literal {
 }
 
 a.reference code.literal {
-	color: #9B59B6; !important;
+	color: #9B59B6 !important;
 }
 	
 a.reference em {
