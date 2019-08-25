@@ -69,7 +69,7 @@ var Base = class {
      * Returns location of a provider icon.
      *
      * @param {integer}    size  Size of the requested icon.
-     * @param accountData  A :class:`TbSync:AccountData` instance of the
+     * @param accountData  An :class:`TbSync:AccountData` instance of the
      *                     account, which is requesting the icon. Optional.
      *
      */
@@ -245,7 +245,7 @@ var Base = class {
      * Is called everytime an account of this provider is enabled in the
      * manager UI.
      *
-     * @param accountData  A :class:`TbSync:AccountData` instance of the
+     * @param accountData  An :class:`TbSync:AccountData` instance of the
      *                     account being enabled.
      *
      */
@@ -258,7 +258,7 @@ var Base = class {
      * Is called everytime an account of this provider is disabled in the
      * manager UI.
      *
-     * @param accountData  A :class:`TbSync:AccountData` instance of the
+     * @param accountData  An :class:`TbSync:AccountData` instance of the
      *                     account being disabled.
      *
      */
@@ -291,7 +291,7 @@ var Base = class {
      * to disable the default autocomplete for this directory and have full
      * control over the autocomplete.
      *
-     * @param accountData  A :class:`TbSync:AccountData` instance of the
+     * @param accountData  An :class:`TbSync:AccountData` instance of the
      *                     account being queried.
      *
      * @param {string}     query  The search query.
@@ -311,7 +311,7 @@ var Base = class {
      * The order will be used in the folder list and also as the order to sync
      * the resources of the account identified by the passed AccountData.
      *
-     * @param accountData  A :class:`TbSync:AccountData` instance for the
+     * @param accountData  An :class:`TbSync:AccountData` instance for the
      *                     account for which the sorted folder should be
      *                     returned.
      *
@@ -331,7 +331,7 @@ var Base = class {
      * answer from the server. Only syncstates which start with ``send.`` will
      * trigger this (see ``SyncData.setSyncState``).
      *
-     * @param accountData  A :class:`TbSync:AccountData` instance for the
+     * @param accountData  An :class:`TbSync:AccountData` instance for the
      *                     account for which the timeout is being requested.
      *
      * @returns {integer} The timeout in milliseconds.
