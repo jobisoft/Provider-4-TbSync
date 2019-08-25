@@ -216,3 +216,6 @@ if chinese:
     latex_elements = latex_elements_user or latex_elements_rtd
 elif japanese:
     latex_engine = latex_engine_user or 'platex'
+    
+
+os.listdir('/home/docs/checkouts/readthedocs.org/user_builds/tbsync/checkouts/latest/docs/sources/')
