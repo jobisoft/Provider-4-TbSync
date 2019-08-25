@@ -118,7 +118,7 @@ var manager = {
 
 
 /**
- * 
+ * Functions used by the folderlist in the main account settings tab
  */
 manager.FolderList = class {
   /**
