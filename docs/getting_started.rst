@@ -101,5 +101,5 @@ content
     File containing your implementation of the :class:`Base` class and a few other classes, depending on what your add-on is supposed to do. See :doc:`api` for more details.
    
   manager
-    Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (announced via :class:`Base.getCreateAccountWindowUrl`) and the XUL file containing your tabs for the *Edit account dialog* (announced via :class:`Base.getEditAccountOverlayUrl`).
+    Folder containing resources used be the manager UI. In paticular the XUL file for the *Create new account* dialog of your provider add-on (see :class:`Base.getCreateAccountWindowUrl`) and the XUL file containing your tabs for the *Edit account dialog* (see :class:`Base.getEditAccountOverlayUrl`).
     
