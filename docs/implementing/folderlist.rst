@@ -11,3 +11,5 @@ The DOM of the folderlist can be accessed by its ID and the FolderData of each e
 .. js:autoclass:: StandardFolderList
    :members:
 
+.. js:autoclass:: FolderList
+   :members:
