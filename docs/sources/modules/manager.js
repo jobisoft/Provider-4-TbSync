@@ -397,4 +397,15 @@ manager.FolderList2 = class {
     constructor(provider) {
       this.provider = provider
     }
+
+    /**
+     * Returns name of this provider for the *Add account* menu of tbe TbSync
+     * account manager.
+     *
+     * @returns {string}  A name.
+     *
+     */
+    static getProviderName() {
+        return tbSync.getString("menu.name", "__ProviderNameSpace__");
+    }    
 }
