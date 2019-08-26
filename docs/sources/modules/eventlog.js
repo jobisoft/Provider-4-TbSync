@@ -62,39 +62,13 @@ var EventLogInfo = class {
  * The TbSync event log 
  */
 var eventlog = {
-
-  events: null,
-  eventLogWindow: null,
-  
-  load: async function () {
-    this.clear();
-  },
-
-  unload: async function () {
-    if (this.eventLogWindow) {
-      this.eventLogWindow.close();
-    }
-  },
-
-  get: function (accountID = null) {
-    if (accountID) {
-      return this.events.filter(e => e.accountID == accountID);
-    } else {
-      return this.events;
-    }
-  },
-  
-  clear: function () {
-    this.events = [];
-  },
-  
   /**
    * Adds an entry to the TbSync event log
    *
    * @param {string}       type       Either "info", "warning" or "error".
    * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
    * @param {string}       message    The event message.
-   * @param {string=}       details   The event details.
+   * @param {string}      details   The event details.
    *  
    */
   add: function (type, eventInfo, message, details = null) {
@@ -144,6 +118,32 @@ var eventlog = {
     if (this.events.length > 100) this.events.shift();
     Services.obs.notifyObservers(null, "tbsync.observer.eventlog.update", null);
   },
+
+  events: null,
+  eventLogWindow: null,
+  
+  load: async function () {
+    this.clear();
+  },
+
+  unload: async function () {
+    if (this.eventLogWindow) {
+      this.eventLogWindow.close();
+    }
+  },
+
+  get: function (accountID = null) {
+    if (accountID) {
+      return this.events.filter(e => e.accountID == accountID);
+    } else {
+      return this.events;
+    }
+  },
+  
+  clear: function () {
+    this.events = [];
+  },
+  
   
   open: function (accountID = null, folderID = null) {
     this.eventLogWindow = tbSync.manager.prefWindowObj.open("chrome://tbsync/content/manager/eventlog/eventlog.xul", "TbSyncEventLog", "centerscreen,chrome,resizable");
