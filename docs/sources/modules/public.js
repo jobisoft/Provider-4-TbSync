@@ -93,8 +93,8 @@ var ProviderData = class {
   }
   
   /**
-   * Gets the EventLogInfo with all the information regarding this ProviderData instance.
-   * @returns {EventLogInfo} 
+   * Getter for an :class:`EventLogInfo` instance with all the information
+   * regarding this ProviderData instance.
    *
    */
   get eventLogInfo() {
@@ -169,8 +169,8 @@ var AccountData = class {
   }
 
   /**
-   * Gets the EventLogInfo with all the information regarding this AccountData instance.
-   * @returns {EventLogInfo} 
+   * Getter for an :class:`EventLogInfo` instance with all the information
+   * regarding this AccountData instance.
    *
    */
   get eventLogInfo() {
@@ -290,8 +290,8 @@ var FolderData = class {
   }
   
   /**
-   * Gets the EventLogInfo with all the information regarding this FolderData instance.
-   * @returns {EventLogInfo} 
+   * Getter for an :class:`EventLogInfo` instance with all the information 
+   * regarding this FolderData instance.
    *
    */
   get eventLogInfo() {
@@ -456,8 +456,8 @@ var SyncData = class {
   }
 
   /**
-   * Gets the EventLogInfo with all the information regarding this SyncData instance.
-   * @returns {EventLogInfo} 
+   * Getter for an :class:`EventLogInfo` instance with all the information
+   * regarding this SyncData instance.
    *
    */  
   get eventLogInfo() {
