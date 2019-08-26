@@ -26,9 +26,10 @@ This document tries to cover all aspects of how to create a provider add-on for 
    implementing
 
 .. toctree::
-   :caption: References
+   :caption: Additional Resources
    :hidden:
    :maxdepth: 3
 
-   api
+   resources/api
+   resources/eventlog
     
