@@ -227,8 +227,8 @@ var core = {
       let target = folder.getFolderProperty("target");
       if (target) {
         folder.targetData.removeTarget(); 
-        TbSync.db.clearChangeLog(target);
         folder.resetFolderProperty("target");
+        TbSync.db.clearChangeLog(target);
       }
       folder.setFolderProperty("selected", false);
       folder.setFolderProperty("cached", true);

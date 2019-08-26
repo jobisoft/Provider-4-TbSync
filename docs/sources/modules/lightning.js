@@ -127,33 +127,51 @@ var lightning = {
       } catch (e) {}
     }
 
+    set targetName(newName) {
+      if (!TbSync.lightning.isAvailable()) {
+          throw new Error("nolightning");
+      }
+      let calendar = TbSync.lightning.getCalendar(this._folderData);
+      if (calendar && newName) {
+        calendar.name = newName;
+      } else {
+        throw new Error("notargets");
+      }
+    }
+  
+    get targetName() {
+      if (!TbSync.lightning.isAvailable()) {
+          throw new Error("nolightning");
+      }
+      let calendar = TbSync.lightning.getCalendar(this._folderData);
+      if (calendar) {
+        return calendar.name;
+      } else {
+        throw new Error("notargets");
+      }
+    }
+
     /**
-     * This is called, when a folder is removed, but its target should be kept
-     * as a stale/unconnected item.
-     *
-     * @param suffix         [in] Suffix, which should be appended to the name
-     *                            of the target.
-     * @param pendingChanges [in] Array of ChangelogData objects, of unsynced
-     *                            local changes
-     * 
+     * Is called, when a target is being disconnected from a folder, but
+     * not deleted.
      */
-     appendStaleSuffix(suffix, pendingChanges) {
+    onDisconnectTarget() {
       if (!TbSync.lightning.isAvailable()) {
           throw new Error("nolightning");
       }
 
       let calendar = TbSync.lightning.getCalendar(this._folderData);
-      if (calendar && suffix) {
-        //if there are pending/unsynced changes, append an  (*) to the name of the target
-        if (pendingChanges.length > 0) suffix += " (*)";
-
-        let orig = calendar.name;
-        calendar.name = TbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
+      if (calendar) {
+        let target = this._folderData.getFolderProperty("target");
+        let changes = TbSync.db.getItemsFromChangeLog(target, 0, "_by_user");        
+        if (changes.length > 0) {
+          this.targetName = this.targetName + " (*)";
+        }
         calendar.setProperty("disabled", true);
         calendar.setProperty("tbSyncProvider", "orphaned");
         calendar.setProperty("tbSyncAccountID", "");
       }
-    }     
+    } 
   },
 
 

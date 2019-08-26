@@ -88,11 +88,7 @@ var Base = class {
 
 
     /**
-     * Returns a list of sponsors, they will be sorted by the index
-     *
-     * .. literalinclude:: ../content/includes/addressbook.js
-     *
-     * Test
+     * Returns a list of sponsors, they will be sorted by sortIndex.
      * 
      * ::
      * 
@@ -106,6 +102,8 @@ var Base = class {
      *
      * This probably has to be dropped when TbSync gets integrated into
      * Thunderbird.
+     *
+     * @returns {Object}  List of sponsors.
      *
      */
     static getSponsors() {
@@ -267,8 +265,9 @@ var Base = class {
 
 
     /**
-     * Is called everytime a new target is created.
+     * Is called everytime a new target is created. 
      *
+     * @deprecated Whatever has been done in here should be done createTarget.
      * @param {FolderData}  folderData  A FolderData instance of the folder
      *                                  being resetted.
      *
@@ -310,8 +309,8 @@ var Base = class {
      * the resources of the account identified by the passed AccountData.
      *
      * @param {AccountData}  accountData  An AccountData instance for the
-     *                                    account for which the sorted folder
-     *                                    should be returned.
+     *                                    account for which the sorted list of
+     *                                    folders should be returned.
      *
      * @returns Array of :class:`FolderData` instances in the desired
      *          order.
@@ -466,7 +465,7 @@ var TargetData = class {
             let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("targetName"), "", 2);
             let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
             if (!directory) {
-                throw new Error("TargetError");
+                throw new Error("notargets");
             }
         }
         
@@ -489,26 +488,32 @@ var TargetData = class {
     }
     
     /**
-     * Sets a target as stale. TbSync will disconnect the target from the
-     * account belonging to this TargetData after this call has been executed.
-     *
-     * @param {string}  suffix  Suffix, which should be appended to the name
-     *                          of the target.
+     * Getter/Setter for the target name.
      *
      */
-    appendStaleSuffix(suffix, pendingChanges) {
+    set targetName(newName) {
         let target = this._folderData.getFolderProperty("target");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
-        if (directory && suffix) {
-            // If there are pending/unsynced changes, append an (*) to the name
-            // of the target.
-            if (pendingChanges.length > 0) suffix += " (*)";
-            let orig = directory.dirName;
-            // If getString() is called without a provider as second argument,
-            // the main string bundle from TbSync is used.
-            directory.dirName = TbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
-        }
+        if (directory && newName) {
+            directory.dirName = newName;
+        }     
     }
+    get targetName() {
+        let target = this._folderData.getFolderProperty("target");
+        let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
+        if (directory) {
+            return directory.dirName;
+        }
+        throw new Error("notargets");
+    }
+
+    /**
+     * Is called, when a target is being disconnected from a folder, but
+     * not deleted.
+     * 
+     */
+    onDisconnectTarget() {
+    }    
 }
 
 
@@ -543,7 +548,7 @@ var StandardFolderList = class {
      * @param {FolderData}  folderData  A FolderData instance of the folder for
      *                                  which the icon is requested.
      *                                   
-     * @returns {string}  Chrome URL of icon
+     * @returns {string}  Chrome URL of icon.
      *
      */
     static getTypeImage(folderData) {
@@ -563,7 +568,7 @@ var StandardFolderList = class {
      * @param {FolderData}  folderData  A FolderData instance of the folder for
      *                                  which the display name is requested.
      *                                   
-     * @returns {string}  Display name of the folder   
+     * @returns {string}  Display name of the folder.   
      *
      */
     static getFolderDisplayName(folderData) {

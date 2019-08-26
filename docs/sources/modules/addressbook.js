@@ -85,24 +85,38 @@ var addressbook = {
       } catch (e) {}
     }
     
+    set targetName(newName) {
+      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
+      if (directory && newName) {
+        directory.dirName = newName;
+      } else {
+        throw new Error("notargets");
+      }
+    }
+  
+    get targetName() {
+      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
+      if (directory) {
+        return directory.dirName;
+      } else {
+        throw new Error("notargets");
+      }
+    }
+    
     /**
-     * This is called, when a folder is removed, but its target should be kept
-     * as a stale/unconnected item.
-     *
-     * @param suffix         [in] Suffix, which should be appended to the name
-     *                            of the target.
-     * @param pendingChanges [in] Array of ChangelogData objects, of unsynced
-     *                            local changes
+     * Is called, when a target is being disconnected from a folder, but
+     * not deleted.
      * 
      */
-     appendStaleSuffix(suffix, pendingChanges) {
+    onDisconnectTarget() {
       let directory = TbSync.addressbook.checkAddressbook(this._folderData);
-      if (directory && suffix) {
-        //if there are pending/unsynced changes, append an  (*) to the name of the target
-        if (pendingChanges.length > 0) suffix += " (*)";
-
-        let orig = directory.dirName;
-        directory.dirName = TbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
+      if (directory) {
+        let target = this._folderData.getFolderProperty("target");
+        let changes = TbSync.db.getItemsFromChangeLog(target, 0, "_by_user");        
+        if (changes.length > 0) {
+          this.targetName = this.targetName + " (*)";
+        }
+        
         directory.setStringValue("tbSyncIcon", "orphaned");
         directory.setStringValue("tbSyncProvider", "orphaned");
         directory.setStringValue("tbSyncAccountID", "");

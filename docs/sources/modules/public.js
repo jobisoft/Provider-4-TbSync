@@ -434,12 +434,13 @@ var FolderData = class {
     let target = this.getFolderProperty("target");
     if (target) {
       if (keepStaleTargetSuffix) {
-        let changes = TbSync.db.getItemsFromChangeLog(target, 0, "_by_user");
-        TbSync.db.clearChangeLog(target);      
-        this.targetData.appendStaleSuffix(keepStaleTargetSuffix, changes);
+        let oldName =  this.targetData.targetName;
+        this.targetData.targetName = TbSync.getString("target.orphaned") + ": " + oldName + " " + keepStaleTargetSuffix;
+        this.targetData.onDisconnectTarget();
       } else {
         this.targetData.removeTarget();
       }
+      TbSync.db.clearChangeLog(target);
     }
     this.resetFolderProperty("target");
     this.setFolderProperty("cached", true);
