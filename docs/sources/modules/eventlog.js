@@ -26,7 +26,7 @@ var EventLogInfo = class {
    * @param {string} foldername   A folder name. Optional.
    *
    */
-  constructor(provider, accountname, accountID, foldername) {
+  constructor(provider, accountname = "", accountID = "", foldername = "") {
     this._provider = provider;
     this._accountname = accountname;
     this._accountID = accountID;
