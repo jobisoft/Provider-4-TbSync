@@ -10,14 +10,19 @@
 
 /**
  * StatusData
- *
  */
  var StatusData = class {
   /**
-   * Constructor
+   * A StatusData instance must be used as return value by 
+   * :class:`Base.syncFolderList` and :class:`Base.syncFolder`.
    *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
+   * @param {Status} type     Status type (see getter below)
+   * @param {string} message  ``Optional`` A message, which will be used as
+   *                          sync status. If this is not a success, it will
+   *                          be used also in the :ref:`TbSyncEventLog`as well.
+   * @param {string} details  ``Optional``  If this is not a success, it will
+   *                          be used as description in the
+   *                          :ref:`TbSyncEventLog`.
    *
    */
   constructor(type = "success", message = "", details = "") {
@@ -25,12 +30,30 @@
     this.message = message;
     this.details = details;
   }
-  
+  /**
+   * Status getter. 
+   */
   static get SUCCESS() {return "success"};
+  /**
+   * Status getter. Sync will be aborted.
+   */
   static get ERROR() {return "error"};
+  /**
+   * Status getter. Sync will continue with next resource.
+   */
   static get WARNING() {return "warning"};
+  /**
+   * Status getter. Sync is treated as success, but message and details
+   * provided will be added to the event log.
+   */
   static get INFO() {return "info"};
+  /**
+   * Status getter. Sync will be aborted and restarted completely.
+   */
   static get ACCOUNT_RERUN() {return "account_rerun"}; 
+  /**
+   * Status getter. Sync of the current folder/resource will be restarted.
+   */
   static get FOLDER_RERUN() {return "folder_rerun"}; 
 }
 

@@ -359,7 +359,7 @@ var Base = class {
      *                               It starts with 1 and is limited by 
      *                               syncDescription.maxAccountReruns.
      *
-     * @return A :class:`TbSync:StatusData` instance with information of the
+     * @return A :class:`StatusData` instance with information of the
      *         sync (failed/success).
      *
      */
@@ -388,7 +388,7 @@ var Base = class {
      *                               It starts with 1 and is limited by 
      *                               syncDescription.maxAccountReruns.
      *
-     * @return A :class:`TbSync:StatusData` instance with information of the
+     * @return A :class:`StatusData` instance with information of the
      *         sync (failed/success).
      *
      */
