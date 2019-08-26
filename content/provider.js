@@ -448,6 +448,8 @@ var TargetData = class {
      *    :class:`Base.getStringBundleUrl`) for the actual error/status 
      *    message.
      *
+     * For further information check :class:`FolderData.targetData`.
+     *
      * @returns {Object}  Whatever you want to use as target object for
      *                    this TargetData.
      *
