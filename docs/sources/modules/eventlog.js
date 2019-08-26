@@ -19,14 +19,14 @@ var EventLogInfo = class {
    *
    * @param {string} provider     A provider ID (also used as provider 
    *                              namespace).
-   * @param {string} [accountname=""]  An account name. Can be arbitrary but should
-   *                              match the accountID (if provided).
-   * @param {string} [accountID=""]    An account ID. Used to filter events for a
-   *                              given account.
-   * @param {string} [foldername=""]   A folder name.
+   * @param {string} accountname  An account name. Can be arbitrary but should
+   *                              match the accountID (if provided). Optional.
+   * @param {string} accountID    An account ID. Used to filter events for a
+   *                              given account. Optional.
+   * @param {string} foldername   A folder name. Optional.
    *
    */
-  constructor(provider, accountname="", accountID="", foldername="") {
+  constructor(provider, accountname, accountID, foldername) {
     this._provider = provider;
     this._accountname = accountname;
     this._accountID = accountID;
@@ -68,10 +68,10 @@ var eventlog = {
    * @param {string}       type       Either "info", "warning" or "error".
    * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
    * @param {string}       message    The event message.
-   * @param {string}      [details]   The event details.
+   * @param {string}       details    The event details. Optional.
    *  
    */
-  add: function (type, eventInfo, message, details="") {
+  add: function (type, eventInfo, message, details = null) {
     let entry = {
       timestamp: Date.now(),
       message: message, 
