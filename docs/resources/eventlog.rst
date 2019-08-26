@@ -1,3 +1,5 @@
+.. _TbSyncEventLog:
+
 TbSync Event Log
 ================
 

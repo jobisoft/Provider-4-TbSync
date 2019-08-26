@@ -13,9 +13,8 @@
  */
 var EventLogInfo = class {
   /**
-   * An EventLogInfo instance is used when adding entries to the 
-   * :doc:`resources/eventlog`. The information given here will be added as a
-   * header to the actual event.
+   * An EventLogInfo instance is used to add entries to the TbSyncEventLog_
+   * The information given here will be added as a header to the actual event.
    *
    * @param {string} provider     A provider ID (also used as provider 
    *                              namespace). ``optional``
