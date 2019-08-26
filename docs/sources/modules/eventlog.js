@@ -18,12 +18,12 @@ var EventLogInfo = class {
    * event.
    *
    * @param {string} provider     A provider ID (also used as provider 
-   *                              namespace).
+   *                              namespace). ``optional``
    * @param {string} accountname  An account name. Can be arbitrary but should
-   *                              match the accountID (if provided). Optional.
+   *                              match the accountID (if provided). ``optional``
    * @param {string} accountID    An account ID. Used to filter events for a
-   *                              given account. Optional.
-   * @param {string} foldername   A folder name. Optional.
+   *                              given account. ``optional``
+   * @param {string} foldername   A folder name. ``optional``
    *
    */
   constructor(provider, accountname = "", accountID = "", foldername = "") {
@@ -68,7 +68,7 @@ var eventlog = {
    * @param {string}       type       Either "info", "warning" or "error".
    * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
    * @param {string}       message    The event message.
-   * @param {string}       details    The event details. Optional.
+   * @param {string}       details    The event details. ``optional``
    *  
    */
   add: function (type, eventInfo, message, details = null) {
