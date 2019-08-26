@@ -10,8 +10,8 @@
 
 var { MailServices } = ChromeUtils.import("resource:///modules/MailServices.jsm");
 
-// Every Object in here will be loaded into the following namespace: tbSync.providers.__ProviderNameSpace__. 
-const __ProviderNameSpace__ = tbSync.providers.__ProviderNameSpace__;
+// Every Object in here will be loaded into the following namespace: TbSync.providers.__ProviderNameSpace__. 
+const __ProviderNameSpace__ = TbSync.providers.__ProviderNameSpace__;
 
 /**
  * Base class for the TbSync provider interface.
@@ -48,7 +48,7 @@ var Base = class {
      *
      */
     static getProviderName() {
-        return tbSync.getString("menu.name", "__ProviderNameSpace__");
+        return TbSync.getString("menu.name", "__ProviderNameSpace__");
     }
 
 
@@ -61,7 +61,7 @@ var Base = class {
      * @returns {string}  An API version identifier.
      *
      */
-    static getApiVersion() { return "Beta 2.0"; }
+    static getApiVersion() { return "Beta 2.1"; }
 
 
 
@@ -130,7 +130,7 @@ var Base = class {
 
     /**
      * Returns the URL of the string bundle file of this provider, it can be
-     * accessed by ``tbSync.getString``.
+     * accessed by ``TbSync.getString``.
      *
      * @returns {string}  Chrome uri to the string bundle file.
      *
@@ -365,7 +365,7 @@ var Base = class {
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
         await __ProviderNameSpace__.sync.folderList(syncData);
-        return new tbSync.StatusData();
+        return new TbSync.StatusData();
     }
     
 
@@ -394,7 +394,7 @@ var Base = class {
      */
     static async syncFolder(syncData, syncJob, syncRunNr) {
         await __ProviderNameSpace__.sync.folder(syncData);
-        return new tbSync.StatusData();
+        return new TbSync.StatusData();
     }
 }
 
@@ -506,7 +506,7 @@ var TargetData = class {
             let orig = directory.dirName;
             // If getString() is called without a provider as second argument,
             // the main string bundle from TbSync is used.
-            directory.dirName = tbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
+            directory.dirName = TbSync.getString("target.orphaned") + ": " + orig + (suffix ? " " + suffix : "");
         }
     }
 }

@@ -23,7 +23,7 @@ var StandardAddressbookTarget = class {
      *                                list belongs to
      */
     static generatePrimaryKey(folderData) {
-        return tbSync.generateUUID();
+        return TbSync.generateUUID();
     }
     
 
@@ -233,11 +233,11 @@ var StandardCalendarTarget = class {
      * @returns {calICalendar}         the new calendar
      */
     static createCalendar(newname, folderData) {
-        let calManager = tbSync.lightning.cal.getCalendarManager();
+        let calManager = TbSync.lightning.cal.getCalendarManager();
 
         //Create the new standard calendar with a unique name
         let newCalendar = calManager.createCalendar("storage", Services.io.newURI("moz-storage-calendar://"));
-        newCalendar.id = tbSync.lightning.cal.getUUID();
+        newCalendar.id = TbSync.lightning.cal.getUUID();
         newCalendar.name = newname;
         calManager.registerCalendar(newCalendar);
         

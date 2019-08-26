@@ -8,9 +8,9 @@
  
  "use strict";
 
-var { tbSync } = ChromeUtils.import("chrome://tbsync/content/tbsync.jsm");
+var { TbSync } = ChromeUtils.import("chrome://tbsync/content/tbsync.jsm");
 
-const __ProviderNameSpace__ = tbSync.providers.__ProviderNameSpace__;
+const __ProviderNameSpace__ = TbSync.providers.__ProviderNameSpace__;
 
 var tbSyncNewAccount = {
 
@@ -19,7 +19,7 @@ var tbSyncNewAccount = {
     },
 
     onLoad: function () {
-        this.providerData = new tbSync.ProviderData("__ProviderNameSpace__");
+        this.providerData = new TbSync.ProviderData("__ProviderNameSpace__");
 
         this.elementName = document.getElementById('tbsync.newaccount.name');
         this.elementUser = document.getElementById('tbsync.newaccount.user');

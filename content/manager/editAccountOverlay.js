@@ -8,7 +8,7 @@
 
 "use strict";
 
-const __ProviderNameSpace__ = tbSync.providers.__ProviderNameSpace__;
+const __ProviderNameSpace__ = TbSync.providers.__ProviderNameSpace__;
 
 var tbSyncEditAccountOverlay = {
 
