@@ -1,7 +1,7 @@
 Implementing the Provider Classes
 ==================================
 
-The content of file ``provider.js`` will be loaded into the provider namespace and is the central starting point to implement the TbSync provider classes. The provider namespace is using the short provider identifier selected during the initial setup of the provider add-on:
+The content of file ``provider.js`` will be loaded into the provider namespace and is the central starting point to implement the TbSync provider classes. The provider namespace is build using the short provider identifier selected during the initial setup of the provider add-on:
 
 ::
 

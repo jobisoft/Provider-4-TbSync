@@ -404,22 +404,9 @@ var FolderData = class {
 
   /**
    * Getter for the :class:`TargetData` instance associated with this
-   * FolderData. The provider of this account/folder must implememt a class of
-   * type ``TargetData`` in his provider namespace with a name matching the
-   * value of the folder property ``targetType``.
+   * FolderData. See :doc:`implementing/targets` for more details.
    *
-   * Example:
-   *
-   * If the namespace of the provider is ``dav`` and the value of the folder 
-   * property ``targetType`` is ``DavCalendar``, this getter will return an
-   * instance of
-   *
-   * ::
-   *
-   *    TbSync.providers.dav.DavCalendar()
-   *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
+   * @returns {TargetData}
    *
    */
   get targetData() {
