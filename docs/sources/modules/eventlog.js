@@ -9,25 +9,83 @@
  "use strict";
 
 /**
- * EventLogInfo
  *
  */
 var EventLogInfo = class {
   /**
-   * Constructor
+   * Create an EventLogInfo instance, which is used when adding entries to the
+   * TbSync event log. The information given here will be added as a header to
+   * the actual event.
    *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
+   * @param {string} provider     A provider ID (also used as provider 
+   *                              namespace).
+   * @param {string} accountname  An account name. Can be arbitrary but should
+   *                              match the accountID (if provided). Optional.
+   * @param {string} accountID    An account ID. Used to filter events for a
+   *                              given account. Optional.
+   * @param {string} foldername   A folder name. Optional
    *
    */
-  constructor(provider, accountname, accountID, foldername = "") {
-    this.provider = provider;
-    this.accountname = accountname;
-    this.accountID = accountID;
-    this.foldername = foldername;
+  constructor(provider, accountname, accountID, foldername) {
+    this._provider = provider;
+    this._accountname = accountname;
+    this._accountID = accountID;
+    this._foldername = foldername;
   }
-}
   
+  /**
+   * Returns the provider ID of this EventLogInfo
+   * @returns {string}
+   */
+  get provider() {return this._provider};
+  /**
+   * Returns the account name of this EventLogInfo
+   * @returns {string}
+   */
+  get accountname() {return this._accountname};
+  /**
+   * Returns the account ID of this EventLogInfo
+   * @returns {string}
+   */
+  get accountID() {return this._accountID};
+  /**
+   * Returns the folder name of this EventLogInfo
+   * @returns {string}
+   */
+  get foldername() {return this._foldername};
+
+  /**
+   * Sets the provider ID of this EventLogInfo
+   *
+   * @param {string} A provider ID.
+   */
+  set provider(v) {this._provider = v};
+  /**
+   * Sets the account name of this EventLogInfo. Can be arbitrary but should
+   * match the accountID (if provided).
+   *
+   * @param {string} An account name.
+   */
+  set accountname(v) {this._accountname = v};
+  /**
+   * Sets the account ID of this EventLogInfo
+   *
+   * @param {string} An account ID.
+   */
+  set accountID(v) {this._accountID = v};
+  /**
+   * Sets the folder name of this EventLogInfo
+   *
+   * @param {string} A folder name.
+   */
+  set foldername(v) {this._foldername = v};
+}
+
+
+  
+/**
+ * The TbSync event log 
+ */
 var eventlog = {
 
   events: null,
@@ -43,6 +101,18 @@ var eventlog = {
     }
   },
 
+  /**
+   * Gets event log entries. An event log entry is an Object with the following
+   * members:
+   *
+   * ::
+   *
+   *    
+   *
+   * @param {string} accountID  Optional filter the returned log entries for a
+   *                            specific account.
+   * @returns Array of event log objects.
+   */
   get: function (accountID = null) {
     if (accountID) {
       return this.events.filter(e => e.accountID == accountID);
