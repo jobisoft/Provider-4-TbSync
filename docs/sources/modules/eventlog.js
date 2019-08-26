@@ -19,11 +19,11 @@ var EventLogInfo = class {
    *
    * @param {string} provider     A provider ID (also used as provider 
    *                              namespace).
-   * @param {string} accountname  An account name. Can be arbitrary but should
+   * @param {string=} accountname  An account name. Can be arbitrary but should
    *                              match the accountID (if provided). Optional.
-   * @param {string} accountID    An account ID. Used to filter events for a
+   * @param {string=} accountID    An account ID. Used to filter events for a
    *                              given account. Optional.
-   * @param {string} foldername   A folder name. Optional
+   * @param {string=} foldername   A folder name. Optional
    *
    */
   constructor(provider, accountname, accountID, foldername) {
@@ -34,23 +34,19 @@ var EventLogInfo = class {
   }
   
   /**
-   * Returns the provider ID of this EventLogInfo
-   * @returns {string}
+   * Getter/Setter for the provider ID of this EventLogInfo
    */
   get provider() {return this._provider};
   /**
-   * Returns the account name of this EventLogInfo
-   * @returns {string}
+   * Getter/Setter for the account ID of this EventLogInfo
    */
   get accountname() {return this._accountname};
   /**
-   * Returns the account ID of this EventLogInfo
-   * @returns {string}
+   * Getter/Setter for the account name of this EventLogInfo
    */
   get accountID() {return this._accountID};
   /**
-   * Returns the folder name of this EventLogInfo
-   * @returns {string}
+   * Getter/Setter for the folder name of this EventLogInfo
    */
   get foldername() {return this._foldername};
 
@@ -80,18 +76,6 @@ var eventlog = {
     }
   },
 
-  /**
-   * Gets event log entries. An event log entry is an Object with the following
-   * members:
-   *
-   * ::
-   *
-   *    
-   *
-   * @param {string} accountID  Optional filter the returned log entries for a
-   *                            specific account.
-   * @returns Array of event log objects.
-   */
   get: function (accountID = null) {
     if (accountID) {
       return this.events.filter(e => e.accountID == accountID);
@@ -104,6 +88,15 @@ var eventlog = {
     this.events = [];
   },
   
+  /**
+   * Adds an entry to the TbSync event log
+   *
+   * @param {string}       type       Either "info", "warning" or "error".
+   * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
+   * @param {string}       message    The event message.
+   * @param {string=}       details   The event details.
+   *  
+   */
   add: function (type, eventInfo, message, details = null) {
     let entry = {
       timestamp: Date.now(),
