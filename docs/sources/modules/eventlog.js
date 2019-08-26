@@ -66,10 +66,11 @@ var eventlog = {
   /**
    * Adds an entry to the TbSync event log
    *
-   * @param {string}       type       Either "info", "warning" or "error".
-   * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
-   * @param {string}       message    The event message.
-   * @param {string}       details    ``Optional`` The event details.
+   * @param {StatusData type}  type       One of the types defined in
+   *                                      :class:`StatusData`
+   * @param {EventLogInfo}     eventInfo  EventLogInfo for this event.
+   * @param {string}           message    The event message.
+   * @param {string}           details    ``Optional`` The event details.
    *  
    */
   add: function (type, eventInfo, message, details = null) {

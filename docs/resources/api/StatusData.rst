@@ -4,8 +4,6 @@ StatusData
 .. js:autoclass:: StatusData
    :members: constructor
 
-The following status types are defined:
-
    .. js:autoattribute:: StatusData.SUCCESS
    .. js:autoattribute:: StatusData.INFO
    .. js:autoattribute:: StatusData.WARNING

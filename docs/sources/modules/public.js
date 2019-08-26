@@ -18,8 +18,8 @@
    *
    * @param {Status} type     Status type (see const definitions below)
    * @param {string} message  ``Optional`` A message, which will be used as
-   *                          sync status. If this is not a success, it will
-   *                          be used also in the :ref:`TbSyncEventLog`as well.
+   *                          sync status. If this is not a success, it will be
+   *                          used also in the :ref:`TbSyncEventLog` as well.
    * @param {string} details  ``Optional``  If this is not a success, it will
    *                          be used as description in the
    *                          :ref:`TbSyncEventLog`.
