@@ -19,11 +19,11 @@ var EventLogInfo = class {
    *
    * @param {string} provider     A provider ID (also used as provider 
    *                              namespace).
-   * @param {string} [accountname]  An account name. Can be arbitrary but should
+   * @param {string} [accountname=""]  An account name. Can be arbitrary but should
    *                              match the accountID (if provided).
-   * @param {string} [accountID]    An account ID. Used to filter events for a
+   * @param {string} [accountID=""]    An account ID. Used to filter events for a
    *                              given account.
-   * @param {string} [foldername]   A folder name.
+   * @param {string} [foldername=""]   A folder name.
    *
    */
   constructor(provider, accountname="", accountID="", foldername="") {
