@@ -404,7 +404,7 @@ var FolderData = class {
 
   /**
    * Getter for the :class:`TargetData` instance associated with this
-   * FolderData. See :doc:`implementing/targets` for more details.
+   * FolderData. See :ref:`TbSyncTargets` for more details.
    *
    * @returns {TargetData}
    *

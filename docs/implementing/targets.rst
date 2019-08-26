@@ -1,3 +1,5 @@
+.. _TbSyncTargets:
+
 Target Classes
 --------------
 
