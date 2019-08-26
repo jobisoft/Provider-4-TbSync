@@ -487,6 +487,8 @@ var TargetData = class {
     /**
      * Getter/Setter for the target name.
      *
+     * @throws {Error}    Reason, why the target name could not be set/retrieved.
+     *
      */
     set targetName(newName) {
         let target = this._folderData.getFolderProperty("target");
