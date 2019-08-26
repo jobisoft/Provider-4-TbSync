@@ -31,28 +31,28 @@
     this.details = details;
   }
   /**
-   * Status getter. 
+   * Static status getter. 
    */
   static get SUCCESS() {return "success"};
   /**
-   * Status getter. Sync will be aborted.
+   * Static status getter. Sync will be aborted.
    */
   static get ERROR() {return "error"};
   /**
-   * Status getter. Sync will continue with next resource.
+   * Static status getter. Sync will continue with next resource.
    */
   static get WARNING() {return "warning"};
   /**
-   * Status getter. Sync is treated as success, but message and details
+   * Static status getter. Sync is treated as success, but message and details
    * provided will be added to the event log.
    */
   static get INFO() {return "info"};
   /**
-   * Status getter. Sync will be aborted and restarted completely.
+   * Static status getter. Sync will be aborted and restarted completely.
    */
   static get ACCOUNT_RERUN() {return "account_rerun"}; 
   /**
-   * Status getter. Sync of the current folder/resource will be restarted.
+   * Static status getter. Sync of the current folder/resource will be restarted.
    */
   static get FOLDER_RERUN() {return "folder_rerun"}; 
 }
