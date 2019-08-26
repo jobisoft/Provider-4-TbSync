@@ -1,7 +1,12 @@
 Implementing the Provider Classes
 ==================================
 
-The file ``provider.js`` is the central starting point to implement the TbSync provider classes:
+The content of file ``provider.js`` will be loaded into the provider namespace and is the central starting point to implement the TbSync provider classes. The provider namespace is using the short provider identifier selected during the initial setup of the provider add-on:
+
+::
+
+   TbSync.providers.<short provider identifier>
+
 
 :doc:`implementing/base`
   Implementing the :class:`Base` class defines, where TbSync can find certain things, like icons, XUL files for different dialogs or localized string definitions. It also defines, what properties the provider needs in the account and folder database and what should happen, if an account is being synchronized.
