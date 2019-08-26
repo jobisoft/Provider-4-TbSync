@@ -54,30 +54,9 @@ var EventLogInfo = class {
    */
   get foldername() {return this._foldername};
 
-  /**
-   * Sets the provider ID of this EventLogInfo
-   *
-   * @param {string} A provider ID.
-   */
   set provider(v) {this._provider = v};
-  /**
-   * Sets the account name of this EventLogInfo. Can be arbitrary but should
-   * match the accountID (if provided).
-   *
-   * @param {string} An account name.
-   */
   set accountname(v) {this._accountname = v};
-  /**
-   * Sets the account ID of this EventLogInfo
-   *
-   * @param {string} An account ID.
-   */
   set accountID(v) {this._accountID = v};
-  /**
-   * Sets the folder name of this EventLogInfo
-   *
-   * @param {string} A folder name.
-   */
   set foldername(v) {this._foldername = v};
 }
 
