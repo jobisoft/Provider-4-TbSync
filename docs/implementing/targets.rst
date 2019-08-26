@@ -10,9 +10,11 @@ class of type ``TargetData`` in his provider namespace.
 
 *Example:*
    
-If the value of the ``targetType`` property can be ``DavCalendar``, the provider
-must implement a ``TargetData`` class inside his``provider.js`` with a name of 
-``DavCalendar``.
+If the value of the ``targetType`` property can be ``MyCalendar``, the provider
+must implement a ``TargetData`` class inside his ``provider.js`` with a name of 
+``MyCalendar``.
+
+For further information check :class:`FolderData.targetData`.
 
    
 .. js:autoclass:: TargetData
