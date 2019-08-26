@@ -23,10 +23,10 @@ var EventLogInfo = class {
    *                              match the accountID (if provided). Optional.
    * @param {string} accountID    An account ID. Used to filter events for a
    *                              given account. Optional.
-   * @param {string} [foldername]   A folder name. Optional
+   * @param {string} [foldername=null]   A folder name. Optional
    *
    */
-  constructor(provider, accountname, accountID, foldername) {
+  constructor(provider, accountname, accountID=null, foldername=null) {
     this._provider = provider;
     this._accountname = accountname;
     this._accountID = accountID;
