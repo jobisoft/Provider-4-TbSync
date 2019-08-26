@@ -415,10 +415,7 @@ var TargetData = class {
     }
     
     /**
-     * Returns the targetType, this TargetData was initialized with.
-     *
-     * @returns {string}  The targetType.
-     *
+     * Getter for the targetType, this TargetData was initialized with.
      */
     get targetType() { 
         return this._targetType;
@@ -509,10 +506,11 @@ var TargetData = class {
 
     /**
      * Is called, when a target is being disconnected from a folder, but
-     * not deleted.
+     * not deleted. TbSync will reset the target property after this
+     * call has been executed.
      * 
      */
-    onDisconnectTarget() {
+    onBeforeDisconnectTarget() {
     }    
 }
 
