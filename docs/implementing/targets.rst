@@ -10,14 +10,10 @@ class of type ``TargetData`` in his provider namespace.
 
 *Example:*
    
-If the short name identifer of the provider is ``dav`` and the value of the
-``targetType`` property is ``DavCalendar``, the provider must implement a
-TargetData class at:
- 
-::
+If the value of the ``targetType`` property can be ``DavCalendar``, the provider
+must implement a ``TargetData`` class inside his``provider.js`` with a name of 
+``DavCalendar``.
 
-   TbSync.providers.dav.DavCalendar()
-   
    
 .. js:autoclass:: TargetData
    :members:
