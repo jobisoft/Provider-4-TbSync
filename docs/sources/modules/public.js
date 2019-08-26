@@ -92,6 +92,16 @@ var ProviderData = class {
     this.provider = provider;
   }
   
+  /**
+   * Gets the EventLogInfo with all the information regarding this ProviderData instance.
+   * @returns {EventLogInfo} 
+   *
+   */
+  get eventLogInfo() {
+    return new EventLogInfo(
+      this.getAccountProperty("provider"));
+  }
+
   getVersion() {
     return tbSync.providers.loadedProviders[this.provider].version;
   }
@@ -156,6 +166,18 @@ var AccountData = class {
     if (!tbSync.db.accounts.data.hasOwnProperty(accountID)) {
       throw new Error("An account with ID <" + accountID + "> does not exist. Failed to create AccountData.");
     }
+  }
+
+  /**
+   * Gets the EventLogInfo with all the information regarding this AccountData instance.
+   * @returns {EventLogInfo} 
+   *
+   */
+  get eventLogInfo() {
+    return new EventLogInfo(
+      this.getAccountProperty("provider"),
+      this.getAccountProperty("accountname"),
+      this.accountID);
   }
 
   get accountID() {
@@ -267,6 +289,20 @@ var FolderData = class {
     }
   }
   
+  /**
+   * Gets the EventLogInfo with all the information regarding this FolderData instance.
+   * @returns {EventLogInfo} 
+   *
+   */
+  get eventLogInfo() {
+    return new EventLogInfo(
+      this.accountData.getAccountProperty("provider"),
+      this.accountData.getAccountProperty("accountname"),
+      this.accountData.accountID,
+      this.getFolderProperty("foldername"),
+    );
+  }
+
   get folderID() {
     return this._folderID;
   }
@@ -419,6 +455,11 @@ var SyncData = class {
     this._currentFolderData = null;
   }
 
+  /**
+   * Gets the EventLogInfo with all the information regarding this SyncData instance.
+   * @returns {EventLogInfo} 
+   *
+   */  
   get eventLogInfo() {
     return new EventLogInfo(
       this.accountData.getAccountProperty("provider"),

@@ -11,3 +11,10 @@ Example usage:
 
    let info = new TbSync.EventLogInfo();
    TbSync.eventlog.add("warning", info, "Have a nice day!");
+
+Instead of creating a custom :class:`EventLogInfo`instance, you can also get one with prefilled information via 
+
+* :class:`ProviderData.eventLogInfo`
+* :class:`AccountData.eventLogInfo`
+* :class:`FolderData.eventLogInfo`
+* :class:`SyncData.eventLogInfo`
