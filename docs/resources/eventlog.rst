@@ -11,8 +11,8 @@ Example usage:
 
 ::
 
-   let info = new TbSync.EventLogInfo();
-   TbSync.eventlog.add(TbSync.StatusData.WARNING, info, "Have a nice day!");
+   let eventInfo = new TbSync.EventLogInfo();
+   TbSync.eventlog.add(TbSync.StatusData.WARNING, eventInfo, "Have a nice day!");
 
 Instead of creating a custom :class:`EventLogInfo` instance, you can also get one with prefilled information via 
 

@@ -16,10 +16,10 @@
    * A StatusData instance must be used as return value by 
    * :class:`Base.syncFolderList` and :class:`Base.syncFolder`.
    * 
-   * StatusData also defines the possible status types used by the
+   * StatusData also defines the possible StatusDataTypes used by the
    * :ref:`TbSyncEventLog`.
    *
-   * @param {Status} type     Status type (see const definitions below)
+   * @param {StatusDataType} type  Status type (see const definitions below)
    * @param {string} message  ``Optional`` A message, which will be used as
    *                          sync status. If this is not a success, it will be
    *                          used also in the :ref:`TbSyncEventLog` as well.
@@ -46,7 +46,7 @@
    */
   static get WARNING() {return "warning"};
   /**
-   * Successfull syn, but message and details
+   * Successfull sync, but message and details
    * provided will be added to the event log.
    */
   static get INFO() {return "info"};

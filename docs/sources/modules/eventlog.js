@@ -35,19 +35,19 @@ var EventLogInfo = class {
   }
   
   /**
-   * Getter/Setter for the provider ID of this EventLogInfo
+   * Getter/Setter for the provider ID of this EventLogInfo.
    */
   get provider() {return this._provider};
   /**
-   * Getter/Setter for the account ID of this EventLogInfo
+   * Getter/Setter for the account ID of this EventLogInfo.
    */
   get accountname() {return this._accountname};
   /**
-   * Getter/Setter for the account name of this EventLogInfo
+   * Getter/Setter for the account name of this EventLogInfo.
    */
   get accountID() {return this._accountID};
   /**
-   * Getter/Setter for the folder name of this EventLogInfo
+   * Getter/Setter for the folder name of this EventLogInfo.
    */
   get foldername() {return this._foldername};
 
