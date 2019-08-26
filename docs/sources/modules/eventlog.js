@@ -69,7 +69,7 @@ var eventlog = {
    * @param {string}       type       Either "info", "warning" or "error".
    * @param {EventLogInfo} eventInfo  EventLogInfo for this event.
    * @param {string}       message    The event message.
-   * @param {string}       details    The event details. ``optional``
+   * @param {string}       details    ``Optional`` The event details.
    *  
    */
   add: function (type, eventInfo, message, details = null) {
