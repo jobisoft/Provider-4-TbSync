@@ -13,16 +13,18 @@
  */
 var EventLogInfo = class {
   /**
-   * An EventLogInfo instance is used to add entries to the TbSyncEventLog_
-   * The information given here will be added as a header to the actual event.
+   * An EventLogInfo instance is used when adding entries to the
+   * :ref:`TbSyncEventLog`. The information given here will be added as a
+   * header to the actual event.
    *
-   * @param {string} provider     A provider ID (also used as provider 
-   *                              namespace). ``optional``
-   * @param {string} accountname  An account name. Can be arbitrary but should
-   *                              match the accountID (if provided). ``optional``
-   * @param {string} accountID    An account ID. Used to filter events for a
-   *                              given account. ``optional``
-   * @param {string} foldername   A folder name. ``optional``
+   * @param {string} provider     ``Optional`` A provider ID (also used as
+   *                              provider namespace). 
+   * @param {string} accountname  ``Optional`` An account name. Can be
+   *                              arbitrary but should match the accountID
+   *                              (if provided).
+   * @param {string} accountID    ``Optional`` An account ID. Used to filter
+   *                              events for a given account.
+   * @param {string} foldername   ``Optional`` A folder name.
    *
    */
   constructor(provider, accountname = "", accountID = "", foldername = "") {
