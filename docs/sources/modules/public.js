@@ -9,14 +9,14 @@
  "use strict";
 
 /**
- * StatusData
+ *
  */
  var StatusData = class {
   /**
    * A StatusData instance must be used as return value by 
    * :class:`Base.syncFolderList` and :class:`Base.syncFolder`.
    *
-   * @param {Status} type     Status type (see getter below)
+   * @param {Status} type     Status type (see const definitions below)
    * @param {string} message  ``Optional`` A message, which will be used as
    *                          sync status. If this is not a success, it will
    *                          be used also in the :ref:`TbSyncEventLog`as well.
@@ -31,28 +31,28 @@
     this.details = details;
   }
   /**
-   * Static status getter. 
+   * Successfull sync. 
    */
   static get SUCCESS() {return "success"};
   /**
-   * Static status getter. Sync will be aborted.
+   * Sync of the entire account will be aborted.
    */
   static get ERROR() {return "error"};
   /**
-   * Static status getter. Sync will continue with next resource.
+   * Sync of this resource will be aborted and continued with next resource.
    */
   static get WARNING() {return "warning"};
   /**
-   * Static status getter. Sync is treated as success, but message and details
+   * Successfull syn, but message and details
    * provided will be added to the event log.
    */
   static get INFO() {return "info"};
   /**
-   * Static status getter. Sync will be aborted and restarted completely.
+   * Sync of the entire account will be aborted and restarted completely.
    */
   static get ACCOUNT_RERUN() {return "account_rerun"}; 
   /**
-   * Static status getter. Sync of the current folder/resource will be restarted.
+   * Sync of the current folder/resource will be restarted.
    */
   static get FOLDER_RERUN() {return "folder_rerun"}; 
 }
