@@ -1,7 +1,7 @@
 EventLogInfo
 ------------
 
-.. autoattribute:: eventlog.add
+.. js:autofunction:: eventlog.add
 
 .. js:autoclass:: EventLogInfo
    :members:
