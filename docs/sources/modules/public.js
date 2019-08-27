@@ -552,30 +552,28 @@ var SyncData = class {
     let msg = "State: " + syncstate + ", Account: " + this.accountData.getAccountProperty("accountname");
     if (this.currentFolderData) msg += ", Folder: " + this.currentFolderData.getFolderProperty("foldername");
 
-    if (syncstate.split(".")[0] == "send") {
-      //add timestamp to be able to display timeout countdown
-      syncstate = syncstate + "||" + Date.now();
-    }
+    let state = {};
+    state.state = syncstate;
+    state.timestamp = Date.now();
 
-    this._syncstate = syncstate;
+    this._syncstate = state;
     TbSync.dump("setSyncState", msg);
 
     Services.obs.notifyObservers(null, "tbsync.observer.manager.updateSyncstate", this.accountData.accountID);
   }
   
   /**
-   * Gets the current syncstate of the ongoing sync. TODO: return object
-   * 
-   * @param {boolean} includingTimeStamp  ``Optional`` If true, the returned
-   *                                      syncstate includes the timestamp of
-   *                                      when the syncstate was set.
+   * Gets the current syncstate and its timestamp of the ongoing sync. The
+   * returned Object has the following attributes:
    *
-   * @return {string} The currently set syncsate, optionally appended with its
-   *                  timestamp, seperated by ``||``.
+   * * ``state`` : the current syncsate
+   * * ``timestamp`` : its timestamp
+   *
+   * @returns {Object}
    *
    */
-  getSyncState(includingTimeStamp = false) {
-    return includingTimeStamp ? this._syncstate : this._syncstate.split("||")[0];
+  getSyncState() {
+    return this._syncstate;
   }
 }
 
