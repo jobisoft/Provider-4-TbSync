@@ -223,8 +223,9 @@ var Base = class {
      *
      * Please also check the standard properties added by TbSync:
      *
-     * .. include:: ../sources/modules/providers.js
-     *    :literal:
+     * .. literalinclude:: ../sources/modules/providers.js
+     *    :start-after: DefaultFolderPropsStart
+     *    :end-before: DefaultFolderPropsStop
      *
      * @returns {Object}  List of properties with default values.
      *
