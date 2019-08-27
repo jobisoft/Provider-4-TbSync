@@ -63,15 +63,11 @@
 
 
 /**
- * ProgressData
+ * ProgressData to manage a ``done`` and a ``todo`` counter.
  *
  */
 var ProgressData = class {
   /**
-   * Constructor
-   *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
    *
    */
   constructor() {
@@ -79,19 +75,40 @@ var ProgressData = class {
     this._done = 0;
    }
    
+  /**
+   * Reset ``done`` and ``todo`` counter.
+   *
+   * @param {integer} done  ``Optional`` Set a value for the ``done`` counter.
+   * @param {integer} todo  ``Optional`` Set a value for the ``todo`` counter.
+   *
+   */
    reset(done = 0, todo = 0) {
     this._todo = todo;
     this._done = done;
    }
    
+  /**
+   * Increment the ``done`` counter.
+   *
+   * @param {integer} value  ``Optional`` Set incrementation value.
+   *
+   */
    inc(value = 1) {
      this._done += value;
    }
    
+  /**
+   * Getter for the ``todo`` counter.
+   *
+   */
    get todo() {
      return this._todo;
    }
    
+  /**
+   * Getter for the ``done`` counter.
+   *
+   */
    get done() {
      return this._done;
    }
@@ -596,7 +613,8 @@ var SyncData = class {
 
 
 
-// simple dumper, who can dump to file or console
+// Simple dumper, who can dump to file or console
+// It is suggested to use the event log instead of dumping directly.
 var dump = function (what, aMessage) {
   if (TbSync.prefs.getBoolPref("log.toconsole")) {
     Services.console.logStringMessage("[TbSync] " + what + " : " + aMessage);
@@ -612,6 +630,8 @@ var dump = function (what, aMessage) {
 
 /**
  * Get a localized string from a string bundle.
+ *
+ * TODO: Explain placeholder and :: notation.
  *
  * @param {string} key       The key to look up in the string bundle
  * @param {string} provider  ``Optional`` The provider whose string bundle
