@@ -535,16 +535,15 @@ var SyncData = class {
 
   /**
    * Sets the syncstate of the ongoing sync, to provide feedback to the user.
+   * The selected state can trigger special UI features, if it starts with one
+   * of the following prefixes:
    *
-   * The set state can trigger special UI features, if it starts with one of the
-   * following prefixes:
-   *
-   * ``send.``, ``eval.``, ``prepare.``
+   * * ``send.``, ``eval.``, ``prepare.``
    *   The status message in the UI will be appended with the current progress
    *   stored in the :class:`ProgressData` associated with this SyncData
    *   instance. See :class:`SyndData.progressData`. 
    * 
-   * ``send.``
+   * * ``send.``
    *   The status message in the UI will be appended by a timeout countdown
    *   with the timeout being defined by :class:`Base.getConnectionTimeout`.
    *
