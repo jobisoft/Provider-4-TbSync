@@ -559,13 +559,27 @@ var dump = function (what, aMessage) {
   
 
 
-// get localized string from core or provider (if possible)
-var getString = function (msg, provider) {
+/**
+ * Get a localized string from a string bundle.
+ *
+ * @param {string} key       The key to look up in the string bundle
+ * @param {string} provider  ``Optional`` The provider whose string bundle
+ *                           should be used to lookup the key. 
+ *
+ * @returns {string} The entry in the string bundle of the specified provider
+ *                   matching the provided key. If that key is not found in the
+ *                   string bundle of the specified provider or if no provider
+ *                   has been specified, the string bundle of TbSync itself we
+ *                   be used as fallback. If the key could notz be found there
+ *                   as well, the key is returned.
+ *
+ */
+var getString = function (key, provider) {
   let success = false;
-  let localized = msg;
+  let localized = key;
   
   //spezial treatment of strings with :: like status.httperror::403
-  let parts = msg.split("::");
+  let parts = key.split("::");
 
   // if a provider is given, try to get the string from the provider
   if (provider && TbSync.providers.loadedProviders.hasOwnProperty(provider)) {
