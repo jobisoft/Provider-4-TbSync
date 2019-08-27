@@ -180,10 +180,6 @@ var ProviderData = class {
  */
 var AccountData = class {
   /**
-   * Constructor
-   *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
    *
    */
   constructor(accountID) {
@@ -259,6 +255,13 @@ var AccountData = class {
 
 
   // shortcuts
+  /**
+   * Initiate a sync of this entire account by first calling
+   * :class:`Base.syncFolderList` and :class:`Base.syncFolder` for each
+   * available folder / resource found on the server.
+   *
+   * @param {Object} syncDescription  ``Optional``
+   */
   sync(syncDescription = {}) {
     TbSync.core.syncAccount(this.accountID, syncDescription);
   }
@@ -299,10 +302,6 @@ var AccountData = class {
  */
 var FolderData = class {
   /**
-   * Constructor
-   *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
    *
    */
   constructor(accountData, folderID) {
@@ -353,6 +352,13 @@ var FolderData = class {
     TbSync.db.resetFolderProperty(this.accountID, this.folderID, field);
   }
 
+  /**
+   * Initiate a sync of this folder only by calling
+   * :class:`Base.syncFolderList` and :class:`Base.syncFolder` for this
+   * folder / resource only.
+   *
+   * @param {Object} syncDescription  ``Optional``
+   */
   sync(aSyncDescription = {}) {
     let syncDescription = {};
     Object.assign(syncDescription, aSyncDescription);
