@@ -462,6 +462,9 @@ var FolderData = class {
  *
  */
 var SyncData = class {
+  /**
+   *
+   */
   constructor(accountID) {
     
     //internal (private, not to be touched by provider)
