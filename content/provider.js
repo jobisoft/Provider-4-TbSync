@@ -287,7 +287,7 @@ var Base = class {
      *   * ``comment`` : ``Optional`` A comment displayed to the right of the
      *     value in the autocomplete list.
      *   * ``icon`` : ``Optional`` A chrome uri to a 16x16 icon.
-     *   * ``style`` : ``Optional``A style tag.
+     *   * ``style`` : ``Optional`` A style tag.
      *
      * When creating directories, you can set:
      *
