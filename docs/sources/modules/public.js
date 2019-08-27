@@ -255,7 +255,7 @@ var AccountData = class {
 
 
   /**
-   * Initiate a sync of this entire account by first calling
+   * Initiate a sync of this entire account by calling
    * :class:`Base.syncFolderList`. If that succeeded, :class:`Base.syncFolder`
    * will be called for each available folder / resource found on the server.
    *
@@ -352,7 +352,7 @@ var FolderData = class {
   }
 
   /**
-   * Initiate a sync of this folder only by first calling
+   * Initiate a sync of this folder only by calling
    * :class:`Base.syncFolderList` and than :class:`Base.syncFolder` for this
    * folder / resource only.
    *
@@ -535,7 +535,19 @@ var SyncData = class {
 
   /**
    * Sets the syncstate of the ongoing sync, to provide feedback to the user.
+   *
+   * The set state can trigger special UI features, if it starts with one of the
+   * following prefixes:
+   *
+   * ``send.``, ``eval.``, ``prepare.``
+   *   The status message in the UI will be appended with the current progress
+   *   stored in the :class:`ProgressData` associated with this SyncData
+   *   instance. See :class:`SyndData.progressData`. 
    * 
+   * ``send.``
+   *   The status message in the UI will be appended by a timeout countdown
+   *   with the timeout being defined by :class:`Base.getConnectionTimeout`.
+   *
    * @param {string} state      A short syncstate identifier. The actual
    *                            message to be displayed in the UI will be
    *                            looked up in the string bundle of the provider
@@ -543,11 +555,7 @@ var SyncData = class {
    *                            (:class:`Base.getStringBundleUrl`) by looking 
    *                            for ``syncstate.<state>``. The lookup is
    *                            done via :func:`getString`, so the same 
-   *                            fallback rules apply. If the syncstate
-   *                            starts with ``send.``, the message in the UI
-   *                            will be appended by a timeout countdown with
-   *                            the timeout being defined by
-   *                            :class:`Base.getConnectionTimeout`. 
+   *                            fallback rules apply. 
    *
    */  
   setSyncState(state) {
