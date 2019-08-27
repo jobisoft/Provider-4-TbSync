@@ -279,13 +279,15 @@ var Base = class {
      * to the autocomplete list while typing something into the address field
      * of the message composer.
      *
-     * The return value is an Array of Objects and each Object may have the
+     * The return value is an Array of Objects and each Object needs the
      * following attributes:
      *
-     *   * ``value`` : An email address with display name notation ("DisplayName <emailaddress>").
-     *   * ``comment`` : A comment displayed to the right of the value in the autocomplete list
-     *   * ``icon`` : A chrome uri to a 16x16 icon.
-     *   * ``style`` : A style tag.
+     *   * ``value`` : An email address with display name notation like
+     *     ``DisplayName <EmailAddress>``.
+     *   * ``comment`` : ``Optional`` A comment displayed to the right of the
+     *     value in the autocomplete list.
+     *   * ``icon`` : ``Optional`` A chrome uri to a 16x16 icon.
+     *   * ``style`` : ``Optional``A style tag.
      *
      * When creating directories, you can set:
      *
