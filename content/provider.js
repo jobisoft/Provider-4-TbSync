@@ -221,7 +221,9 @@ var Base = class {
      *      "someSetting" : "none",    
      *    }
      *
-     * Please also check the standard properties added by TbSync.
+     * Please also check the standard properties added by TbSync:
+     *
+     * .. include:: ../sources/modules/providers.js
      *
      * @returns {Object}  List of properties with default values.
      *
@@ -282,12 +284,12 @@ var Base = class {
      * The return value is an Array of Objects and each Object needs the
      * following attributes:
      *
-     *   * ``value`` : An email address with display name notation like
+     *   * ``value`` : An email address written like
      *     ``DisplayName <EmailAddress>``.
      *   * ``comment`` : ``Optional`` A comment displayed to the right of the
      *     value in the autocomplete list.
      *   * ``icon`` : ``Optional`` A chrome uri to a 16x16 icon.
-     *   * ``style`` : ``Optional`` A style tag.
+     *   * ``style`` : ``Optional`` A CSS class name.
      *
      * When creating directories, you can set:
      *
