@@ -254,11 +254,10 @@ var AccountData = class {
   }
 
 
-  // shortcuts
   /**
    * Initiate a sync of this entire account by first calling
-   * :class:`Base.syncFolderList` and :class:`Base.syncFolder` for each
-   * available folder / resource found on the server.
+   * :class:`Base.syncFolderList`. If that succeeded, :class:`Base.syncFolder`
+   * will be called for each available folder / resource found on the server.
    *
    * @param {Object} syncDescription  ``Optional``
    */
@@ -353,8 +352,8 @@ var FolderData = class {
   }
 
   /**
-   * Initiate a sync of this folder only by calling
-   * :class:`Base.syncFolderList` and :class:`Base.syncFolder` for this
+   * Initiate a sync of this folder only by first calling
+   * :class:`Base.syncFolderList` and than :class:`Base.syncFolder` for this
    * folder / resource only.
    *
    * @param {Object} syncDescription  ``Optional``
