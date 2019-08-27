@@ -190,7 +190,11 @@ var Base = class {
      *     "someOtherOption" : false,    
      *    }
      *
-     * Please also check the standard properties added by TbSync.
+     * Please also check the standard account properties added by TbSync.
+     *
+     * .. literalinclude:: ../sources/modules/providers.js
+     *    :start-after: DefaultAccountPropsStart
+     *    :end-before: DefaultAccountPropsEnd
      *
      * @returns {Object}  List of properties with default values.
      *
@@ -221,7 +225,7 @@ var Base = class {
      *      "someSetting" : "none",    
      *    }
      *
-     * Please also check the standard properties added by TbSync:
+     * Please also check the standard folder properties added by TbSync:
      *
      * .. literalinclude:: ../sources/modules/providers.js
      *    :start-after: DefaultFolderPropsStart
