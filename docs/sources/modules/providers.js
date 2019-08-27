@@ -152,7 +152,7 @@ var providers = {
     defaults.provider = provider;
     defaults.accountID = "";
     defaults.lastsynctime = 0;
-    defaults.status = "disabled"; //global status: disabled, OK, syncing, notsyncronized, nolightning, ...
+    defaults.status = "disabled";
     defaults.autosync = 0;
     defaults.accountname = "";
     // DefaultAccountPropsEnd
