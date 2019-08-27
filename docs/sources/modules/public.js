@@ -569,10 +569,10 @@ var SyncData = class {
    * Gets the current syncstate and its timestamp of the ongoing sync. The
    * returned Object has the following attributes:
    *
-   * * ``state`` : the current syncsate
+   * * ``state`` : the current syncstate
    * * ``timestamp`` : its timestamp
    *
-   * @returns {Object}
+   * @returns {Object}  The syncstate and its timestamp.
    *
    */
   getSyncState() {
