@@ -279,20 +279,20 @@ var Base = class {
      * to the autocomplete list while typing something into the address field
      * of the message composer.
      *
+     * The return value is an Array of Objects and each Object may have the
+     * following attributes:
+     *
+     *   * ``value`` : An email address with display name notation ("DisplayName <emailaddress>").
+     *   * ``comment`` : A comment displayed to the right of the value in the autocomplete list
+     *   * ``icon`` : A chrome uri to a 16x16 icon.
+     *   * ``style`` : A style tag.
+     *
      * When creating directories, you can set:
      *
      *    ``directory.setBoolValue("enable_autocomplete", false);``
      *
      * to disable the default autocomplete for this directory and have full
      * control over the autocomplete.
-     *
-     * The return value is an Array of Objects and each Object must have the
-     * following attributes:
-     *
-     * * ``value`` : email address with display name notation (DisplayName <emailaddress>)
-     * * ``comment`` : comment displayed to the right of the value in the autocomplete list
-     * * ``icon`` : chrome uri to an 16x16 icon
-     * * ``style`` : style tag
      *
      * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account being queried.
