@@ -30,6 +30,7 @@ This document tries to cover all aspects of how to create a provider add-on for 
    :hidden:
    :maxdepth: 3
 
-   resources/api
+   resources/classes
+   resources/methods   
    resources/eventlog
     

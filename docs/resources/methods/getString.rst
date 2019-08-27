@@ -1,0 +1,4 @@
+getString()
+-----------
+
+.. js:autofunction:: getString
