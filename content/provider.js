@@ -128,7 +128,7 @@ var Base = class {
 
     /**
      * Returns the URL of the string bundle file of this provider, it can be
-     * accessed by ``TbSync.getString``.
+     * accessed by :func:`getString`.
      *
      * @returns {string}  Chrome uri to the string bundle file.
      *

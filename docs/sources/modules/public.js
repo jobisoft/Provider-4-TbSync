@@ -457,18 +457,11 @@ var FolderData = class {
 
 
 /**
- * SyncData
+ * There is only one ``SyncData`` instance per account which contains all
+ * relevant information regarding an ongoing sync. 
  *
- * there is only one syncdata object per account which contains the current state of the sync
  */
 var SyncData = class {
-  /**
-   * Constructor
-   *
-   * @param {FolderData} folderData    FolderData of the folder for which the
-   *                                   display name is requested.
-   *
-   */
   constructor(accountID) {
     
     //internal (private, not to be touched by provider)
@@ -491,7 +484,7 @@ var SyncData = class {
 
   /**
    * Getter for an :class:`EventLogInfo` instance with all the information
-   * regarding this SyncData instance.
+   * regarding this ``SyncData`` instance.
    *
    */  
   get eventLogInfo() {
@@ -503,18 +496,44 @@ var SyncData = class {
     );
   }
   
+  /**
+   * Getter for the :class:`FolderData` instance of the folder being currently
+   * synced. Can be ``null`` if no folder is being synced.
+   *
+   */  
   get currentFolderData() {
     return this._currentFolderData;
   }
 
+  /**
+   * Getter for the :class:`AccountData` instance of the account being
+   * currently synced.
+   *
+   */  
   get accountData() {
     return this._accountData;
   }
 
+  /**
+   * Getter for the :class:`ProgressData` instance of the ongoing sync.
+   *
+   */
   get progressData() {
     return this._progressData;
   }
 
+  /**
+   * Sets the syncstate of the ongoing sync, to provide feedback to the user.
+   * 
+   * @param {string} syncstate  A short syncstate identifier.  Will be used as
+   *                            ``key`` in :func:`getString` to lookup the
+   *                            actual message for the UI. If the syncstate
+   *                            starts with ``send.``, the message in the UI
+   *                            will be appended by a timeout countdown with
+   *                            the timeout being defined by
+   *                            :class:`Base.getConnectionTimeout`.
+   *
+   */  
   setSyncState(syncstate) {
     //set new syncstate
     let msg = "State: " + syncstate + ", Account: " + this.accountData.getAccountProperty("accountname");
@@ -531,6 +550,17 @@ var SyncData = class {
     Services.obs.notifyObservers(null, "tbsync.observer.manager.updateSyncstate", this.accountData.accountID);
   }
   
+  /**
+   * Gets the current syncstate of the ongoing sync. TODO: return object
+   * 
+   * @param {boolean} includingTimeStamp  ``Optional`` If true, the returned
+   *                                      syncstate includes the timestamp of
+   *                                      when the syncstate was set.
+   *
+   * @return {string} The currently set syncsate, optionally appended with its
+   *                  timestamp, seperated by ``||``.
+   *
+   */
   getSyncState(includingTimeStamp = false) {
     return includingTimeStamp ? this._syncstate : this._syncstate.split("||")[0];
   }
@@ -570,8 +600,8 @@ var dump = function (what, aMessage) {
  *                   matching the provided key. If that key is not found in the
  *                   string bundle of the specified provider or if no provider
  *                   has been specified, the string bundle of TbSync itself we
- *                   be used as fallback. If the key could notz be found there
- *                   as well, the key is returned.
+ *                   be used as fallback. If the key could not be found there
+ *                   as well, the key itself is returned.
  *
  */
 var getString = function (key, provider) {
