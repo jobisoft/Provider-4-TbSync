@@ -536,12 +536,12 @@ var SyncData = class {
   /**
    * Sets the syncstate of the ongoing sync, to provide feedback to the user.
    * 
-   * @param {string} syncstate  A short syncstate identifier. The actual
+   * @param {string} state      A short syncstate identifier. The actual
    *                            message to be displayed in the UI will be
    *                            looked up in the string bundle of the provider
    *                            associated with this SyncData instance
    *                            (:class:`Base.getStringBundleUrl`) by looking 
-   *                            for ``syncstate.<syncstate>``. The lookup is
+   *                            for ``syncstate.<state>``. The lookup is
    *                            done via :func:`getString`, so the same 
    *                            fallback rules apply. If the syncstate
    *                            starts with ``send.``, the message in the UI
@@ -550,16 +550,16 @@ var SyncData = class {
    *                            :class:`Base.getConnectionTimeout`. 
    *
    */  
-  setSyncState(syncstate) {
+  setSyncState(state) {
     //set new syncstate
-    let msg = "State: " + syncstate + ", Account: " + this.accountData.getAccountProperty("accountname");
+    let msg = "State: " + state + ", Account: " + this.accountData.getAccountProperty("accountname");
     if (this.currentFolderData) msg += ", Folder: " + this.currentFolderData.getFolderProperty("foldername");
 
-    let state = {};
-    state.state = syncstate;
-    state.timestamp = Date.now();
+    let syncstate = {};
+    syncstate.state = state;
+    syncstate.timestamp = Date.now();
 
-    this._syncstate = state;
+    this._syncstate = syncstate;
     TbSync.dump("setSyncState", msg);
 
     Services.obs.notifyObservers(null, "tbsync.observer.manager.updateSyncstate", this.accountData.accountID);
