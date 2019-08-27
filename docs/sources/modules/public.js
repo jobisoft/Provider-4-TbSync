@@ -533,13 +533,18 @@ var SyncData = class {
   /**
    * Sets the syncstate of the ongoing sync, to provide feedback to the user.
    * 
-   * @param {string} syncstate  A short syncstate identifier.  Will be used as
-   *                            ``key`` in :func:`getString` to lookup the
-   *                            actual message for the UI. If the syncstate
+   * @param {string} syncstate  A short syncstate identifier. The actual
+   *                            message to be displayed in the UI will be
+   *                            looked up in the string bundle of the provider
+   *                            associated with this SyncData instance
+   *                            (:class:`Base.getStringBundleUrl`) by looking 
+   *                            for ``syncstate.<syncstate>``. The lookup is
+   *                            done via :func:`getString`, so the same 
+   *                            fallback rules apply. If the syncstate
    *                            starts with ``send.``, the message in the UI
    *                            will be appended by a timeout countdown with
    *                            the timeout being defined by
-   *                            :class:`Base.getConnectionTimeout`.
+   *                            :class:`Base.getConnectionTimeout`. 
    *
    */  
   setSyncState(syncstate) {

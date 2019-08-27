@@ -10,7 +10,7 @@ must implememt a matching class of type TargetData in his provider namespace.
 
 *Example:*
    
-If one the possible values of the ``targetType`` property is ``MyCalendar``, the provider
+If one of the possible values of the ``targetType`` property is ``MyCalendar``, the provider
 must implement a TargetData class inside his ``provider.js`` with a name of 
 ``MyCalendar``.
 
