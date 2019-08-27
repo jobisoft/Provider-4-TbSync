@@ -404,7 +404,7 @@ var TargetData = class {
     /**
      * TargetData constrcutor.
      *
-     * @param {FolderData}  folderData  A FolderData instance of the folder
+     * @param {FolderData}  folderData  The FolderData instance of the folder
      *                                  for which this TargetData instance is
      *                                  being created.
      *
@@ -470,8 +470,8 @@ var TargetData = class {
     }
     
     /**
-     * Removes the target. TbSync will reset the target property after this
-     * call has been executed.
+     * Removes the target from the local storage. TbSync will reset any target
+     * information of the associated folder after this has been executed.
      *
      */
     removeTarget() {
@@ -507,9 +507,9 @@ var TargetData = class {
     }
 
     /**
-     * Is called, when a target is being disconnected from a folder, but
-     * not deleted. TbSync will reset the target property after this
-     * call has been executed.
+     * Is called before a target is being disconnected from a folder, but
+     * not deleted. TbSync will reset any target information of the associated
+     * folder after this has been executed.
      * 
      */
     onBeforeDisconnectTarget() {
