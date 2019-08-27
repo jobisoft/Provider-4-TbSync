@@ -602,7 +602,8 @@ var dump = function (what, aMessage) {
  *
  * @param {string} key       The key to look up in the string bundle
  * @param {string} provider  ``Optional`` The provider whose string bundle
- *                           should be used to lookup the key. 
+ *                           should be used to lookup the key. See
+ *                           :class:`Base.getStringBundleUrl`.
  *
  * @returns {string} The entry in the string bundle of the specified provider
  *                   matching the provided key. If that key is not found in the
