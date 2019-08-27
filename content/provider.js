@@ -69,7 +69,7 @@ var Base = class {
      * Returns location of a provider icon.
      *
      * @param {integer}      size         Size of the requested icon.
-     * @param {AccountData}  accountData  An AccountData instance of the
+     * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account, which is requesting the
      *                                    icon. Optional.
      *
@@ -242,7 +242,7 @@ var Base = class {
      * Is called everytime an account of this provider is enabled in the
      * manager UI.
      *
-     * @param {AccountData}  accountData  An AccountData instance of the
+     * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account being enabled.
      *
      */
@@ -255,7 +255,7 @@ var Base = class {
      * Is called everytime an account of this provider is disabled in the
      * manager UI.
      *
-     * @param {AccountData}  accountData  An AccountData instance of the
+     * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account being disabled.
      *
      */
@@ -268,7 +268,7 @@ var Base = class {
      * Is called everytime a new target is created. 
      *
      * @deprecated Whatever has been done in here should be done createTarget.
-     * @param {FolderData}  folderData  A FolderData instance of the folder
+     * @param {FolderData}  folderData  The FolderData instance of the folder
      *                                  being resetted.
      *
      */
@@ -289,7 +289,7 @@ var Base = class {
      * to disable the default autocomplete for this directory and have full
      * control over the autocomplete.
      *
-     * @param {AccountData}  accountData  An AccountData instance of the
+     * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account being queried.
      * @param {string}       query        The search query.
      *
@@ -308,7 +308,7 @@ var Base = class {
      * The order will be used in the folder list and also as the order to sync
      * the resources of the account identified by the passed AccountData.
      *
-     * @param {AccountData}  accountData  An AccountData instance for the
+     * @param {AccountData}  accountData  The AccountData instance for the
      *                                    account for which the sorted list of
      *                                    folders should be returned.
      *
@@ -326,9 +326,9 @@ var Base = class {
      * Returns the connection timeout for an active server request, so TbSync
      * can append a countdown to the connection timeout, while waiting for an
      * answer from the server. Only syncstates which start with ``send.`` will
-     * trigger this (see ``SyncData.setSyncState``).
+     * trigger this (see :class:`SyncData.setSyncState`).
      *
-     * @param {AccountData}  accountData  An AccountData instance for the
+     * @param {AccountData}  accountData  The AccountData instance for the
      *                                    account for which the timeout is
      *                                    being requested.
      *
@@ -533,7 +533,7 @@ var StandardFolderList = class {
      * be disabled.
      *
      * @param {nsIDOMWindow}  window      Object of the account settings window.
-     * @param {FolderData}    folderData  A FolderData instance of the selected
+     * @param {FolderData}    folderData  The FolderData instance of the selected
      *                                    folder.
      *
      */
@@ -545,7 +545,7 @@ var StandardFolderList = class {
     /**
      * Returns the icon for a folder to be shown in the folderlist.
      *
-     * @param {FolderData}  folderData  A FolderData instance of the folder for
+     * @param {FolderData}  folderData  The FolderData instance of the folder for
      *                                  which the icon is requested.
      *                                   
      * @returns {string}  Chrome URL of icon.
@@ -565,7 +565,7 @@ var StandardFolderList = class {
     /**
      * Returns the display name for a folder to be shown in the folderlist.
      *
-     * @param {FolderData}  folderData  A FolderData instance of the folder for
+     * @param {FolderData}  folderData  The FolderData instance of the folder for
      *                                  which the display name is requested.
      *                                   
      * @returns {string}  Display name of the folder.   
@@ -594,7 +594,7 @@ var StandardFolderList = class {
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
-     * @param {FolderData}  folderData  A FolderData instance of the folder for
+     * @param {FolderData}  folderData  The FolderData instance of the folder for
      *                                  which the attributes for the ACL RO XUL
      *                                  element are requested.
      *                                   
@@ -625,7 +625,7 @@ var StandardFolderList = class {
      * If both (RO+RW) do not return any attributes, the ACL menu is not
      * displayed at all.
      *
-     * @param {FolderData}  folderData  A FolderData instance of the folder for
+     * @param {FolderData}  folderData  The FolderData instance of the folder for
      *                                  which the attributes for the ACL RW XUL
      *                                  element are requested.
      *                                   
