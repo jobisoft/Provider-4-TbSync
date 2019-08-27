@@ -389,7 +389,7 @@ var FolderData = class {
           if (this.isSyncing()) {
             let syncdata = this.accountData.syncData;
             status = TbSync.getString("status.syncing", this.accountData.getAccountProperty("provider"));
-            if (["send","eval","prepare"].includes(syncdata._syncstate.split(".")[0]) && (syncdata.progressData.todo + syncdata.progressData.done) > 0) {
+            if (["send","eval","prepare"].includes(syncdata.getSyncState().state.split(".")[0]) && (syncdata.progressData.todo + syncdata.progressData.done) > 0) {
               //add progress information
               status = status + " (" + syncdata.progressData.done + (syncdata.progressData.todo > 0 ? "/" + syncdata.progressData.todo : "") + ")"; 
             }
@@ -473,7 +473,10 @@ var SyncData = class {
   constructor(accountID) {
     
     //internal (private, not to be touched by provider)
-    this._syncstate = "accountdone";
+    this._syncstate = {
+      state: "accountdone",
+      timestamp: Date.now(),
+    }
     this._accountData = new TbSync.AccountData(accountID);
     this._progressData = new TbSync.ProgressData();
     this._currentFolderData = null;
