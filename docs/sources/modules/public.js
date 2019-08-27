@@ -538,12 +538,12 @@ var SyncData = class {
    * The selected state can trigger special UI features, if it starts with one
    * of the following prefixes:
    *
-   * * ``send.``, ``eval.``, ``prepare.``
+   * * ``send.``, ``eval.``, ``prepare.`` :
    *   The status message in the UI will be appended with the current progress
    *   stored in the :class:`ProgressData` associated with this SyncData
-   *   instance. See :class:`SyndData.progressData`. 
+   *   instance. See :class:`SyncData.progressData`. 
    * 
-   * * ``send.``
+   * * ``send.`` : 
    *   The status message in the UI will be appended by a timeout countdown
    *   with the timeout being defined by :class:`Base.getConnectionTimeout`.
    *
