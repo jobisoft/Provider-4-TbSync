@@ -457,7 +457,7 @@ var FolderData = class {
 
 
 /**
- * There is only one ``SyncData`` instance per account which contains all
+ * There is only one SyncData instance per account which contains all
  * relevant information regarding an ongoing sync. 
  *
  */
@@ -487,7 +487,7 @@ var SyncData = class {
 
   /**
    * Getter for an :class:`EventLogInfo` instance with all the information
-   * regarding this ``SyncData`` instance.
+   * regarding this SyncData instance.
    *
    */  
   get eventLogInfo() {

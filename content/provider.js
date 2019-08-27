@@ -54,11 +54,11 @@ var Base = class {
 
 
     /**
-     * Returns a version identifier of the TbSync API this provider is using.
+     * Returns the version identifier of the TbSync API this provider is using.
      * If it is not matching the version identifier of the TbSync add-on the
      * user has currently installed, this provider add-on is not loaded.
      *
-     * @returns {string}  An API version identifier.
+     * @returns {string}  The API version identifier.
      *
      */
     static getApiVersion() { return "Beta 2.1"; }
@@ -99,9 +99,6 @@ var Base = class {
      *                     link: "url://or/empty"
      *                    },
      *    }
-     *
-     * This probably has to be dropped when TbSync gets integrated into
-     * Thunderbird.
      *
      * @returns {Object}  List of sponsors.
      *
@@ -326,7 +323,7 @@ var Base = class {
      * Returns the connection timeout for an active server request, so TbSync
      * can append a countdown to the connection timeout, while waiting for an
      * answer from the server. Only syncstates which start with ``send.`` will
-     * trigger this (see :class:`SyncData.setSyncState`).
+     * trigger this, see :class:`SyncData.setSyncState`.
      *
      * @param {AccountData}  accountData  The AccountData instance for the
      *                                    account for which the timeout is
@@ -344,11 +341,9 @@ var Base = class {
     /**
      * Is called to synchronize the folder list.
      *
-     * Never call this method directly, but use:
+     * Never call this method directly, but use :class:`AccountData.sync`.
      *
-     *    ``AccountData.sync()``
-     *
-     * @param {SyncData}  syncData   A SyncData instance with information 
+     * @param {SyncData}  syncData   The SyncData instance with information 
      *                               regarding the requested sync
      * @param {string}    syncJob    A specific sync job, defaults to "sync",
      *                               but can be set via the syncDescription.
@@ -372,12 +367,10 @@ var Base = class {
     /**
      * Is called to synchronize a folder.
      *
-     * Never call this method directly, but use:
+     * Never call this method directly, but use :class:`AccountData.sync` or
+     * :class:`FolderData.sync`.
      *
-     *    ``AccountData.sync()`` or
-     *    ``FolderData::sync()``
-     *
-     * @param {SyncData}  syncData   A SyncData instance with information 
+     * @param {SyncData}  syncData   The SyncData instance with information 
      *                               regarding the requested sync
      * @param {string}    syncJob    A specific sync job, defaults to "sync",
      *                               but can be set via the syncDescription.
