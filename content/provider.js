@@ -225,8 +225,6 @@ var Base = class {
      *
      * .. include:: ../sources/modules/providers.js
      *    :literal:
-     *    :start-after: DefaultFolderPropsStart
-     *    :end-before: DefaultFolderPropsStop
      *
      * @returns {Object}  List of properties with default values.
      *
