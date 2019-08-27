@@ -63,7 +63,12 @@
 
 
 /**
- * ProgressData to manage a ``done`` and a ``todo`` counter.
+ * ProgressData to manage a ``done`` and a ``todo`` counter. 
+ *
+ * Each :class:`SyncData` instance has an associated ProgressData instance. See
+ * :class:`SyncData.progressData`. The information of that ProgressData
+ * instance is used, when the current syncstate is prefixed by ``send.``,
+ * ``eval.`` or ``prepare.``. See :class:`SyncData.setSyncState`.
  *
  */
 var ProgressData = class {
