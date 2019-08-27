@@ -286,11 +286,19 @@ var Base = class {
      * to disable the default autocomplete for this directory and have full
      * control over the autocomplete.
      *
+     * The return value is an Array of Objects and each Object must have the
+     * following attributes:
+     *
+     * * ``value`` : email address with display name notation (DisplayName <emailaddress>)
+     * * ``comment`` : comment displayed to the right of the value in the autocomplete list
+     * * ``icon`` : chrome uri to an 16x16 icon
+     * * ``style`` : style tag
+     *
      * @param {AccountData}  accountData  The AccountData instance of the
      *                                    account being queried.
      * @param {string}       query        The search query.
      *
-     * @returns {Array.AutoCompleteData} Array of AutoCompleteData entries.
+     * @returns Array of Objects.
      *
      */
     static async abAutoComplete(accountData, query)  {
