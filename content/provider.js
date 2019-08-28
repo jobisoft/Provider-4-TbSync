@@ -484,7 +484,7 @@ var TargetData = class {
     
     /**
      * Removes the target from the local storage. If it does not exist, return
-     * silently. A call to ``hasTarget()`` should return false, after this has
+     * silently. A call to :class:`TargetData.hasTarget()` should return ``false``, after this has
      * been executed.
      *
      */
@@ -501,7 +501,7 @@ var TargetData = class {
     /**
      * Disconnects the target in the local storage from this TargetData, but
      * does not delete it, so it becomes a stale "left over". A call
-     * to ``hasTarget()`` should return false, after this has been executed.
+     * to :class:`TargetData.hasTarget()` should return ``false``, after this has been executed.
      * 
      */
     disconnectTarget() {
@@ -545,8 +545,8 @@ var TargetData = class {
     }
 }
 
-// this is just for the documentation generated from this file to
-// have a "TargetClass". You do not nee to extend your own class
+// This is just for the documentation generated from this file to
+// have a "TargetData". You do not need to extend your own class
 // of course and just name it as needed directly.
 var TargetData_addressbook = class extends TargetData {}
 

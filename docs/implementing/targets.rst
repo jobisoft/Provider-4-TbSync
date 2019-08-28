@@ -12,7 +12,7 @@ must implememt a matching class of type TargetData in his provider namespace.
    
 If one of the possible values of the ``targetType`` property is ``MyCalendar``, the provider
 must implement a TargetData class inside his ``provider.js`` with a name of 
-``MyCalendar``.
+``TargetData_MyCalendar``.
 
 When interacting with TbSync, for example when syncing a specific folder / resource,
 you will usually have access to a :class:`FolderData` instance, which will return the 
