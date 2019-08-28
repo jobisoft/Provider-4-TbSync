@@ -488,7 +488,7 @@ var TargetData = class {
 
     /**
      * Disconnects the target in the local storage from this TargetData, but
-     * does not delete it, so it becomes a stale "left over") . A call
+     * does not delete it, so it becomes a stale "left over". A call
      * to ``hasTarget()`` should return false, after this has been executed.
      * 
      */

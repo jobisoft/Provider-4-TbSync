@@ -224,8 +224,10 @@ var core = {
     
     let folders = accountData.getAllFolders();
     for (let folder of folders) {
-      folder.targetData.removeTarget(); 
-      folder.setFolderProperty("selected", false);
+      if (folder.getFolderProperty("selected")) {
+        folder.targetData.removeTarget(); 
+        folder.setFolderProperty("selected", false);
+      }
       folder.setFolderProperty("cached", true);
     }
   },

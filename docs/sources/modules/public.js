@@ -437,16 +437,21 @@ var FolderData = class {
    *
    */
   get targetData() {
-    // targetData can not be set during construction, because targetType has not been set 
-    // create it on the fly - re-create it, if targetType changed
-    if (!this._target || this._target.targetType != this.getFolderProperty("targetType")) {
-      switch (this.getFolderProperty("targetType")) {
-        case "":
-          throw new Error("Property <targetType> not set for this folder.");
-
-        default:
-          this._target = new TbSync.providers[this.accountData.getAccountProperty("provider")]["TargetData_" + this.getFolderProperty("targetType")](this);
-      }
+    // targetData is created on demand
+    if (!this._target) {
+      let provider = this.accountData.getAccountProperty("provider");
+      let targetType = this.getFolderProperty("targetType");
+      
+      if (!targetType)
+        throw new Error("Provider <"+provider+"> has not set a proper target type for this folder.");
+      
+      if (!TbSync.providers[provider].hasOwnProperty("TargetData_" + targetType))
+        throw new Error("Provider <"+provider+"> is missing a TargetData implementation for <"+targetType+">.");
+      
+      this._target = new TbSync.providers[provider]["TargetData_" + targetType](this);
+      
+      if (!this._target)
+        throw new Error("notargets");
     }
     
     return this._target;
