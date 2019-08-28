@@ -523,9 +523,9 @@ var TargetData = class {
      * TbSync UI.
      *
      * .. note::
-     *    This might be changed to a general property observer.
+     *    This might be changed to a general FolderProperty observer.
      *
-     * @param {boolean}  value  The current value of the "downloadonly" folder
+     * @param {boolean}  value  The current value of the ``downloadonly`` folder
      *                          property.
      *
      */    
