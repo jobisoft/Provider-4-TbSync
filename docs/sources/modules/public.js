@@ -443,17 +443,9 @@ var FolderData = class {
       switch (this.getFolderProperty("targetType")) {
         case "":
           throw new Error("Property <targetType> not set for this folder.");
-        
-        case "calendar":
-          this._target = new TbSync.lightning.TargetData(this);
-          break;
-
-        case "addressbook":
-          this._target = new TbSync.addressbook.TargetData(this);
-          break;
 
         default:
-          this._target = new TbSync.providers[this.accountData.getAccountProperty("provider")][this.getFolderProperty("targetType")](this);
+          this._target = new TbSync.providers[this.accountData.getAccountProperty("provider")]["TargetData_" + this.getFolderProperty("targetType")](this);
       }
     }
     
@@ -598,8 +590,8 @@ var SyncData = class {
    * Gets the current syncstate and its timestamp of the ongoing sync. The
    * returned Object has the following attributes:
    *
-   * * ``state`` : the current syncstate
-   * * ``timestamp`` : its timestamp
+   *   * ``state`` : the current syncstate
+   *   * ``timestamp`` : its timestamp
    *
    * @returns {Object}  The syncstate and its timestamp.
    *

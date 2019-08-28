@@ -270,19 +270,6 @@ var Base = class {
 
 
     /**
-     * Is called everytime a new target is created. 
-     *
-     * @deprecated Whatever has been done in here should be done createTarget.
-     * @param {FolderData}  folderData  The FolderData instance of the folder
-     *                                  being resetted.
-     *
-     */
-    static onResetTarget(folderData) {
-    }
-
-
-
-    /**
      * Implement this method, if this provider should add additional entries
      * to the autocomplete list while typing something into the address field
      * of the message composer.
