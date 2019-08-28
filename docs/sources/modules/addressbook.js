@@ -40,15 +40,10 @@ var addressbook = {
   
   AdvancedTargetData : class {
     constructor(folderData) {            
-      this._targetType = folderData.getFolderProperty("targetType");
       this._folderData = folderData;
       this._targetObj = null;
     }
-    
-    // Return the targetType, this was initialized with.
-    get targetType() { 
-      return this._targetType;
-    }
+
     
     // Check, if the target exists and return true/false.
     hasTarget() { 
@@ -139,6 +134,8 @@ var addressbook = {
       }
     }
     
+    setReadOnly(value) {
+    }
 
 
     // * * * * * * * * * * * * * * * * *

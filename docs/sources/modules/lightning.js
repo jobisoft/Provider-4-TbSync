@@ -72,14 +72,8 @@ var lightning = {
   
   AdvancedTargetData : class {
     constructor(folderData) {            
-      this._targetType = folderData.getFolderProperty("targetType");
       this._folderData = folderData;
       this._targetObj = null;           
-    }
-    
-    // Return the targetType, this was initialized with.
-    get targetType() {
-      return this._targetType;
     }
     
     // Check, if the target exists and return true/false.
@@ -199,7 +193,12 @@ var lightning = {
       }
     }
 
-  
+    setReadOnly(value) {
+      if (this.hasTarget()) {
+        this.getTarget().calendar.setProperty("readOnly", value);
+      }
+    }
+
     
     // * * * * * * * * * * * * * * * * *
     // * AdvancedTargetData extension  * 

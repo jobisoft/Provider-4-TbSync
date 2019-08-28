@@ -516,7 +516,21 @@ var TargetData = class {
             return directory.dirName;
         }
         throw new Error("notargets");
-    }  
+    }
+    
+    /**
+     * The readonly property of the associated folder has been changed via the
+     * TbSync UI.
+     *
+     * .. note::
+     *    This might be changed to a general property observer.
+     *
+     * @param {boolean}  value  The current value of the "downloadonly" folder
+     *                          property.
+     *
+     */    
+    setReadOnly(value) {
+    }
 }
 
 
