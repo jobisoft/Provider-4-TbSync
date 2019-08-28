@@ -1,5 +1,4 @@
 /*
-/*
  * This file is part of __ProviderShortName__.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public

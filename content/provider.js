@@ -236,8 +236,8 @@ var Base = class {
      */
     static getDefaultFolderEntries() {
         let folder = {
+            "UID" : "",
             "targetID" : "",
-            "targetName": "",
             };
         return folder;
     }
@@ -364,7 +364,18 @@ var Base = class {
      *
      */
     static async syncFolderList(syncData, syncJob, syncRunNr) {        
-        await __ProviderNameSpace__.sync.folderList(syncData);
+        try {
+            await __ProviderNameSpace__.sync.folderList(syncData);
+        } catch (e) {
+            if (e.name == "__ProviderChromeUrl__") {
+                return e.statusData;
+            } else {
+                Components.utils.reportError(e);
+                // re-throw any other error and let TbSync handle it
+                throw (e);
+            }
+        }
+
         return new TbSync.StatusData();
     }
     
@@ -391,12 +402,21 @@ var Base = class {
      *
      */
     static async syncFolder(syncData, syncJob, syncRunNr) {
-        await __ProviderNameSpace__.sync.folder(syncData);
+        try {
+            await __ProviderNameSpace__.sync.singleFolder(syncData);
+        } catch (e) {
+            if (e.name == "__ProviderChromeUrl__") {
+                return e.statusData;
+            } else {
+                Components.utils.reportError(e);
+                // re-throw any other error and let TbSync handle it
+                throw (e);
+            }
+        }
+
         return new TbSync.StatusData();
     }
 }
-
-
 
 
 var TargetData = class {
@@ -409,15 +429,7 @@ var TargetData = class {
      *
      */
     constructor(folderData) {            
-        this._targetType = folderData.getFolderProperty("targetType");
         this._folderData = folderData;
-    }
-    
-    /**
-     * Getter for the targetType, this TargetData was initialized with.
-     */
-    get targetType() { 
-        return this._targetType;
     }
     
     /**
@@ -428,7 +440,7 @@ var TargetData = class {
      *
      */
     hasTarget() {
-        let target = folderData.getFolderProperty("targetID");
+        let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
      
         if (directory !== null && directory instanceof Components.interfaces.nsIAbDirectory) {
@@ -459,7 +471,7 @@ var TargetData = class {
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
       
         if (!directory) {
-            let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("targetName"), "", 2);
+            let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("foldername"), "", 2);
             let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
             if (!directory) {
                 throw new Error("notargets");
@@ -533,7 +545,10 @@ var TargetData = class {
     }
 }
 
-
+// this is just for the documentation generated from this file to
+// have a "TargetClass". You do not nee to extend your own class
+// of course and just name it as needed directly.
+var TargetData_addressbook = class extends TargetData {}
 
 
 
@@ -655,4 +670,5 @@ var StandardFolderList = class {
     }
 }
 
+Services.scriptloader.loadSubScript("chrome://__ProviderChromeUrl__/content/includes/sync.js", this, "UTF-8");
 Services.scriptloader.loadSubScript("chrome://__ProviderChromeUrl__/content/includes/addressbook.js", this, "UTF-8");
