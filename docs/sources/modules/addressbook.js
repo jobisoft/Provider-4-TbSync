@@ -52,7 +52,9 @@ var addressbook = {
     
     // Check, if the target exists and return true/false.
     hasTarget() { 
-      return TbSync.addressbook.checkAddressbook(this._folderData) ? true : false;
+      let target = this._folderData.getFolderProperty("target");
+      let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
+      return directory ? true : false;
     }
 
     // Returns the target obj, which TbSync should return as the target. It can
@@ -60,7 +62,8 @@ var addressbook = {
     // If the target does not exist, it should be created. Throw a simple Error, if that
     // failed.
     getTarget() { 
-      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
+      let target = this._folderData.getFolderProperty("target");
+      let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
       
       if (!directory) {
         // create a new addressbook and store its UID in folderData
@@ -75,8 +78,12 @@ var addressbook = {
       return this._targetObj;
     }
     
-    // Remove the target and everything that belongs to it. TbSync will reset the target
-    // property after this call has been executed.
+    /**
+     * Removes the target from the local storage. If it does not exist, return
+     * silently. A call to ``hasTarget()`` should return false, after this has
+     * been executed.
+     *
+     */
     removeTarget() {
       let target = this._folderData.getFolderProperty("target");
       let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
@@ -85,11 +92,37 @@ var addressbook = {
           MailServices.ab.deleteAddressBook(directory.URI);
         }
       } catch (e) {}
+
+      TbSync.db.clearChangeLog(target);
+      this._folderData.resetFolderProperty("target");        
     }
     
+    /**
+     * Disconnects the target in the local storage from this TargetData, but
+     * does not delete it, so it becomes a stale "left over") . A call
+     * to ``hasTarget()`` should return false, after this has been executed.
+     * 
+     */
+    disconnectTarget() {
+      let target = this._folderData.getFolderProperty("target");
+      let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
+      if (directory) {
+        let changes = TbSync.db.getItemsFromChangeLog(target, 0, "_by_user");        
+        if (changes.length > 0) {
+          this.targetName = this.targetName + " (*)";
+        }        
+        directory.setStringValue("tbSyncIcon", "orphaned");
+        directory.setStringValue("tbSyncProvider", "orphaned");
+        directory.setStringValue("tbSyncAccountID", "");
+      }
+      TbSync.db.clearChangeLog(target);
+      this._folderData.resetFolderProperty("target");      
+    }     
+    
     set targetName(newName) {
-      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
-      if (directory && newName) {
+      let target = this._folderData.getFolderProperty("target");
+      let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
+      if (directory) {
         directory.dirName = newName;
       } else {
         throw new Error("notargets");
@@ -97,7 +130,8 @@ var addressbook = {
     }
   
     get targetName() {
-      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
+      let target = this._folderData.getFolderProperty("target");
+      let directory = TbSync.addressbook.getDirectoryFromDirectoryUID(target);
       if (directory) {
         return directory.dirName;
       } else {
@@ -105,25 +139,7 @@ var addressbook = {
       }
     }
     
-    /**
-     * Is called, when a target is being disconnected from a folder, but
-     * not deleted.
-     * 
-     */
-    onBeforeDisconnectTarget() {
-      let directory = TbSync.addressbook.checkAddressbook(this._folderData);
-      if (directory) {
-        let target = this._folderData.getFolderProperty("target");
-        let changes = TbSync.db.getItemsFromChangeLog(target, 0, "_by_user");        
-        if (changes.length > 0) {
-          this.targetName = this.targetName + " (*)";
-        }
-        
-        directory.setStringValue("tbSyncIcon", "orphaned");
-        directory.setStringValue("tbSyncProvider", "orphaned");
-        directory.setStringValue("tbSyncAccountID", "");
-      }
-    }
+
 
     // * * * * * * * * * * * * * * * * *
     // * AdvancedTargetData extension  * 
@@ -606,23 +622,6 @@ var addressbook = {
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // * Internal Functions
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  
-  checkAddressbook: function (folderData) {
-    let target = folderData.getFolderProperty("target");
-    let directory = this.getDirectoryFromDirectoryUID(target);
-    
-    if (directory !== null && directory instanceof Components.interfaces.nsIAbDirectory) {
-      //check for double targets - just to make sure
-      let folders = TbSync.db.findFolders({"target": target}, {"accountID": folderData.accountID});
-      if (folders.length == 0)
-        return null;                
-      if (folders.length == 1)
-        return directory;
-      throw "Target with multiple source folders found! Forcing hard fail ("+target+")."; 
-    }
-    
-    return null;
-  },
 
   createAddressbook: function (folderData) {
     let target = folderData.getFolderProperty("target");

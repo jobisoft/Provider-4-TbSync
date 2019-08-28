@@ -237,6 +237,7 @@ var Base = class {
     static getDefaultFolderEntries() {
         let folder = {
             "targetID" : "",
+            "targetName": "",
             };
         return folder;
     }
@@ -420,13 +421,14 @@ var TargetData = class {
     }
     
     /**
-     * Check, if the target of this TargetData exists.
+     * Check, if the target object of this TargetData exists in the local
+     * storage.
      *
      * @returns {boolean}  True, if target exists.
      *
      */
     hasTarget() {
-        let target = folderData.getFolderProperty("target");
+        let target = folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
      
         if (directory !== null && directory instanceof Components.interfaces.nsIAbDirectory) {
@@ -453,7 +455,7 @@ var TargetData = class {
      *
      */
     getTarget() { 
-        let target = this._folderData.getFolderProperty("target");
+        let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
       
         if (!directory) {
@@ -462,18 +464,20 @@ var TargetData = class {
             if (!directory) {
                 throw new Error("notargets");
             }
+            this._folderData.setFolderProperty("targetID", directory.UID);
         }
         
         return directory;
     }
     
     /**
-     * Removes the target from the local storage. TbSync will reset any target
-     * information of the associated folder after this has been executed.
+     * Removes the target from the local storage. If it does not exist, return
+     * silently. A call to ``hasTarget()`` should return false, after this has
+     * been executed.
      *
      */
     removeTarget() {
-        let target = this._folderData.getFolderProperty("target");
+        let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
         try {
             if (directory) {
@@ -481,6 +485,16 @@ var TargetData = class {
             }
         } catch (e) {}
     }
+
+    /**
+     * Disconnects the target in the local storage from this TargetData, but
+     * does not delete it, so it becomes a stale "left over") . A call
+     * to ``hasTarget()`` should return false, after this has been executed.
+     * 
+     */
+    disconnectTarget() {
+    }  
+
     
     /**
      * Getter/Setter for the target name.
@@ -489,29 +503,20 @@ var TargetData = class {
      *
      */
     set targetName(newName) {
-        let target = this._folderData.getFolderProperty("target");
+        let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
         if (directory && newName) {
             directory.dirName = newName;
         }     
     }
     get targetName() {
-        let target = this._folderData.getFolderProperty("target");
+        let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
         if (directory) {
             return directory.dirName;
         }
         throw new Error("notargets");
-    }
-
-    /**
-     * Is called before a target is being disconnected from a folder, but
-     * not deleted. TbSync will reset any target information of the associated
-     * folder after this has been executed.
-     * 
-     */
-    onBeforeDisconnectTarget() {
-    }    
+    }  
 }
 
 

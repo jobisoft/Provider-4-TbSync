@@ -272,10 +272,7 @@ manager.FolderList = class {
     
       if (folder.getFolderProperty("selected")) {
         if (!folder.targetData.hasTarget() || element.ownerDocument.defaultView.confirm(TbSync.getString("prompt.Unsubscribe"))) {
-          folder.targetData.removeTarget(); 
-            //TODO in targetData
-            TbSync.db.clearChangeLog(target);
-            folder.resetFolderProperty("target");              
+          folder.targetData.removeTarget();           
           folder.setFolderProperty("selected", false);          
         } else {
           if (element) {

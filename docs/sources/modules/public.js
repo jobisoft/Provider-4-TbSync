@@ -461,14 +461,11 @@ var FolderData = class {
       if (keepStaleTargetSuffix) {
         let oldName =  this.targetData.targetName;
         this.targetData.targetName = TbSync.getString("target.orphaned") + ": " + oldName + " " + keepStaleTargetSuffix;
-        this.targetData.onBeforeDisconnectTarget();
+        this.targetData.disconnectTarget();
       } else {
         this.targetData.removeTarget();
       }
     }
-    //TODO in targetData
-    TbSync.db.clearChangeLog(target);
-    this.resetFolderProperty("target");
     this.setFolderProperty("cached", true);
   }
 }
