@@ -224,12 +224,10 @@ var core = {
     
     let folders = accountData.getAllFolders();
     for (let folder of folders) {
-      let target = folder.getFolderProperty("target");
-      if (target) {
-        folder.targetData.removeTarget(); 
+      folder.targetData.removeTarget(); 
+        //TODO in targetData
         folder.resetFolderProperty("target");
         TbSync.db.clearChangeLog(target);
-      }
       folder.setFolderProperty("selected", false);
       folder.setFolderProperty("cached", true);
     }

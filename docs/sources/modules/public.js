@@ -457,8 +457,7 @@ var FolderData = class {
   // will be added to its name, to indicate, that it is no longer
   // managed by TbSync.
   remove(keepStaleTargetSuffix = "") {
-    let target = this.getFolderProperty("target");
-    if (target) {
+    if (this.targetData.hasTarget()) {
       if (keepStaleTargetSuffix) {
         let oldName =  this.targetData.targetName;
         this.targetData.targetName = TbSync.getString("target.orphaned") + ": " + oldName + " " + keepStaleTargetSuffix;
@@ -466,8 +465,9 @@ var FolderData = class {
       } else {
         this.targetData.removeTarget();
       }
-      TbSync.db.clearChangeLog(target);
     }
+    //TODO in targetData
+    TbSync.db.clearChangeLog(target);
     this.resetFolderProperty("target");
     this.setFolderProperty("cached", true);
   }

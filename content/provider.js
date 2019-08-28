@@ -236,7 +236,7 @@ var Base = class {
      */
     static getDefaultFolderEntries() {
         let folder = {
-            "someSetting" : "none",
+            "targetID" : "",
             };
         return folder;
     }

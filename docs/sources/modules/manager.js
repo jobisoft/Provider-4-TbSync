@@ -271,15 +271,12 @@ manager.FolderList = class {
         return;
     
       if (folder.getFolderProperty("selected")) {
-        let target = folder.getFolderProperty("target");
-        if (!target || element.ownerDocument.defaultView.confirm(TbSync.getString("prompt.Unsubscribe"))) {
-          if (target) {
-            folder.targetData.removeTarget(); 
+        if (!folder.targetData.hasTarget() || element.ownerDocument.defaultView.confirm(TbSync.getString("prompt.Unsubscribe"))) {
+          folder.targetData.removeTarget(); 
+            //TODO in targetData
             TbSync.db.clearChangeLog(target);
             folder.resetFolderProperty("target");              
-          }
-          folder.setFolderProperty("selected", false);
-          
+          folder.setFolderProperty("selected", false);          
         } else {
           if (element) {
             //undo users action
