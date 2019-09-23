@@ -61,7 +61,7 @@ var Base = class {
      * @returns {string}  The API version identifier.
      *
      */
-    static getApiVersion() { return "Beta 2.1"; }
+    static getApiVersion() { return "Beta 2.2"; }
 
 
 
