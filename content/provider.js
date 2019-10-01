@@ -466,7 +466,7 @@ var TargetData = class {
      * @throws {Error}    Reason, why the target could not be created.
      *
      */
-    getTarget() { 
+    async getTarget() { 
         let target = this._folderData.getFolderProperty("targetID");
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
       
