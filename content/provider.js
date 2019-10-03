@@ -112,6 +112,19 @@ var Base = class {
 
 
     /**
+     * Returns the URL of a page with details about contributors
+     * (used in the manager UI)
+     *
+     * @returns {string}  An URL.
+     *
+     */
+    static getContributorsUrl() {
+        return "https://github.com/jobisoft/TbSync/blob/master/CONTRIBUTORS.md";
+    }
+
+
+
+    /**
      * Returns the email address of the maintainer (used for bug reports).
      *
      * @returns {string}  An email address.
