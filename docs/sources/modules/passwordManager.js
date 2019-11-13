@@ -69,10 +69,118 @@ var passwordManager = {
       let url = "chrome://tbsync/content/passwordPrompt/passwordPrompt.xul";
   
       return await new Promise(function(resolve, reject) {
-       reference[data.windowID] = TbSync.window.openDialog(url, "TbSyncPasswordPrompt:" + data.accountName, "centerscreen,chrome,resizable=no", data, resolve);
+       reference[data.windowID] = TbSync.window.openDialog(url, "TbSyncPasswordPrompt:" + data.windowID, "centerscreen,chrome,resizable=no", data, resolve);
       });
     }
     
     return false;
   },  
+  
+  // returns obj: {error, accessToken}
+  asyncOAuthPrompt: async function(data, reference) {
+    if (data.windowID) {
+    
+      let parameters = [];
+      for (let key of Object.keys(data.auth_opt)) {
+        parameters.push(key + "=" + encodeURIComponent(data.auth_opt[key])); 
+      }
+      let auth_url = data.auth_url + "?" + parameters.join("&");      
+      reference[data.windowID] = TbSync.window.openDialog(auth_url, "TbSyncOAuthPrompt:" + data.windowID, "centerscreen,chrome,width=500,height=700");
+      console.log("auth_url: " + auth_url);
+
+      let timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+
+      // Try to get an auth code
+      let auth_rv = await new Promise(function(resolve, reject) {
+        var loaded = false;
+        var last_url = "";
+        
+        let event = { 
+          notify: function(timer) {
+            let done = false;
+            let rv = {};
+
+            try {
+              let url = reference[data.windowID].location.href;
+              if (last_url != url) console.log("current_url:" + url);
+              last_url = url;
+              
+              // Must be set after accessing the location.href (which might fail).
+              loaded = true;
+              
+              // Abort, if we hit the redirect_url.
+              if (url.startsWith(data.auth_redirect_uri)) {
+                let parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                  rv[key] = decodeURIComponent(value);
+                });
+                done = true;                
+              }
+            } catch (e) {
+              // Did the window has been loaded, but the user closed it?
+              if (loaded) {
+                done = "aborted";
+              }
+              //Components.utils.reportError(e);
+            }
+            
+            if (done) {
+              timer.cancel();
+              resolve({code: rv[data.auth_codefield], error: (done == "aborted" ? "OAuthAbortError" : "OAuthServerError::" + rv["error_description"])});
+            }
+            
+          }
+        }
+        
+        timer.initWithCallback(event, 200, Components.interfaces.nsITimer.TYPE_REPEATING_SLACK);          
+      });
+      
+      try {
+        reference[data.windowID].close();
+        reference[data.windowID] = null;
+      } catch (e) {
+        //Components.utils.reportError(e);
+      }
+            
+      //auth_rv is now {code, error}
+      if (!auth_rv.code) {
+       return {error: auth_rv.error, accessToken: ""};
+     }
+     
+      // Try to get an access token
+      return await new Promise(function(resolve, reject) {        
+          let req = new XMLHttpRequest();
+          req.mozBackgroundRequest = true;
+          req.open("POST", data.access_url, true);
+          req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // POST data needs to be urlencoded!
+
+          req.onerror = function () {
+            resolve({error: "OAuthNetworkError", accessToken: ""});
+          };
+
+          let parameters = [];
+          for (let key of Object.keys(data.access_opt)) {
+            parameters.push(key + "=" + encodeURIComponent(data.access_opt[key])); 
+          }
+          parameters.push(data.access_codefield + "=" +encodeURIComponent(auth_rv.code));
+          
+          req.onload = function() {              
+              switch(req.status) {
+                  case 200: //OK
+                    {
+                      console.log(req.responseText);
+                      resolve({error: "", accessToken: JSON.parse(req.responseText).access_token});
+                    }                      
+                    break;
+                    
+                  default:
+                    resolve({error: "OAuthHttpError::"+ req.status, accessToken: ""});
+              }
+          };
+
+          req.send(parameters.join("&"));
+      });      
+    }    
+     
+    throw new Error ("TbSync::asyncOAuthPrompt() is missing a windowID");
+  },    
 }
