@@ -90,16 +90,23 @@ var passwordManager = {
   
   // returns obj: {error, tokens}
   // https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow#refresh-the-access-token
-  asyncOAuthPrompt: async function(data, reference, currentTokenString = "") {
+  asyncOAuthPrompt: async function(data, reference, currentTokenString = "", refreshOnly = false) {
     if (data.windowID) {      
      
       // Before actually asking the user again, assume we have a refresh token, and can get a new token silently
       let step2Url = data.refresh.url;
       let step2RequestParameters = data.refresh.requestParameters;
-      let step2ResponseFields = data.refresh.requestParameters;
+      let step2ResponseFields = data.refresh.responseFields;
       let step2Token = this.getOAuthToken(currentTokenString, "refresh");
 
       if (!step2Token) {
+        if (refreshOnly) {
+          return {
+            error: "RefreshOnlyButRefreshFailed", 
+            tokens: JSON.stringify({access: "", refresh: ""})
+          }
+        }
+        
         let parameters = [];
         for (let key of Object.keys(data.auth.requestParameters)) {
           parameters.push(key + "=" + encodeURIComponent(data.auth.requestParameters[key])); 
@@ -199,7 +206,10 @@ var passwordManager = {
                 case 200: //OK
                   {
                     let tokens = JSON.parse(req.responseText);
-                    resolve({access: tokens[step2ResponseFields.accessToken], refresh: tokens[step2ResponseFields.refreshToken], errorStep2: ""});
+                    // the refresh-token may or may not be renewed
+                    let _access = tokens[step2ResponseFields.accessToken];
+                    let _refresh = (step2ResponseFields.hasOwnProperty("refreshToken") && tokens.hasOwnProperty(step2ResponseFields.refreshToken)) ? tokens[step2ResponseFields.refreshToken] : step2Token;
+                    resolve({access: _access, refresh: _refresh, errorStep2: ""});
                   }                      
                   break;
                   
