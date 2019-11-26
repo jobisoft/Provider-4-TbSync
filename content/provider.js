@@ -284,6 +284,18 @@ var Base = class {
 
 
     /**
+     * Is called everytime an account of this provider is deleted in the
+     * manager UI.
+     *
+     * @param {AccountData}  accountData  The AccountData instance of the
+     *                                    account being deleted.
+     *
+     */
+    static onDeleteAccount(accountData) {
+    }
+
+
+    /**
      * Implement this method, if this provider should add additional entries
      * to the autocomplete list while typing something into the address field
      * of the message composer.
