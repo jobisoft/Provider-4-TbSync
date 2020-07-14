@@ -154,8 +154,8 @@ var ProviderData = class {
     return TbSync.providers.loadedProviders[this.provider].version;
   }
   
-  getStringBundle() {
-    return TbSync.providers.loadedProviders[this.provider].bundle;
+  get extension() {
+    return TbSync.providers.loadedProviders[this.provider].extension;
   }
   
   getAllAccounts() {
@@ -576,12 +576,10 @@ var SyncData = class {
    *
    * @param {string} state      A short syncstate identifier. The actual
    *                            message to be displayed in the UI will be
-   *                            looked up in the string bundle of the provider
-   *                            associated with this SyncData instance
-   *                            (:class:`Base.getStringBundleUrl`) by looking 
-   *                            for ``syncstate.<state>``. The lookup is
-   *                            done via :func:`getString`, so the same 
-   *                            fallback rules apply. 
+   *                            looked up in the locales of the provider
+   *                            by looking for ``syncstate.<state>``. 
+   *                            The lookup is done via :func:`getString`,
+   *                            so the same fallback rules apply. 
    *
    */  
   setSyncState(state) {
@@ -639,48 +637,43 @@ var dump = function (what, aMessage) {
 
 
 /**
- * Get a localized string from a string bundle.
+ * Get a localized string.
  *
  * TODO: Explain placeholder and :: notation.
  *
- * @param {string} key       The key to look up in the string bundle
- * @param {string} provider  ``Optional`` The provider whose string bundle
- *                           should be used to lookup the key. See
- *                           :class:`Base.getStringBundleUrl`.
+ * @param {string} key       The key of the message to look up
+ * @param {string} provider  ``Optional`` The provider the key belongs to.
  *
- * @returns {string} The entry in the string bundle of the specified provider
- *                   matching the provided key. If that key is not found in the
- *                   string bundle of the specified provider or if no provider
- *                   has been specified, the string bundle of TbSync itself we
- *                   be used as fallback. If the key could not be found there
- *                   as well, the key itself is returned.
+ * @returns {string} The message belonging to the key of the specified provider.
+ *                   If that key is not found in the in the specified provider
+ *                   or if no provider has been specified, the messages of
+ *                   TbSync itself we be used as fallback. If the key could not
+ *                   be found there as well, the key itself is returned.
  *
  */
 var getString = function (key, provider) {
-  let success = false;
-  let localized = key;
+  let localized = null;
   
   //spezial treatment of strings with :: like status.httperror::403
   let parts = key.split("::");
 
-  // if a provider is given, try to get the string from the provider
+  // if a provider is given, try to get the string from the provider  
   if (provider && TbSync.providers.loadedProviders.hasOwnProperty(provider)) {
-    try {
-      localized = TbSync.providers.loadedProviders[provider].bundle.GetStringFromName(parts[0]);
-      success = true;
-    } catch (e) {}        
+    let localeData = TbSync.providers.loadedProviders[provider].extension.localeData;
+    if (localeData.messages.get(localeData.selectedLocale).has(parts[0].toLowerCase())) {
+      localized = TbSync.providers.loadedProviders[provider].extension.localeData.localizeMessage(parts[0]);
+    }
   }
 
-  // if we did not yet succeed, request the tbsync bundle
-  if (!success) {
-    try {
-      localized = TbSync.bundle.GetStringFromName(parts[0]);
-      success = true;
-    } catch (e) {}                    
+  // if we did not yet succeed, check the locales of tbsync itself
+  if (!localized) {
+    localized = TbSync.extension.localeData.localizeMessage(parts[0]);
   }
-
-  //replace placeholders in returned string
-  if (success) {
+  
+  if (!localized) {
+    localized = key;
+  } else {
+    //replace placeholders in returned string
     for (let i = 0; i<parts.length; i++) {
       let regex = new RegExp( "##replace\."+i+"##", "g");
       localized = localized.replace(regex, parts[i]);
@@ -688,6 +681,68 @@ var getString = function (key, provider) {
   }
 
   return localized;
+}
+
+
+var localizeNow = function (window, provider) {
+  let document = window.document;
+  let keyPrefix = "__" + (provider ? provider.toUpperCase() + "4" : "") + "TBSYNCMSG_";
+  
+  let localization = {
+    i18n: null,
+    
+    updateString(string) {
+      let re = new RegExp(keyPrefix + "(.+?)__", "g");
+      return string.replace(re, matched => {
+        const key = matched.slice(keyPrefix.length, -2);
+        return TbSync.getString(key, provider) || matched;
+      });
+    },
+    
+    updateDocument(node) {
+      const texts = document.evaluate(
+        'descendant::text()[contains(self::text(), "' + keyPrefix + '")]',
+        node,
+        null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+        null
+      );
+      for (let i = 0, maxi = texts.snapshotLength; i < maxi; i++) {
+        const text = texts.snapshotItem(i);
+        if (text.nodeValue.includes(keyPrefix)) text.nodeValue = this.updateString(text.nodeValue);
+      }
+      
+      const attributes = document.evaluate(
+        'descendant::*/attribute::*[contains(., "' + keyPrefix + '")]',
+        node,
+        null,
+        XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+        null
+      );
+      for (let i = 0, maxi = attributes.snapshotLength; i < maxi; i++) {
+        const attribute = attributes.snapshotItem(i);
+        if (attribute.value.includes(keyPrefix)) attribute.value = this.updateString(attribute.value);
+      }
+    }		
+  };
+
+  localization.updateDocument(document);
+}
+
+var localizeOnLoad = function (window, provider) {
+  // standard event if loaded by a standard window
+  window.document.addEventListener('DOMContentLoaded', () => {
+    TbSync.localizeNow(window, provider);
+  }, { once: true });
+
+  // custom event, fired by the overlay loader after it has finished loading
+    // the editAccount dialog is never called as a provider, but from tbsync itself
+  let eventId = "DOMOverlayLoaded_"
+      + (!provider || window.location.href.startsWith("chrome://tbsync/content/manager/editAccount.") ? "" : provider + "4")
+      + "tbsync@jobisoft.de";
+  window.document.addEventListener(eventId, () => {
+    TbSync.localizeNow(window, provider);
+  }, { once: true });
 }
 
 

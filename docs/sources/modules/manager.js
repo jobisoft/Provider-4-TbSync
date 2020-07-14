@@ -29,7 +29,7 @@ var manager = {
       if (TbSync.enabled) {
         // check, if a window is already open and just put it in focus
         if (this.prefWindowObj === null) {
-          this.prefWindowObj = TbSync.window.open("chrome://tbsync/content/manager/accountManager.xul", "TbSyncAccountManagerWindow", "chrome,centerscreen");
+          this.prefWindowObj = TbSync.window.open("chrome://tbsync/content/manager/accountManager.xhtml", "TbSyncAccountManagerWindow", "chrome,centerscreen");
         }
         this.prefWindowObj.focus();
       } else {
@@ -85,7 +85,7 @@ var manager = {
     if (!TbSync.debugMode) {
       this.prefWindowObj.alert(TbSync.getString("NoDebugLog"));
     } else {
-      this.prefWindowObj.openDialog("chrome://tbsync/content/manager/support-wizard/support-wizard.xul", "support-wizard", "dialog,centerscreen,chrome,resizable=no");
+      this.prefWindowObj.openDialog("chrome://tbsync/content/manager/support-wizard/support-wizard.xhtml", "support-wizard", "dialog,centerscreen,chrome,resizable=no");
     }
   },
   
@@ -183,7 +183,7 @@ manager.FolderList = class {
     let roAttributes = TbSync.providers[this.provider].StandardFolderList.getAttributesRoAcl(folderData);
     let rwAttributes = TbSync.providers[this.provider].StandardFolderList.getAttributesRwAcl(folderData);
     let itemACL = document.createXULElement("button");
-    itemACL.setAttribute("image", "chrome://tbsync/skin/acl_" + (folderData.getFolderProperty("downloadonly") ? "ro" : "rw") + ".png");
+    itemACL.setAttribute("image", "chrome://tbsync/content/skin/acl_" + (folderData.getFolderProperty("downloadonly") ? "ro" : "rw") + ".png");
     itemACL.setAttribute("class", "plain");
     itemACL.setAttribute("style", "width: 35px; min-width: 35px; margin: 0; height:26px");
     itemACL.setAttribute("updatefield", "acl");
@@ -194,7 +194,7 @@ manager.FolderList = class {
         let menuitem = document.createXULElement("menuitem");
         menuitem.downloadonly = false;
         menuitem.setAttribute("class", "menuitem-iconic");
-        menuitem.setAttribute("image", "chrome://tbsync/skin/acl_rw2.png");
+        menuitem.setAttribute("image", "chrome://tbsync/content/skin/acl_rw2.png");
         menuitem.addEventListener("command", this.updateReadOnly);
         for (const [attr, value] of Object.entries(rwAttributes)) {
           menuitem.setAttribute(attr, value);
@@ -206,7 +206,7 @@ manager.FolderList = class {
         let menuitem = document.createXULElement("menuitem");
         menuitem.downloadonly = true;
         menuitem.setAttribute("class", "menuitem-iconic");
-        menuitem.setAttribute("image", "chrome://tbsync/skin/acl_ro2.png");
+        menuitem.setAttribute("image", "chrome://tbsync/content/skin/acl_ro2.png");
         menuitem.addEventListener("command", this.updateReadOnly);
         for (const [attr, value] of Object.entries(roAttributes)) {
           menuitem.setAttribute(attr, value);
@@ -322,9 +322,9 @@ manager.FolderList = class {
       //update icon
       let button = element.parentNode.parentNode;
       if (value) {
-        button.setAttribute('image','chrome://tbsync/skin/acl_ro.png');
+        button.setAttribute('image','chrome://tbsync/content/skin/acl_ro.png');
       } else {
-        button.setAttribute('image','chrome://tbsync/skin/acl_rw.png');
+        button.setAttribute('image','chrome://tbsync/content/skin/acl_rw.png');
       }
         
       folder.targetData.setReadOnly(value);
@@ -364,7 +364,7 @@ manager.FolderList = class {
     }
     
     if (fields.hasOwnProperty("acl")) {
-      fields.acl.setAttribute("image", "chrome://tbsync/skin/acl_" + (folderData.getFolderProperty("downloadonly") ? "ro" : "rw") + ".png");
+      fields.acl.setAttribute("image", "chrome://tbsync/content/skin/acl_" + (folderData.getFolderProperty("downloadonly") ? "ro" : "rw") + ".png");
       fields.acl.setAttribute("disabled", folderData.accountData.isSyncing());
     }
     

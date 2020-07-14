@@ -496,7 +496,8 @@ var TargetData = class {
         let directory = __ProviderNameSpace__.addressbook.getDirectoryFromDirectoryUID(target);
       
         if (!directory) {
-            let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("foldername"), "", 2);
+            // https://searchfox.org/comm-central/source/mailnews/addrbook/src/nsDirPrefs.h
+            let dirPrefId = MailServices.ab.newAddressBook(this._folderData.getFolderProperty("foldername"), "", 101);
             let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
             if (!directory) {
                 throw new Error("notargets");

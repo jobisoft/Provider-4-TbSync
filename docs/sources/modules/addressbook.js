@@ -38,6 +38,24 @@ var addressbook = {
     }
   },
   
+  searchDirectory: function (uri, search) {
+    return new Promise((resolve, reject) => {
+      let listener = {
+        cards : [],
+        
+        onSearchFinished(aResult, aErrorMsg) {
+          resolve(this.cards);
+        },
+        onSearchFoundCard(aCard) {
+          this.cards.push(aCard.QueryInterface(Components.interfaces.nsIAbCard));
+        }
+      }
+    
+      let result = MailServices.ab.getDirectory(uri).search(search, listener);
+    });
+  },
+  
+  
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   // * AdvancedTargetData, an extended TargetData implementation, providers
   // * can use this as their own TargetData by extending it and just
@@ -212,7 +230,8 @@ var addressbook = {
     // replace this with your own implementation to create the actual addressbook,
     // when this class is extended
     async createAddressbook(newname) {
-      let dirPrefId = MailServices.ab.newAddressBook(newname, "", 2);
+      // https://searchfox.org/comm-central/source/mailnews/addrbook/src/nsDirPrefs.h
+      let dirPrefId = MailServices.ab.newAddressBook(newname, "", 101);
       let directory = MailServices.ab.getDirectoryFromId(dirPrefId);
       return directory;
     }    
@@ -485,7 +504,7 @@ var addressbook = {
       return new TbSync.addressbook.AbItem(this, listDirectory);
     }
 
-    addItem(abItem, pretagChangelogWithByServerEntry = true) {
+    async addItem(abItem, pretagChangelogWithByServerEntry = true) {
       if (this.primaryKeyField && !abItem.getProperty(this.primaryKeyField)) {
         abItem.setProperty(this.primaryKeyField, this._folderData.targetData.generatePrimaryKey());
         //Services.console.logStringMessage("[AbDirectory::addItem] Generated primary key!");
@@ -503,7 +522,7 @@ var addressbook = {
         this._directory.addMailList(abItem._tempListDirectory);
         
         // the list has been added and we can now get the corresponding card via its UID
-        let found = this.getItemFromProperty("UID", abItem.UID);
+        let found = await this.getItemFromProperty("UID", abItem.UID);
         abItem._tempListDirectory = null;
         abItem._card = found._card;
 
@@ -542,18 +561,16 @@ var addressbook = {
       if (pretagChangelogWithByServerEntry) {
         abItem.changelogStatus = "deleted_by_server";
       }
-      let delArray = Components.classes["@mozilla.org/array;1"].createInstance(Components.interfaces.nsIMutableArray);
-      delArray.appendElement(abItem._card, true);
-      this._directory.deleteCards(delArray);
+      this._directory.deleteCards([abItem._card]);
     }
 
-    getItem(searchId) {
+    async getItem(searchId) {
       //use UID as fallback
       let key = this.primaryKeyField ? this.primaryKeyField : "UID";
-      return this.getItemFromProperty(key, searchId);
+      return await this.getItemFromProperty(key, searchId);
     }
 
-    getItemFromProperty(property, value) {
+    async getItemFromProperty(property, value) {
       // try to use the standard card method first
       let card = this._directory.getCardFromProperty(property, value, true);
       if (card) {
@@ -564,9 +581,9 @@ var addressbook = {
       // we cannot search for the prop directly, because for mailinglists
       // they are not part of the card (expect UID) but stored in a custom storage
       let searchList = "(IsMailList,=,TRUE)"; 
-      let result = MailServices.ab.getDirectory(this._directory.URI +  "?(or" + searchList+")").childCards;
-      while (result.hasMoreElements()) {
-        let card = new TbSync.addressbook.AbItem(this, result.getNext().QueryInterface(Components.interfaces.nsIAbCard));
+      let foundCards = await TbSync.addressbook.searchDirectory(this._directory.URI, "(or" + searchList+")");
+      for (let aCard of foundCards) {
+        let card = new TbSync.addressbook.AbItem(this, aCard);
         //does this list card have the req prop?
         if (card.getProperty(property) == value) {
           return card;
@@ -675,15 +692,15 @@ var addressbook = {
     return null;
   },
   
-  getListInfoFromListUID: function(UID) {
+  getListInfoFromListUID: async function(UID) {
     let directories = MailServices.ab.directories;
     while (directories.hasMoreElements()) {
       let directory = directories.getNext();
       if (directory instanceof Components.interfaces.nsIAbDirectory && !directory.isRemote) {
         let searchList = "(IsMailList,=,TRUE)(UID,=,"+UID+")";
-        let result = MailServices.ab.getDirectory(directory.URI +  "?(and" + searchList+")").childCards;
-        if (result.hasMoreElements()) {
-          let listCard = result.getNext().QueryInterface(Components.interfaces.nsIAbCard);
+        let foundCards = await TbSync.addressbook.searchDirectory(directory.URI, "(and" + searchList+")");
+        for (let listCard of foundCards) {
+          //return after first found card
           return {directory, listCard};
         }
       }
@@ -700,7 +717,7 @@ var addressbook = {
   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   
   addressbookObserver: {
-    observe: function (aSubject, aTopic, aData) {
+    observe: async function (aSubject, aTopic, aData) {
       switch (aTopic) {
         // we do not need addrbook-created
         case "addrbook-updated":
@@ -997,7 +1014,7 @@ var addressbook = {
           // aSubject: nsIAbDirectory
           aSubject.QueryInterface(Components.interfaces.nsIAbDirectory);
           // get the card representation of this list, including its parent directory
-          let listInfo = TbSync.addressbook.getListInfoFromListUID(aSubject.UID);
+          let listInfo = await TbSync.addressbook.getListInfoFromListUID(aSubject.UID);
           let bookUID = listInfo.directory.UID;
 
           let folderData = TbSync.addressbook.getFolderFromDirectoryUID(bookUID);
@@ -1056,7 +1073,7 @@ var addressbook = {
           //aSubject: nsIAbCard of Member
           aSubject.QueryInterface(Components.interfaces.nsIAbCard);
           //aData: 128-bit unique identifier for the list
-          let listInfo = TbSync.addressbook.getListInfoFromListUID(aData);
+          let listInfo = await TbSync.addressbook.getListInfoFromListUID(aData);
           let bookUID = listInfo.directory.UID;
 
           let folderData = TbSync.addressbook.getFolderFromDirectoryUID(bookUID);

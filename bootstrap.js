@@ -10,7 +10,7 @@
 
 var { Services } = ChromeUtils.import("resource://gre/modules/Services.jsm");
 
-let thisID = "";
+let gExtension = "";
 
 let onInitDoneObserver = {
     observe: async function (aSubject, aTopic, aData) {        
@@ -24,21 +24,14 @@ let onInitDoneObserver = {
         
         //load this provider add-on into TbSync
         if (valid) {
-            await TbSync.providers.loadProvider(thisID, "__ProviderNameSpace__", "chrome://__ProviderChromeUrl__/content/provider.js");
+            await TbSync.providers.loadProvider(gExtension, "__ProviderNameSpace__", "chrome://__ProviderChromeUrl__/content/provider.js");
         }
     }
 }
 
-function install(data, reason) {
-}
 
-function uninstall(data, reason) {
-}
-
-function startup(data, reason) {
-    // Possible reasons: APP_STARTUP, ADDON_ENABLE, ADDON_INSTALL, ADDON_UPGRADE, or ADDON_DOWNGRADE.
-
-    thisID = data.id;
+function startup(addon, extension) {
+    gExtension = extension;
     Services.obs.addObserver(onInitDoneObserver, "tbsync.observer.initialized", false);
 
     // The startup of TbSync is delayed until all add-ons have called their startup(),
@@ -51,14 +44,7 @@ function startup(data, reason) {
     }
 }
 
-function shutdown(data, reason) {
-    // Possible reasons: APP_SHUTDOWN, ADDON_DISABLE, ADDON_UNINSTALL, ADDON_UPGRADE, or ADDON_DOWNGRADE.
-
-    // When the application is shutting down we normally don't have to clean up.
-    if (reason == APP_SHUTDOWN) {
-        return;
-    }
-
+function shutdown(addon, extension) {
     Services.obs.removeObserver(onInitDoneObserver, "tbsync.observer.initialized");
     //unload this provider add-on from TbSync
     try {
@@ -67,5 +53,4 @@ function shutdown(data, reason) {
     } catch (e) {
         //if this fails, TbSync has been unloaded already and has unloaded this addon as well
     }
-    Services.obs.notifyObservers(null, "chrome-flush-caches", null);
 }
